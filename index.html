@@ -181,6 +181,10 @@ input[type=color].cin{width:100%;height:30px;padding:2px;border-radius:7px;borde
 </div>
 <div class="tp" id="tp-ai">
 <div class="st">✨ Recreate From Reference</div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:7px 10px">
+<span class="hint" style="margin:0" id="aiKeyStat">API key: not set</span>
+<button class="linkbtn" id="aiKeyBtn">⚙ Set API key</button>
+</div>
 <div class="hint">Upload any frame design you like — AI rebuilds it as fully editable layers. The result is applied to your canvas and <b>auto-saved to My Frames</b>.</div>
 <label class="uz" id="aiZone" style="margin-bottom:8px"><input type="file" accept="image/*" id="aiImg"><span id="aiLbl">📎 Upload reference frame</span></label>
 <div id="aiPrevWrap"><img id="aiPrev"><div id="aiPrevInfo"><div id="aiPrevName"></div><div id="aiPrevHint">Ready to generate</div><button class="linkbtn" id="aiChange">↺ Use a different reference</button></div></div>
@@ -200,7 +204,8 @@ input[type=color].cin{width:100%;height:30px;padding:2px;border-radius:7px;borde
 <button class="btn btn-s" id="undoBtn" title="Undo (Ctrl+Z)">↩ Undo</button>
 <button class="btn btn-s" id="redoBtn" title="Redo (Ctrl+Y)">↪ Redo</button>
 <button class="btn btn-s" id="saveBtn" title="Save to My Frames (Ctrl+S)">💾 Save</button>
-<button class="btn btn-p" id="expBtn" title="Download 1080×1080 PNG">↓ Export PNG</button>
+<button class="btn btn-p" id="expBtn" title="Transparent 1080×1080 frame — upload to Meta; product auto-renders through the center">↓ Frame PNG <span style="opacity:.75;font-weight:600">(transparent)</span></button>
+<button class="btn btn-s" id="expPrevBtn" title="Flattened preview with your product image — for reviews & approvals">Preview PNG</button>
 <button class="btn btn-s" id="clrBtn" title="Deselect (Esc)">Deselect</button>
 </div>
 </div>
@@ -217,7 +222,7 @@ input[type=color].cin{width:100%;height:30px;padding:2px;border-radius:7px;borde
 <div class="mfeatures">
 <div class="mfeat"><div class="mfi">🖼️</div><div><b>Start anywhere</b><span>Pick a template, build from scratch, or upload a reference for AI to recreate.</span></div></div>
 <div class="mfeat"><div class="mfi">🎯</div><div><b>Full control</b><span>Click any element to edit. Drag to move. Every color, font &amp; shape is yours.</span></div></div>
-<div class="mfeat"><div class="mfi">💾</div><div><b>Save &amp; reuse</b><span>Designs live in My Frames. Export 1080×1080 PNGs ready for your catalog.</span></div></div>
+<div class="mfeat"><div class="mfi">💾</div><div><b>Save &amp; reuse</b><span>Designs live in My Frames. Export transparent 1080×1080 frame PNGs — Meta renders your product through the center.</span></div></div>
 </div>
 <div class="mfoot">
 <div class="mkbd">Shortcuts: <span class="kbd">Ctrl+Z</span> <span class="kbd">Ctrl+Y</span> <span class="kbd">Del</span> <span class="kbd">Ctrl+D</span> <span class="kbd">Ctrl+S</span> <span class="kbd">Esc</span> · arrows nudge</div>
@@ -616,20 +621,29 @@ if(l.hidden)return;
 switch(l.type){case"bg":drawBg(c,l,exportMode);break;case"banner":drawBanner(c,l,exportMode);break;case"badge":drawBadge(c,l,exportMode);break;case"decor":drawDecor(c,l,exportMode);break;case"strip":drawStrip(c,l,exportMode);break;case"text":drawTextL(c,l,exportMode);break;case"img":drawImgL(c,l,exportMode);break}}
 
 /* ============ SCENE RENDER ============ */
+let _checker=null;
+function checkerTex(){if(_checker)return _checker;const o=document.createElement("canvas");o.width=K;o.height=K;const c=o.getContext("2d");const s=27;
+for(let y=0;y<K/s;y++)for(let x=0;x<K/s;x++){c.fillStyle=(x+y)%2?"#e8ebf0":"#f8f9fb";c.fillRect(x*s,y*s,s,s)}
+_checker=o;return o}
 function renderScene(c,layers,opts={}){
 c.clearRect(0,0,K,K);
-const bg=layers.find(l=>l.type==="bg");
-const ins=bg?(bg.inset||{t:44,r:44,b:44,l:44}):{t:0,r:0,b:0,l:0};
-// center backdrop
+if(opts.transparent){
+/* FRAME EXPORT: nothing behind the layers — center stays fully transparent */
+}else if(opts.img){
 c.fillStyle="#ffffff";c.fillRect(0,0,K,K);
-if(opts.img){
 const img=opts.img;const sc=Math.max(K/img.width,K/img.height)*(opts.imgScale||1);
 const iw=img.width*sc,ih=img.height*sc;
 c.drawImage(img,(K-iw)/2+(opts.imgX||0),(K-ih)/2+(opts.imgY||0),iw,ih);
-}else if(!opts.exportMode){
-c.fillStyle="#f2f3f5";c.fillRect(ins.l,ins.t,K-ins.l-ins.r,K-ins.t-ins.b);
-c.fillStyle="#b9bdc7";c.font="600 30px 'DM Sans',sans-serif";c.textAlign="center";c.textBaseline="middle";
-c.fillText("Upload a product image",K/2,K/2);}
+}else if(opts.exportMode){
+c.fillStyle="#ffffff";c.fillRect(0,0,K,K);
+}else{
+/* editor / thumbnails: checkerboard = transparency indicator */
+c.drawImage(checkerTex(),0,0);
+if(!opts.thumb){
+c.fillStyle="rgba(90,95,114,.8)";c.font="600 27px 'DM Sans',sans-serif";c.textAlign="center";c.textBaseline="middle";
+c.fillText("Transparent — product auto-renders here",K/2,K/2-16);
+c.fillStyle="rgba(90,95,114,.55)";c.font="500 20px 'DM Sans',sans-serif";
+c.fillText("Upload a product image (top-left) to preview",K/2,K/2+22);}}
 layers.forEach(l=>drawLayer(c,l,opts.exportMode));
 if(opts.sel&&opts.sel._bb){const b=opts.sel._bb;c.save();c.strokeStyle="#6c8cff";c.lineWidth=3;c.setLineDash([10,7]);c.strokeRect(b[0],b[1],b[2],b[3]);c.setLineDash([]);
 c.fillStyle="#6c8cff";[[b[0],b[1]],[b[0]+b[2],b[1]],[b[0],b[1]+b[3]],[b[0]+b[2],b[1]+b[3]]].forEach(([hx,hy])=>{c.fillRect(hx-6,hy-6,12,12)});c.restore()}
@@ -830,7 +844,7 @@ const th=document.createElement("div");th.className="thumb";
 const cc=document.createElement("canvas");cc.width=180;cc.height=180;
 const n=document.createElement("div");n.className="tn";n.textContent=spec.name;
 th.appendChild(cc);th.appendChild(n);
-try{renderScene(tctx,spec.layers,{exportMode:false});cc.getContext("2d").drawImage(tcv,0,0,180,180)}catch(e){}
+try{renderScene(tctx,spec.layers,{thumb:true});cc.getContext("2d").drawImage(tcv,0,0,180,180)}catch(e){}
 th.onclick=()=>{applyTemplate(spec)};
 if(myIdx!==undefined){
 const ct=document.createElement("div");ct.className="tctl";
@@ -1134,9 +1148,14 @@ document.getElementById("pPanY").addEventListener("input",function(){S.imgY=pars
 /* ============ EXPORT / JSON ============ */
 document.getElementById("expBtn").onclick=()=>{
 const oc=document.createElement("canvas");oc.width=K;oc.height=K;
+renderScene(oc.getContext("2d"),S.layers,{transparent:true,exportMode:true});
+const a=document.createElement("a");a.download=(S.designName||"frame").replace(/[^\w\- ]+/g,"").trim().replace(/\s+/g,"-").toLowerCase()+"-frame-1080.png";a.href=oc.toDataURL("image/png");a.click();
+toast("⬇ Transparent frame exported — center is see-through, ready for Meta","ok")};
+document.getElementById("expPrevBtn").onclick=()=>{
+const oc=document.createElement("canvas");oc.width=K;oc.height=K;
 renderScene(oc.getContext("2d"),S.layers,{img:S.img,imgX:S.imgX,imgY:S.imgY,imgScale:S.imgScale,exportMode:true});
-const a=document.createElement("a");a.download=(S.designName||"frame").replace(/[^\w\- ]+/g,"").trim().replace(/\s+/g,"-").toLowerCase()+"-1080.png";a.href=oc.toDataURL("image/png");a.click();
-toast("⬇ Exported "+a.download,"ok")};
+const a=document.createElement("a");a.download=(S.designName||"frame").replace(/[^\w\- ]+/g,"").trim().replace(/\s+/g,"-").toLowerCase()+"-preview-1080.png";a.href=oc.toDataURL("image/png");a.click();
+toast(S.img?"⬇ Preview exported (flattened with product)":"⬇ Preview exported — upload a product image for a real preview")};
 document.getElementById("expJsonBtn").onclick=()=>{
 const spec={name:"Custom Frame",layers:S.layers.map(l=>{const c={...l};delete c.imgObj;delete c._bb;return c})};
 const a=document.createElement("a");a.download=(S.designName||"frame").replace(/[^\w\- ]+/g,"").trim().replace(/\s+/g,"-").toLowerCase()+"-spec.json";a.href="data:application/json,"+encodeURIComponent(JSON.stringify(spec,null,1));a.click();toast("💾 Frame spec downloaded")};
@@ -1171,16 +1190,35 @@ const btn=document.getElementById("aiBtn");btn.disabled=false;btn.textContent="�
 document.getElementById("aiStat").textContent="";
 };r.readAsDataURL(f);e.target.value=""};
 document.getElementById("aiChange").onclick=()=>{document.getElementById("aiImg").click()};
+/* --- API key management (needed when this file runs outside claude.ai) --- */
+let AIKEY=store.get("fs_apikey")||"";
+function updKeyStat(){document.getElementById("aiKeyStat").innerHTML=AIKEY?'API key: <b style="color:var(--ok)">set ✓</b> (stored in this browser)':'API key: <b>not set</b> — required when running locally';}
+document.getElementById("aiKeyBtn").onclick=()=>{
+const k=prompt("Paste your Anthropic API key (from console.anthropic.com).\nStored only in this browser — never sent anywhere except api.anthropic.com:",AIKEY||"");
+if(k!==null){AIKEY=k.trim();store.set("fs_apikey",AIKEY);updKeyStat();toast(AIKEY?"🔑 API key saved":"API key cleared")}};
+updKeyStat();
+async function callClaude(body){
+const hdrs={"Content-Type":"application/json","anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"};
+if(AIKEY)hdrs["x-api-key"]=AIKEY;
+const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:hdrs,body:JSON.stringify(body)});
+const data=await res.json().catch(()=>({}));
+if(!res.ok||data.error){const em=(data.error&&(data.error.message||data.error.type))||("HTTP "+res.status);const e=new Error(em);e.status=res.status;throw e}
+return data}
+function extractJSON(raw){
+raw=raw.replace(/```json|```/g,"").trim();
+const a=raw.indexOf("{"),b=raw.lastIndexOf("}");
+if(a<0||b<=a)throw new Error("JSON not found in response");
+return JSON.parse(raw.slice(a,b+1))}
 document.getElementById("aiBtn").onclick=async()=>{
 if(!aiImgData)return;
 const st=document.getElementById("aiStat"),btn=document.getElementById("aiBtn");
 btn.disabled=true;btn.innerHTML='<span class="spin"></span>Generating… (10–20s)';
 st.textContent="Analyzing your reference and rebuilding it as editable layers…";
 try{
-const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:2000,messages:[{role:"user",content:[{type:"image",source:{type:"base64",media_type:aiMime,data:aiImgData}},{type:"text",text:"Recreate this product-frame design as layers using this exact schema. Match colors, banner shape, decorations and text as closely as possible.\n"+AI_SCHEMA}]}]})});
-const data=await res.json();
-const raw=(data.content||[]).map(b=>b.text||"").join("").replace(/```json|```/g,"").trim();
-const spec=JSON.parse(raw);
+const data=await callClaude({model:"claude-sonnet-4-6",max_tokens:3000,messages:[{role:"user",content:[{type:"image",source:{type:"base64",media_type:aiMime,data:aiImgData}},{type:"text",text:"Recreate this product-frame design as layers using this exact schema. Match colors, banner shape, decorations and text as closely as possible.\n"+AI_SCHEMA}]}]});
+const raw=(data.content||[]).map(b=>b.text||"").join("");
+const spec=extractJSON(raw);
+if(!spec.layers||!spec.layers.length)throw new Error("JSON missing layers");
 spec.name="AI · "+(spec.name||"Reference Frame");
 applyTemplate(spec,{silent:true});
 saveMyFrame(spec.name,true);
@@ -1192,8 +1230,13 @@ toast("✨ "+spec.name+" ready — saved to My Frames","ok");
 setTimeout(()=>switchTab("layers"),900);
 }catch(err){
 btn.disabled=false;btn.textContent=aiGenerated?"↻ Regenerate":"✨ Generate Editable Frame";
-st.textContent="❌ "+(err.message.includes("JSON")?"AI returned an unexpected format — try Regenerate.":err.message);
-toast("Generation failed — try again","err")}};
+let msg=err.message||String(err);
+if(/Failed to fetch|NetworkError|Load failed|CORS/i.test(msg))msg=AIKEY?"Couldn't reach api.anthropic.com — check your internet connection.":"Couldn't reach the AI service. Running this file locally? Click ⚙ Set API key above (get one free at console.anthropic.com).";
+else if(err.status===401||/authentication|x-api-key|invalid.*key/i.test(msg))msg="API key missing or invalid — click ⚙ Set API key above.";
+else if(err.status===429)msg="Rate limited — wait a few seconds and try again.";
+else if(/JSON|layers/i.test(msg))msg="AI returned an unexpected format — click Regenerate.";
+st.textContent="❌ "+msg;
+toast("Generation failed","err")}};
 [["Luxury Gold","Luxury"],["Diwali Glow","Diwali"],["Winter Frost","Winter"],["Mega Sale","Sale"],["Floral Soft","Floral"],["Neon Tech","Tech"],["Eid Emerald","Eid"],["Organic Fresh","Organic"]].forEach(([lb,theme])=>{
 const c=document.createElement("span");c.className="chip";c.textContent=lb;
 c.onclick=()=>{const t=TEMPLATES.filter(t=>t.cat===theme);applyTemplate(t[Math.floor(Math.random()*t.length)])};
@@ -1206,7 +1249,7 @@ const picks=["Silk Festival 90%","Gold Wave Luxe","Retail Pop Grid","Winter Fros
 const g=document.getElementById("mGallery");
 picks.forEach(nm=>{const spec=TEMPLATES.find(t=>t.name===nm)||TEMPLATES[0];
 const d=document.createElement("div");d.className="gt";const cc=document.createElement("canvas");cc.width=150;cc.height=150;
-try{renderScene(tctx,spec.layers,{exportMode:false});cc.getContext("2d").drawImage(tcv,0,0,150,150)}catch(e){}
+try{renderScene(tctx,spec.layers,{thumb:true});cc.getContext("2d").drawImage(tcv,0,0,150,150)}catch(e){}
 d.appendChild(cc);d.title=spec.name;
 d.onclick=()=>{applyTemplate(spec);modal.classList.remove("show");store.set("fs_seen",1)};
 g.appendChild(d)})})();
