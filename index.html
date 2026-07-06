@@ -424,7 +424,7 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 <div class="topbar">
 <div class="brand"><div class="logo" id="brandLogo"></div><h1>Frame Studio</h1><span class="bg">375+ TEMPLATES</span></div>
 <button class="tbtn" id="homeBtn" data-tip="Back" data-tip-pos="bottom" title="Back to templates"><i class="ich" data-i="back"></i>Back</button>
-<div class="tb-center"><div class="pvchip" id="pvLabel">Pick a template to start</div></div>
+<div class="tb-center"><div class="pvchip" id="pvLabel">Pick a template to start</div><button class="tbtn" id="rerollBtn" data-tip="Generate another surprise design" data-tip-pos="bottom" style="display:none"><i class="ich" data-i="dice"></i></button></div>
 <div class="tb-right">
 <button class="tbtn" id="undoBtn" data-tip="Undo · Ctrl+Z" data-tip-pos="bottom" aria-label="Undo" title="Undo (Ctrl+Z)"><i class="ich" data-i="undo"></i></button>
 <button class="tbtn" id="redoBtn" data-tip="Redo · Ctrl+Y" data-tip-pos="bottom" aria-label="Redo" title="Redo (Ctrl+Y)"><i class="ich" data-i="redo"></i></button>
@@ -1495,6 +1495,7 @@ if(!opts.noAutosave)autosavePrevious();
 S.layers=reviveLayers(JSON.parse(JSON.stringify(spec.layers)));
 S.sel=null;S.designName=spec.name||"Untitled Frame";S.dirty=false;
 render();buildLayerList();buildProps();HIST.push(opts.noSession);
+if(!S.designName.startsWith("✨ Surprise")){const rb=document.getElementById("rerollBtn");if(rb)rb.style.display="none"}
 {const pv=document.getElementById("pvLabel");pv.innerHTML=ICON.pencil+'<span>Editing ·</span><span class="pvname">'+S.designName.replace(/</g,"&lt;")+"</span>";pv.setAttribute("data-tip",S.designName);pv.title=S.designName;}
 switchTab("layers");if(!opts.stayHome)showEditor();
 if(!opts.silent)toast("✓ "+S.designName+" — click any element to customize");
@@ -1605,8 +1606,10 @@ spec.layers.splice(spec.layers.length-1,0,L({type:"decor",kind,name:"Lucky "+kin
 surpriseN++;store.set("fs_surprise_n",surpriseN);
 spec.name="✨ Surprise #"+surpriseN+" · "+tn+" × "+dn;
 applyTemplate(spec);
+document.getElementById("rerollBtn").style.display="";
 }
 document.getElementById("surpriseBtn").onclick=surpriseMe;
+document.getElementById("rerollBtn").onclick=surpriseMe;
 
 /* ============ ELEMENTS TAB ============ */
 function addLayer(l){S.layers.push(l);S.sel=l;render();buildLayerList();buildProps();switchTab("layers");histNow();toast("＋ "+(l.name||l.type)+" added — drag it into place")}
@@ -2337,6 +2340,7 @@ try{await navigator.clipboard.writeText(JSON.stringify(d,null,1));toast("📋 Di
 /* icon hydration */
 document.querySelectorAll("i.ich").forEach(el=>{el.outerHTML=ICON[el.dataset.i]||""});
 document.getElementById("brandLogo").innerHTML=ICON.frame;
+const _rb=document.getElementById("rerollBtn");if(_rb)_rb.innerHTML=ICON.dice;
 
 /* ============ THEME ============ */
 let THEME=store.get("fs_theme")||"light";
