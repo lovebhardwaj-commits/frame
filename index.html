@@ -215,7 +215,7 @@ body.home .tb-center,body.home #undoBtn,body.home #redoBtn,body.home #saveBtn,bo
 .bkrow{display:flex;gap:8px;align-items:center}
 .bkrow input[type=color]{width:40px;height:34px;border:1px solid var(--bd);border-radius:8px;background:var(--card);padding:3px;cursor:pointer}
 /* resume */
-.resume-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 18px;border-radius:20px;border:1px solid var(--acbd);background:var(--acb);color:var(--tx);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s}
+.resume-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 18px;border-radius:20px;border:1px solid rgba(175,70,253,.35);background:rgba(175,70,253,.08);color:var(--tx);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s}
 .resume-btn:hover{filter:brightness(1.15)}
 .resume-btn b{color:var(--ac)}
 /* ============ REDESIGN 6.0 — editorial polish layer ============ */
@@ -287,18 +287,18 @@ input[type=checkbox]{accent-color:var(--ac);width:15px;height:15px}
 .fchip.on{background:var(--acb);border-color:var(--acbd);color:var(--ac)}
 .home-hero .hero-kicker{font-size:9.5px;letter-spacing:.28em;color:var(--tx3);font-weight:800;margin-bottom:14px}
 .home-hero h1{font-family:var(--serif);font-size:46px;font-weight:700;letter-spacing:-.01em;background:none;-webkit-text-fill-color:var(--tx);color:var(--tx)}
-.home-hero h1 em{font-style:italic;color:var(--ac);-webkit-text-fill-color:var(--ac)}
+.home-hero h1 em{font-style:italic;background:linear-gradient(135deg,#AF46FD,#DA3BC2,#F4349D);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .home-hero p{color:var(--tx2);font-size:13px}
 .home-search{background:var(--card);border-color:var(--bd);font-size:13.5px;padding:14px 22px;box-shadow:0 14px 40px rgba(0,0,0,.4)}
 .home-search:focus{border-color:var(--acbd);box-shadow:0 14px 40px rgba(175,70,253,.14)}
 .hact{border-radius:16px;transition:transform .2s cubic-bezier(.2,.8,.2,1),border-color .2s,box-shadow .2s}
 .hact:hover{border-color:var(--acbd)}
-.hact .hi{background:var(--acb)!important;color:var(--ac);border:1px solid rgba(175,70,253,.18)}
+.hact .hi{background:linear-gradient(135deg,rgba(175,70,253,.15),rgba(218,59,194,.12),rgba(244,52,157,.1))!important;color:#AF46FD;border:1px solid rgba(175,70,253,.22)}
 .hact .hi .ic{width:17px;height:17px}
 .resume-btn{background:var(--card);border-color:var(--bd);color:var(--tx2)}
 .resume-btn:hover{border-color:var(--acbd);color:var(--tx);filter:none}
-.resume-btn b{color:var(--ac)}
-.resume-btn .ic{color:var(--ac)}
+.resume-btn b{background:linear-gradient(135deg,#AF46FD,#DA3BC2,#F4349D);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.resume-btn .ic{color:#AF46FD}
 .selbar{border-radius:999px;background:rgba(16,16,20,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:6px 12px}
 .sbtn{display:inline-flex;align-items:center;justify-content:center;border-radius:8px;border-color:transparent;background:transparent;transition:.13s}
 .sbtn:hover{background:var(--acb);border-color:transparent;color:var(--ac)}
@@ -460,7 +460,7 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 <div id="resumeSlot"></div>
 <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px">
 <label class="resume-btn" id="homeProdPill" style="margin-top:0;cursor:pointer"><i class="ich" data-i="pkg"></i><span id="homeProdLbl"><b>Upload your product photo</b> — preview it inside every template</span><input type="file" accept="image/*" id="homeProd" style="display:none"></label>
-<button class="resume-btn" id="surpriseBtn" style="margin-top:0"><i class="ich" data-i="dice"></i>Surprise me — generate a fresh design</button>
+<button class="resume-btn" id="surpriseBtn" style="margin-top:0"><i class="ich" data-i="dice"></i><b>Surprise me</b> — generate a fresh design</button>
 </div>
 </div>
 <div class="home-actions">
