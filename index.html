@@ -418,6 +418,16 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 .gal-head{flex-direction:column;align-items:stretch}
 .gal-search{max-width:none}
 }
+/* product/logo remove controls */
+.uzw{flex:1;display:flex;position:relative;min-width:0}
+.uzw .uz{flex:1;min-width:0}
+.uzw .uz span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.uzw.has .uz{padding-right:34px}
+.uzx{position:absolute;top:50%;right:7px;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;border:1px solid var(--bdh);background:var(--panel);color:var(--tx2);font-size:11px;font-weight:700;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;font-family:inherit;padding:0;transition:.15s}
+.uzx:hover{color:#ef4444;border-color:#ef4444;background:rgba(239,68,68,.08)}
+.uzw.has .uzx{display:flex}
+.prodacts{display:flex;gap:14px;margin-top:9px}
+.linkbtn.danger{color:#ef4444}
 </style>
 </head>
 <body>
@@ -460,6 +470,7 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 <div id="resumeSlot"></div>
 <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px">
 <label class="resume-btn" id="homeProdPill" style="margin-top:0;cursor:pointer"><i class="ich" data-i="pkg"></i><span id="homeProdLbl"><b>Upload your product photo</b> — preview it inside every template</span><input type="file" accept="image/*" id="homeProd" style="display:none"></label>
+<button class="resume-btn" id="homeProdRm" type="button" style="margin-top:0;display:none">✕ Remove product</button>
 <button class="resume-btn" id="surpriseBtn" style="margin-top:0"><i class="ich" data-i="dice"></i><b>Surprise me</b> — generate a fresh design</button>
 </div>
 </div>
@@ -492,8 +503,8 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 <div class="app">
 <div class="panel">
 <div class="ub">
-<label class="uz" id="puz" title="Your product photo — shows through the frame center"><input type="file" accept="image/*" id="pi"><i class="ich" data-i="pkg"></i><span id="pla">Add product image</span></label>
-<label class="uz" id="luz" title="Your brand logo — snaps into the logo slot"><input type="file" accept="image/*" id="li"><i class="ich" data-i="star"></i><span id="lla">Add logo</span></label>
+<div class="uzw" id="puzw"><label class="uz" id="puz" title="Your product photo — shows through the frame center"><input type="file" accept="image/*" id="pi"><i class="ich" data-i="pkg"></i><span id="pla">Add product image</span></label><button class="uzx" id="pRemove" type="button" aria-label="Remove product image" title="Remove product image">✕</button></div>
+<div class="uzw" id="luzw"><label class="uz" id="luz" title="Your brand logo — snaps into the logo slot"><input type="file" accept="image/*" id="li"><i class="ich" data-i="star"></i><span id="lla">Add logo</span></label><button class="uzx" id="lRemove" type="button" aria-label="Remove logo" title="Remove logo">✕</button></div>
 </div>
 <div class="tabs">
 <button class="tab" data-t="elements"><i class="ich" data-i="plus"></i>Add</button>
@@ -538,6 +549,7 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 <div class="sr"><span>Pan X</span><input type="range" min="-400" max="400" step="4" value="0" id="pPanX"><span id="pPanXV">0</span></div>
 <div class="sr"><span>Pan Y</span><input type="range" min="-400" max="400" step="4" value="0" id="pPanY"><span id="pPanYV">0</span></div>
 <div class="hint" style="margin:0">Tip: you can also drag the empty canvas area to pan.</div>
+<div class="prodacts"><button class="linkbtn" id="pReset" type="button">↺ Reset zoom &amp; position</button><button class="linkbtn danger" id="pRemove2" type="button">✕ Remove product</button></div>
 </div>
 <div class="st">Layer Stack <span style="color:var(--tx3);font-weight:500">(top = front · double-click name to rename)</span></div>
 <div id="layerList"></div>
@@ -1579,16 +1591,10 @@ b.innerHTML=`↩ Resume where you left off: <b>${String(ses.name||"Untitled").re
 b.onclick=()=>{applyTemplate({name:ses.name,layers:ses.layers},{noAutosave:true});toast("↩ Session restored")};
 slot.appendChild(b)}
 /* WOW 1 — your product inside every template preview */
-document.getElementById("homeProd").onchange=e=>{const f=e.target.files[0];if(!f)return;
-const img=new Image();img.onload=()=>{
-S.img=img;S.imgX=0;S.imgY=0;S.imgScale=1;
-document.getElementById("pla").textContent="✓ Product · click to change";
-document.getElementById("puz").classList.add("ok");
-document.getElementById("prodCtl").style.display="block";syncProdSliders();
-document.getElementById("homeProdLbl").innerHTML="✓ Product set — <b>tap to change</b> photo";
-render();refreshAllViews();if(curView()==="home")showGallery();else refreshGallery();
+document.getElementById("homeProd").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
+const img=new Image();img.onload=()=>{setProduct(img);if(curView()==="home")showGallery();else refreshGallery();
 toast("Every template now previews with YOUR product","ok")};
-img.src=URL.createObjectURL(f);e.target.value=""};
+img.src=URL.createObjectURL(f)};
 /* WOW 2 — Surprise Me generator */
 const SURPRISE_DECOR=["confetti","firework","sunburst","crown","heart","ribbonBow","seal","paisley","balloon","sparkleCluster"];
 let surpriseN=store.get("fs_surprise_n")||0;
@@ -1966,12 +1972,33 @@ const z=document.getElementById("pZoom"),x=document.getElementById("pPanX"),y=do
 if(z){z.value=S.imgScale;document.getElementById("pZoomV").textContent=S.imgScale.toFixed(2)}
 if(x){x.value=S.imgX;document.getElementById("pPanXV").textContent=Math.round(S.imgX)}
 if(y){y.value=S.imgY;document.getElementById("pPanYV").textContent=Math.round(S.imgY)}}
-document.getElementById("pi").onchange=e=>{const f=e.target.files[0];if(!f)return;const img=new Image();img.onload=()=>{S.img=img;S.imgX=0;S.imgY=0;S.imgScale=1;document.getElementById("pla").textContent="✓ Product · click to change";document.getElementById("puz").classList.add("ok");document.getElementById("prodCtl").style.display="block";syncProdSliders();render();toast("📦 Product image added")};img.src=URL.createObjectURL(f)};
-document.getElementById("li").onchange=e=>{const f=e.target.files[0];if(!f)return;const img=new Image();img.onload=()=>{S.logo=img;
+/* ---- product image: set / clear (single source of truth for all product UI) ---- */
+function _revoke(im){try{if(im&&im.src&&im.src.startsWith("blob:"))URL.revokeObjectURL(im.src)}catch(e){}}
+function syncProductUI(){const on=!!S.img;
+document.getElementById("pla").textContent=on?"✓ Product · change":"Add product image";
+document.getElementById("puz").classList.toggle("ok",on);document.getElementById("puzw").classList.toggle("has",on);
+document.getElementById("prodCtl").style.display=on?"block":"none";
+document.getElementById("homeProdLbl").innerHTML=on?"✓ Product set — <b>tap to change</b> photo":"<b>Upload your product photo</b> — preview it inside every template";
+document.getElementById("homeProdRm").style.display=on?"":"none";syncProdSliders()}
+function setProduct(img){if(S.img&&S.img!==img)_revoke(S.img);S.img=img;S.imgX=0;S.imgY=0;S.imgScale=1;syncProductUI();render();refreshAllViews()}
+function clearProduct(){if(!S.img)return;_revoke(S.img);S.img=null;S.imgX=0;S.imgY=0;S.imgScale=1;S.dragImg=false;syncProductUI();render();refreshAllViews();if(curView()==="gallery")refreshGallery();toast("Product image removed — showing the transparent frame")}
+function resetProduct(){if(!S.img)return;S.imgX=0;S.imgY=0;S.imgScale=1;syncProdSliders();render();toast("↺ Product zoom & position reset")}
+document.getElementById("pi").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const img=new Image();img.onload=()=>{setProduct(img);toast("📦 Product image added")};img.src=URL.createObjectURL(f)};
+document.getElementById("pRemove").onclick=e=>{e.preventDefault();e.stopPropagation();clearProduct()};
+document.getElementById("pRemove2").onclick=clearProduct;
+document.getElementById("homeProdRm").onclick=clearProduct;
+document.getElementById("pReset").onclick=resetProduct;
+/* ---- logo: clear ---- */
+function clearLogo(){if(!S.logo)return;_revoke(S.logo);S.logo=null;
+S.layers.forEach(l=>{if(l.role==="logo"){l.imgObj=null;l.placeholder=true}});
+document.getElementById("lla").textContent="Add logo";document.getElementById("luz").classList.remove("ok");document.getElementById("luzw").classList.remove("has");
+render();buildLayerList();buildProps();toast("Logo removed — logo slots are back to placeholders")}
+document.getElementById("lRemove").onclick=e=>{e.preventDefault();e.stopPropagation();clearLogo()};
+document.getElementById("li").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const img=new Image();img.onload=()=>{if(S.logo&&S.logo!==img)_revoke(S.logo);S.logo=img;
 let slot=S.layers.find(l=>l.role==="logo");
 if(slot){slot.imgObj=img;slot.placeholder=false}
 else{S.layers.push(L({type:"img",role:"logo",name:"Logo",imgObj:img,x:K-280,y:66,wd:200,opacity:1}))}
-document.getElementById("lla").textContent="✓ Logo · click to change";document.getElementById("luz").classList.add("ok");render();buildLayerList();toast("⭐ Logo placed in the logo slot — drag to move")};img.src=URL.createObjectURL(f)};
+document.getElementById("lla").textContent="✓ Logo · change";document.getElementById("luz").classList.add("ok");document.getElementById("luzw").classList.add("has");render();buildLayerList();toast("⭐ Logo placed in the logo slot — drag to move")};img.src=URL.createObjectURL(f)};
 document.getElementById("pZoom").addEventListener("input",function(){S.imgScale=parseFloat(this.value);document.getElementById("pZoomV").textContent=(+this.value).toFixed(2);render()});
 document.getElementById("pPanX").addEventListener("input",function(){S.imgX=parseFloat(this.value);document.getElementById("pPanXV").textContent=this.value;render()});
 document.getElementById("pPanY").addEventListener("input",function(){S.imgY=parseFloat(this.value);document.getElementById("pPanYV").textContent=this.value;render()});
