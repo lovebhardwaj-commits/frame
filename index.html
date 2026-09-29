@@ -428,6 +428,10 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 .uzw.has .uzx{display:flex}
 .prodacts{display:flex;gap:14px;margin-top:9px}
 .linkbtn.danger{color:#ef4444}
+.hpw{position:relative;display:inline-flex}
+.hpw.has .resume-btn{padding-right:42px}
+.hpw .uzx{right:9px}
+.hpw.has .uzx{display:flex}
 </style>
 </head>
 <body>
@@ -469,8 +473,7 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 <p>Transparent frames &amp; overlays for Meta ads. Pick, extract, or generate — your product renders through the center.</p>
 <div id="resumeSlot"></div>
 <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px">
-<label class="resume-btn" id="homeProdPill" style="margin-top:0;cursor:pointer"><i class="ich" data-i="pkg"></i><span id="homeProdLbl"><b>Upload your product photo</b> — preview it inside every template</span><input type="file" accept="image/*" id="homeProd" style="display:none"></label>
-<button class="resume-btn" id="homeProdRm" type="button" style="margin-top:0;display:none">✕ Remove product</button>
+<span class="hpw" id="hpw"><label class="resume-btn" id="homeProdPill" style="margin-top:0;cursor:pointer"><i class="ich" data-i="pkg"></i><span id="homeProdLbl"><b>Upload your product photo</b> — preview it inside every template</span><input type="file" accept="image/*" id="homeProd" style="display:none"></label><button class="uzx" id="homeProdRm" type="button" aria-label="Remove product image" title="Remove product image">✕</button></span>
 <button class="resume-btn" id="surpriseBtn" style="margin-top:0"><i class="ich" data-i="dice"></i><b>Surprise me</b> — generate a fresh design</button>
 </div>
 </div>
@@ -1979,14 +1982,14 @@ document.getElementById("pla").textContent=on?"✓ Product · change":"Add produ
 document.getElementById("puz").classList.toggle("ok",on);document.getElementById("puzw").classList.toggle("has",on);
 document.getElementById("prodCtl").style.display=on?"block":"none";
 document.getElementById("homeProdLbl").innerHTML=on?"✓ Product set — <b>tap to change</b> photo":"<b>Upload your product photo</b> — preview it inside every template";
-document.getElementById("homeProdRm").style.display=on?"":"none";syncProdSliders()}
+document.getElementById("hpw").classList.toggle("has",on);syncProdSliders()}
 function setProduct(img){if(S.img&&S.img!==img)_revoke(S.img);S.img=img;S.imgX=0;S.imgY=0;S.imgScale=1;syncProductUI();render();refreshAllViews()}
 function clearProduct(){if(!S.img)return;_revoke(S.img);S.img=null;S.imgX=0;S.imgY=0;S.imgScale=1;S.dragImg=false;syncProductUI();render();refreshAllViews();if(curView()==="gallery")refreshGallery();toast("Product image removed — showing the transparent frame")}
 function resetProduct(){if(!S.img)return;S.imgX=0;S.imgY=0;S.imgScale=1;syncProdSliders();render();toast("↺ Product zoom & position reset")}
 document.getElementById("pi").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const img=new Image();img.onload=()=>{setProduct(img);toast("📦 Product image added")};img.src=URL.createObjectURL(f)};
 document.getElementById("pRemove").onclick=e=>{e.preventDefault();e.stopPropagation();clearProduct()};
 document.getElementById("pRemove2").onclick=clearProduct;
-document.getElementById("homeProdRm").onclick=clearProduct;
+document.getElementById("homeProdRm").onclick=e=>{e.preventDefault();e.stopPropagation();clearProduct()};
 document.getElementById("pReset").onclick=resetProduct;
 /* ---- logo: clear ---- */
 function clearLogo(){if(!S.logo)return;_revoke(S.logo);S.logo=null;
