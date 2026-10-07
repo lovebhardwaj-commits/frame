@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0B0B14">
-<meta name="description" content="Frame Studio — design transparent catalog frames & overlays for Meta ads. 375+ templates, frame extraction, AI recreate. All data stays on your device.">
+<meta name="description" content="Frame Studio — design transparent catalog frames & overlays for Meta ads. 3,000+ templates, frame extraction, AI recreate. All data stays on your device.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236037d7'/%3E%3Crect x='12' y='12' width='40' height='40' rx='6' fill='none' stroke='white' stroke-width='6'/%3E%3Crect x='24' y='24' width='16' height='16' rx='3' fill='white'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236037d7'/%3E%3Crect x='12' y='12' width='40' height='40' rx='6' fill='none' stroke='white' stroke-width='6'/%3E%3Crect x='24' y='24' width='16' height='16' rx='3' fill='white'/%3E%3C/svg%3E">
 <link rel="manifest" href='data:application/json,{"name":"Frame Studio","short_name":"FrameStudio","display":"standalone","background_color":"%230B0B14","theme_color":"%230B0B14","start_url":".","icons":[{"src":"data:image/svg+xml,%253Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%253E%253Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%25236037d7%27/%253E%253C/svg%253E","sizes":"any","type":"image/svg+xml"}]}'>
-<title>Frame Studio Pro</title>
+<title>Frame Studio Pro · AI (Claude)</title>
 <script>try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem("fs_theme")||'"light"')}catch(e){document.documentElement.dataset.theme="light"}</script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,600;1,800&family=Montserrat:wght@400;600;700;800;900&family=Oswald:wght@400;600;700&family=Bebas+Neue&family=Dancing+Script:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&family=Lobster&family=Pacifico&family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Baloo+2:wght@600;700;800&family=Kalam:wght@700&display=swap" rel="stylesheet">
 <style>
@@ -181,7 +181,7 @@ body.home .tb-center,body.home #undoBtn,body.home #redoBtn,body.home #saveBtn,bo
 .home-hero p{font-size:13.5px;color:var(--tx2);margin-bottom:22px}
 .home-search{width:100%;max-width:560px;padding:13px 20px;border-radius:26px;border:1px solid var(--bdh);background:var(--card);color:var(--tx);font-size:13px;font-family:inherit;outline:none;box-shadow:0 8px 30px rgba(0,0,0,.35);transition:.2s}
 .home-search:focus{border-color:var(--ac);box-shadow:0 8px 30px rgba(108,140,255,.18)}
-.home-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0 26px}
+.home-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 26px}
 .hact{background:linear-gradient(180deg,var(--card),#141720);border:1px solid var(--bd);border-radius:14px;padding:18px 16px;cursor:pointer;transition:.18s;text-align:left}
 .hact:hover{transform:translateY(-3px);border-color:var(--acbd);box-shadow:0 12px 32px rgba(0,0,0,.4)}
 .hact .hi{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:11px}
@@ -428,11 +428,63 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 .uzw.has .uzx{display:flex}
 .prodacts{display:flex;gap:14px;margin-top:9px}
 .linkbtn.danger{color:#ef4444}
+.hpw{position:relative;display:inline-flex}
+.hpw.has .resume-btn{padding-right:42px}
+.hpw .uzx{right:9px}
+.hpw.has .uzx{display:flex}
+/* v6: facets, paging, wizard */
+.facets{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:-4px 0 14px}
+.facets select{padding:7px 10px;border-radius:10px;border:1px solid var(--bd);background:var(--panel);color:var(--tx);font:inherit;font-size:12px;font-weight:600;cursor:pointer;max-width:220px}
+.facets .gcount{margin-left:auto;font-size:11px;color:var(--tx3);font-weight:800;letter-spacing:.04em}
+.gal-more{grid-column:1/-1;justify-self:center;margin:16px 0}
+.safe-btn.on{color:var(--ac)!important;border-color:var(--acbd)!important}
+.wizbg{position:fixed;inset:0;background:rgba(20,15,41,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:120;display:none;align-items:center;justify-content:center;padding:16px}
+.wizbg.show{display:flex}
+.wiz{background:var(--panel);border:1px solid var(--bdh);border-radius:20px;width:min(940px,100%);max-height:94vh;display:flex;flex-direction:column;box-shadow:0 30px 90px rgba(0,0,0,.35);animation:menuIn .2s ease}
+.wiz-head{display:flex;justify-content:space-between;align-items:flex-start;padding:20px 24px 10px}
+.wiz-title{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--tx)}
+.wiz-x{border:1px solid var(--bd);background:transparent;color:var(--tx2);width:32px;height:32px;border-radius:50%;cursor:pointer;font-family:inherit}
+.wiz-steps{display:flex;gap:6px;padding:0 24px 12px}
+.wiz-steps span{flex:1;height:4px;border-radius:4px;background:var(--bd)}
+.wiz-steps span.on{background:linear-gradient(90deg,#AF46FD,#F4349D)}
+.wiz-body{padding:4px 24px 18px;overflow-y:auto;flex:1}
+.wiz-foot{display:flex;align-items:center;gap:12px;padding:14px 24px;border-top:1px solid var(--bd)}
+.wiz-hint{flex:1;font-size:11px;color:var(--tx3);font-weight:700}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.wcard{border:1.5px solid var(--bd);border-radius:14px;padding:14px;cursor:pointer;background:var(--panel);transition:.15s}
+.wcard:hover{border-color:var(--acbd)}
+.wcard.on{border-color:var(--ac);background:var(--acb);box-shadow:0 0 0 3px var(--acb)}
+.wcard .wi{font-size:22px;margin-bottom:6px}
+.wcard b{display:block;font-size:13px;color:var(--tx);margin-bottom:2px}
+.wcard span{font-size:11px;color:var(--tx3)}
+.wrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}
+.wlab{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--tx3);font-weight:800;margin:18px 0 8px}
+.wseg{display:inline-flex;border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.wseg button{border:0;background:transparent;padding:8px 14px;font:inherit;font-size:12px;font-weight:700;color:var(--tx2);cursor:pointer}
+.wseg button.on{background:var(--acb);color:var(--ac)}
+.wthumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.wthumbs.big{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.wthumb{border:2px solid var(--bd);border-radius:12px;overflow:hidden;cursor:pointer;background:#fff;position:relative;transition:.15s}
+.wthumb:hover{border-color:var(--acbd);transform:translateY(-2px)}
+.wthumb canvas{display:block;width:100%;height:auto}
+.wthumb.on{border-color:var(--ac);box-shadow:0 0 0 3px var(--acb)}
+.wthumb .tn{position:absolute;left:0;right:0;bottom:0;font-size:10px;padding:5px 7px;background:linear-gradient(transparent,rgba(8,8,10,.85));color:#fff;font-weight:700}
+.wfield{margin-bottom:12px}
+.wfield .inp{width:100%;margin:4px 0 6px}
+.wsugs{display:flex;gap:6px;flex-wrap:wrap}
+.wsugs .chip{margin:0}
+.wcols{display:grid;grid-template-columns:1fr 300px;gap:22px;align-items:start}
+.wprev{position:sticky;top:0}
+.wcolor{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:700;color:var(--tx2)}
+.wcolor input{width:56px;height:38px;border:1px solid var(--bd);border-radius:10px;background:var(--panel);padding:3px;cursor:pointer}
+.wfp{border:1.5px solid var(--bd);border-radius:12px;padding:8px 14px;cursor:pointer;text-align:center;min-width:86px}
+.wfp.on{border-color:var(--ac);background:var(--acb)}
+@media(max-width:720px){.wthumbs,.wthumbs.big{grid-template-columns:repeat(2,1fr)}.wiz-head,.wiz-body,.wiz-foot{padding-left:16px;padding-right:16px}.wcols{grid-template-columns:1fr}.wprev{position:static;max-width:300px}.wiz-title{font-size:19px}}
 </style>
 </head>
 <body>
 <div class="topbar">
-<div class="brand"><div class="logo" id="brandLogo"></div><h1>Frame Studio</h1><span class="bg">375+ TEMPLATES</span></div>
+<div class="brand"><div class="logo" id="brandLogo"></div><h1>Frame Studio</h1><span class="bg"><span class="tcount">375+</span> TEMPLATES</span></div>
 <button class="tbtn" id="homeBtn" data-tip="Back" data-tip-pos="bottom" title="Back to templates"><i class="ich" data-i="back"></i>Back</button>
 <div class="tb-center"><div class="pvchip" id="pvLabel">Pick a template to start</div><button class="tbtn" id="rerollBtn" data-tip="Generate another surprise design" data-tip-pos="bottom" style="display:none"><i class="ich" data-i="dice"></i></button></div>
 <div class="tb-right">
@@ -447,6 +499,7 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 <button class="helpbtn" id="helpBtn" data-tip="Help" data-tip-pos="bottom" aria-label="Help and shortcuts" title="Help & shortcuts">?</button>
 </div>
 <div class="moremenu" id="moreMenu">
+<button class="mitem" id="wizMenuBtn"><i class="ich" data-i="sparkle"></i>Build your frame (guided)</button>
 <button class="mitem" id="newFrameBtn"><i class="ich" data-i="filePlus"></i>New blank frame</button>
 <button class="mitem" id="dupDesignBtn"><i class="ich" data-i="copy"></i>Duplicate this design</button>
 <button class="mitem" id="copyPngBtn"><i class="ich" data-i="clip"></i>Copy frame PNG to clipboard</button>
@@ -464,20 +517,19 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 </div></div>
 <div id="homeView"><div class="home-wrap">
 <div class="home-hero">
-<div class="hero-kicker">FRAME STUDIO · 375+ TEMPLATES</div>
+<div class="hero-kicker">FRAME STUDIO · <span class="tcount">375+</span> TEMPLATES</div>
 <h1>Design frames that <em>sell.</em></h1>
-<p>Transparent frames &amp; overlays for Meta ads. Pick, extract, or generate — your product renders through the center.</p>
+<p>Transparent frames &amp; overlays for Meta ads. Pick a template or build your own — your product renders through the center.</p>
 <div id="resumeSlot"></div>
 <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px">
-<label class="resume-btn" id="homeProdPill" style="margin-top:0;cursor:pointer"><i class="ich" data-i="pkg"></i><span id="homeProdLbl"><b>Upload your product photo</b> — preview it inside every template</span><input type="file" accept="image/*" id="homeProd" style="display:none"></label>
-<button class="resume-btn" id="homeProdRm" type="button" style="margin-top:0;display:none">✕ Remove product</button>
+<span class="hpw" id="hpw"><label class="resume-btn" id="homeProdPill" style="margin-top:0;cursor:pointer"><i class="ich" data-i="pkg"></i><span id="homeProdLbl"><b>Upload your product photo</b> — preview it inside every template</span><input type="file" accept="image/*" id="homeProd" style="display:none"></label><button class="uzx" id="homeProdRm" type="button" aria-label="Remove product image" title="Remove product image">✕</button></span>
 <button class="resume-btn" id="surpriseBtn" style="margin-top:0"><i class="ich" data-i="dice"></i><b>Surprise me</b> — generate a fresh design</button>
 </div>
 </div>
 <div class="home-actions">
-<div class="hact" id="haBrowse"><div class="hi" style="background:rgba(108,140,255,.15)"><i class="ich" data-i="grid"></i></div><b>Browse templates</b><span>375+ studio‑grade designs · 💎 Premium & overlay packs</span></div>
-<div class="hact" id="haExtract"><div class="hi" style="background:rgba(236,72,153,.15)"><i class="ich" data-i="scissors"></i></div><b>Extract from reference</b><span>Upload any frame — we separate it pixel‑perfect, center transparent</span></div>
-<div class="hact" id="haBlank"><div class="hi" style="background:rgba(52,211,153,.13)"><i class="ich" data-i="filePlus"></i></div><b>Start blank</b><span>Build your own with banners, badges, text &amp; stickers</span></div>
+<div class="hact" id="haBrowse"><div class="hi" style="background:rgba(108,140,255,.15)"><i class="ich" data-i="grid"></i></div><b>Browse templates</b><span><span class="tcount">375+</span> studio‑grade designs · 💎 Premium & overlay packs</span></div>
+<div class="hact" id="haExtract" style="display:none"><div class="hi" style="background:rgba(236,72,153,.15)"><i class="ich" data-i="scissors"></i></div><b>Extract from reference</b><span>Upload any frame — we separate it pixel‑perfect, center transparent</span></div>
+<div class="hact" id="haBlank"><div class="hi" style="background:rgba(52,211,153,.13)"><i class="ich" data-i="filePlus"></i></div><b>Build your frame</b><span>Guided in 5 steps — goal, structure, brand colours &amp; words</span></div>
 <div class="hact" id="haMine"><div class="hi" style="background:rgba(251,191,36,.13)"><i class="ich" data-i="save"></i></div><b>My Frames</b><span id="haMineCount">Your saved designs</span></div>
 </div>
 
@@ -493,10 +545,11 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 
 <div id="galleryView"><div class="home-wrap gal-wrap">
 <div class="gal-head">
-<div><div class="hero-kicker" style="margin-bottom:6px">TEMPLATE LIBRARY</div><h2 class="gal-title">375+ frames &amp; overlays</h2></div>
+<div><div class="hero-kicker" style="margin-bottom:6px">TEMPLATE LIBRARY</div><h2 class="gal-title"><span class="tcount">375+</span> frames &amp; overlays</h2></div>
 <input class="home-search gal-search" id="tplSearch" placeholder="Search — diwali, sale, luxury, overlay…">
 </div>
 <div class="chips" id="homeChips"></div>
+<div class="facets" id="facets"></div>
 <div class="home-grid" id="tplList"></div>
 </div></div>
 
@@ -509,7 +562,7 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 <div class="tabs">
 <button class="tab" data-t="elements"><i class="ich" data-i="plus"></i>Add</button>
 <button class="tab on" data-t="layers"><i class="ich" data-i="layers"></i>Layers</button>
-<button class="tab" data-t="ai"><i class="ich" data-i="scissors"></i>Recreate</button>
+<button class="tab" data-t="ai" style="display:none"><i class="ich" data-i="scissors"></i>Recreate</button>
 </div>
 <div class="tc">
 <div class="tp" id="tp-elements">
@@ -557,12 +610,13 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 </div>
 <div class="tp" id="tp-ai">
 <div class="st">Recreate From Reference<i class="tipdot" data-tip="Upload any frame — or a finished ad (frame over a product photo). Both work." data-tip-pos="left">i</i></div>
-<label class="uz big" id="aiZone" style="margin-bottom:8px"><input type="file" accept="image/*" id="aiImg"><i class="ich" data-i="img"></i><span id="aiLbl">Upload frame or ad image</span><span style="font-size:10px;font-weight:600;color:var(--tx3)">PNG or JPG · nothing leaves your device</span></label>
+<label class="uz big" id="aiZone" style="margin-bottom:8px"><input type="file" accept="image/*" id="aiImg"><i class="ich" data-i="img"></i><span id="aiLbl">Upload frame or ad image</span><span style="font-size:10px;font-weight:600;color:var(--tx3)">PNG or JPG</span></label>
 <div id="aiPrevWrap"><img id="aiPrev"><div id="aiPrevInfo"><div id="aiPrevName"></div><div id="aiPrevHint">Ready</div><button class="linkbtn" id="aiChange">↺ Use a different image</button></div></div>
 <div id="aiActions">
-<button class="btn btn-p" style="width:100%" id="aiBtn" disabled>⚡ Extract Locally — instant, offline</button>
 <div style="display:none"><i class="tipdot" data-tip="Clean frames are separated pixel-perfect. Finished ads are rebuilt as an editable layout — colors, bands, badges, with placeholder text.">i</i></div>
-<button class="btn btn-s" style="width:100%;display:none" id="aiAiBtn" disabled>✨ AI Recreate — reads exact text &amp; design</button>
+<button class="btn btn-p" style="width:100%" id="aiAiBtn" disabled>✨ Generate Editable Frame (AI)</button>
+<button class="btn btn-s" style="width:100%;margin-top:8px;display:none" id="aiBtn" disabled>⚡ Extract Locally — instant, offline</button>
+<div class="hint" style="margin:6px 0 0">AI generation runs on Claude and only works when this page is opened inside Claude.</div>
 <div style="display:none;justify-content:space-between;align-items:center;margin-top:8px;background:var(--card);border:1px solid var(--bd);border-radius:9px;padding:6px 10px">
 <span class="hint" style="margin:0" id="aiKeyStat">API key: not set</span>
 <span><i class="tipdot" data-tip="Get a key at console.anthropic.com → API Keys → Create Key, then paste it here. Stored only in this browser. Not needed when this app runs inside claude.ai.">i</i>
@@ -594,16 +648,23 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 <button class="sbtn danger" id="sbDel" aria-label="Delete layer" title="Delete (Del)"><i class="ich" data-i="trash"></i></button>
 </div>
 <div class="cw"><canvas id="cv"></canvas></div>
-<div class="canvas-hint"><span>Drag to move · corners resize · ⟳ rotates · <b>double-click text to edit</b> · <span class="kbd">Del</span> delete</span><button class="ghost" id="clrBtn" title="Deselect (Esc)">Deselect · Esc</button></div>
+<div class="canvas-hint"><span>Drag to move · corners resize · ⟳ rotates · <b>double-click text to edit</b> · <span class="kbd">Del</span> delete</span><button class="ghost safe-btn" id="safeBtn" title="Show where the product sits and the edge margin">Safe zones</button><button class="ghost" id="clrBtn" title="Deselect (Esc)">Deselect · Esc</button></div>
 </div>
 </div>
+<div id="wizBg" class="wizbg" role="dialog" aria-modal="true" aria-label="Build your frame"><div class="wiz">
+<div class="wiz-head"><div><div class="hero-kicker" style="margin:0 0 4px">BUILD YOUR FRAME</div><div class="wiz-title" id="wizTitle">What's this frame for?</div></div><button class="wiz-x" id="wizClose" aria-label="Close" type="button">✕</button></div>
+<div class="wiz-steps" id="wizSteps"></div>
+<div class="wiz-body" id="wizBody"></div>
+<div class="wiz-foot"><button class="btn btn-s" id="wizBack" type="button">← Back</button><span class="wiz-hint" id="wizHint"></span><button class="btn btn-p" id="wizNext" type="button">Next →</button></div>
+<input type="file" accept="image/*" id="wzLogo" style="display:none">
+</div></div>
 <div id="toasts"></div>
 <div id="modalBg" role="dialog" aria-modal="true" aria-label="Frame Studio help"><div class="modal">
 <div class="mhero">
 <div class="mhero-badge">FRAME STUDIO</div>
 <h2>Design scroll‑stopping catalog frames</h2>
-<div class="sub">Studio‑grade branded frames &amp; overlays for your product ads — 375+ ready templates, full drag‑and‑drop control, and AI that rebuilds any reference into editable layers.</div>
-<div class="mstats"><div class="mstat"><b>375+</b><span>Templates</span></div><div class="mstat"><b>18</b><span>Themes</span></div><div class="mstat"><b>25+</b><span>Elements</span></div><div class="mstat"><b>AI</b><span>Recreate</span></div></div>
+<div class="sub">Studio‑grade branded frames &amp; overlays for your product ads — <span class="tcount">375+</span> ready templates, full drag‑and‑drop control, and AI that rebuilds any reference into editable layers.</div>
+<div class="mstats"><div class="mstat"><b class="tcount">375+</b><span>Templates</span></div><div class="mstat"><b>45</b><span>Occasions</span></div><div class="mstat"><b>25+</b><span>Elements</span></div><div class="mstat"><b>AI</b><span>Recreate</span></div></div>
 </div>
 <div class="mgallery" id="mGallery"></div>
 <div class="mfeatures">
@@ -612,7 +673,7 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 <div class="mfeat"><div class="mfi">💾</div><div><b>Save &amp; reuse</b><span>Designs live in My Frames. Export transparent 1080×1080 frame PNGs — Meta renders your product through the center.</span></div></div>
 </div>
 <div class="mfoot">
-<div class="mkbd" style="display:flex;align-items:center;gap:4px">v5.1
+<div class="mkbd" style="display:flex;align-items:center;gap:4px">v5.1 · AI
 <i class="tipdot" data-tip="Privacy-first: everything runs on your device — designs, uploads &amp; brand colors never leave this browser. AI Recreate sends only your reference image, only when you use it.">🔒</i>
 <i class="tipdot" data-tip="Ctrl+Z undo · Ctrl+Y redo · Del delete · Ctrl+D duplicate · Ctrl+S save · Esc deselect · arrow keys nudge · double-tap text to edit inline">⌨</i>
 <i class="tipdot" id="diagBtn" style="cursor:pointer" data-tip="Copy diagnostics for support">🛠</i>
@@ -947,13 +1008,15 @@ const iw2=K-i.l-i.r, ih2=K-i.t-i.b;
 if(l.arch){const ar=Math.min(iw2/2,l.archH||330);
 p.moveTo(i.l,i.t+ar);p.ellipse(i.l+iw2/2,i.t+ar,iw2/2,ar,0,Math.PI,Math.PI*2);
 p.lineTo(i.l+iw2,i.t+ih2);p.lineTo(i.l,i.t+ih2);p.closePath();}
+else if(l.win==="circle"){const r0=l.r||360,cy0=l.cy||K/2;p.moveTo(K/2+r0,cy0);p.arc(K/2,cy0,r0,0,Math.PI*2)}
 else rrP(p,i.l,i.t,iw2,ih2,l.radius||0);
 c.save();
 if(l.cols&&l.cols.length>1)c.fillStyle=lg(c,0,0,0,K,l.cols);else c.fillStyle=l.cols?.[0]||"#333";
-c.fill(p,"evenodd");
-if(l.tex){c.save();c.clip(p,"evenodd");c.globalAlpha=l.texA??.55;c.drawImage(getTex(l.tex,l.cols?.[0]||"#333"),0,0);c.restore()}
+if(!l.fillNone)c.fill(p,"evenodd");
+if(l.tex&&!l.fillNone){c.save();c.clip(p,"evenodd");c.globalAlpha=l.texA??.55;c.drawImage(getTex(l.tex,l.cols?.[0]||"#333"),0,0);c.restore()}
 if(l.stroke){c.strokeStyle=l.stroke;c.lineWidth=l.strokeW||4;const sp=new Path2D();
 if(l.arch){const ar=Math.min(iw2/2,l.archH||330);sp.moveTo(i.l+2,i.t+ar);sp.ellipse(i.l+iw2/2,i.t+ar,iw2/2-2,ar-2,0,Math.PI,Math.PI*2);sp.lineTo(i.l+iw2-2,i.t+ih2-2);sp.lineTo(i.l+2,i.t+ih2-2);sp.closePath();}
+else if(l.win==="circle"){sp.arc(K/2,l.cy||K/2,(l.r||360)-2,0,Math.PI*2)}
 else rrP(sp,i.l+2,i.t+2,iw2-4,ih2-4,Math.max(0,(l.radius||0)-2));
 c.stroke(sp)}
 c.restore();l._bb=null;l._inset=i;}
@@ -979,14 +1042,14 @@ if(l.strokeCol){c.strokeStyle=l.strokeCol;c.lineWidth=l.strokeW||3;c.stroke(p)}
 const bx=x+w/2+(b.dx||0), by=y+h/2+(b.dy||0);
 c.textAlign=b.align||"center";c.textBaseline="middle";
 if(b.kind==="offer"){
-const big=b.s||64;
+let big=b.s||64;if(b.mw){c.font=`900 ${big}px ${b.f||"'Montserrat',sans-serif"}`;const tw=c.measureText(b.t||"50%").width*1.5;if(tw>b.mw)big=big*b.mw/tw}
 c.font=`800 ${big*.32}px ${b.f||"'Montserrat',sans-serif"}`;c.fillStyle=b.c;c.fillText(b.small||"UP TO",bx-big*.02,by-big*.5);
 c.font=`${b.it?"italic ":""}900 ${big}px ${b.f||"'Montserrat',sans-serif"}`;c.fillText(b.t||"50%",bx,by+big*.08);
 const bw2=c.measureText(b.t||"50%").width;
 c.font=`800 ${big*.3}px ${b.f||"'Montserrat',sans-serif"}`;c.textAlign="left";c.fillText(b.tail||"OFF",bx+bw2/2+big*.06,by+big*.34);c.textAlign="center";
 }else{
-c.font=`${b.it?"italic ":""}${b.b?800:600} ${b.s||34}px ${b.f||"'Poppins',sans-serif"}`;c.fillStyle=b.c||"#fff";
-if(b.strokeC){c.lineWidth=(b.s||34)*.16;c.strokeStyle=b.strokeC;c.strokeText(b.t,bx,by);}
+let bs=b.s||34;const bf=z=>`${b.it?"italic ":""}${b.b?800:600} ${z}px ${b.f||"'Poppins',sans-serif"}`;c.font=bf(bs);if(b.mw){const tw=c.measureText(b.t||"").width;if(tw>b.mw){bs=bs*b.mw/tw;c.font=bf(bs)}}c.fillStyle=b.c||"#fff";
+if(b.strokeC){c.lineWidth=bs*.16;c.strokeStyle=b.strokeC;c.strokeText(b.t,bx,by);}
 c.fillText(b.t||"",bx,by);}
 });
 c.restore();
@@ -1011,22 +1074,24 @@ lines.forEach(b=>{const fs=b.s||24;yy+=fs*.56;c.font=`${b.b?800:700} ${fs}px ${b
 c.restore();l._bb=[x-6,y-6,s+12,s+12];}
 function drawTextL(c,l,exportMode){
 c.save();c.globalAlpha=l.opacity??1;
-const fs=l.s||44;c.font=`${l.it?"italic ":""}${l.wt||800} ${fs}px ${l.f||"'Poppins',sans-serif"}`;
-const lines=String(l.t??"").split("\n");const lh=fs*1.16;
-const w=Math.max(...lines.map(t=>c.measureText(t).width),10);
-const totH=fs+(lines.length-1)*lh;
-const cx2=l.x+w/2,cy=l.y+totH/2;
+let fs=l.s||44;const fnt=z=>`${l.it?"italic ":""}${l.wt||800} ${z}px ${l.f||"'Poppins',sans-serif"}`;c.font=fnt(fs);
+const lines=String(l.t??"").split("\n");
+let w=Math.max(...lines.map(t=>c.measureText(t).width),10);
+if(l.maxW&&w>l.maxW){fs=fs*l.maxW/w;c.font=fnt(fs);w=Math.max(...lines.map(t=>c.measureText(t).width),10)}
+const lh=fs*1.16,totH=fs+(lines.length-1)*lh;
+const X=l.x+(l.anchor==="c"?-w/2:l.anchor==="r"?-w:0);
+const cx2=X+w/2,cy=l.y+totH/2;
 c.translate(cx2,cy);c.rotate((l.rot||0)*Math.PI/180);c.translate(-cx2,-cy);
 c.textAlign="left";c.textBaseline="alphabetic";
-if(l.box){const bp=rr(c,l.x-18,l.y-2,w+36,totH*1.06+fs*.28,8);const pa=c.globalAlpha;c.globalAlpha=pa*.85;c.fillStyle=l.boxC||"#ffffff";c.fill(bp);c.globalAlpha=pa;}
+if(l.box){const bp=rr(c,X-18,l.y-2,w+36,totH*1.06+fs*.28,8);const pa=c.globalAlpha;c.globalAlpha=pa*.85;c.fillStyle=l.boxC||"#ffffff";c.fill(bp);c.globalAlpha=pa;}
 lines.forEach((t,li)=>{
-const bx=l.x,by=l.y+fs+li*lh;
+const lw=c.measureText(t).width;const bx=X+(l.anchor==="c"?(w-lw)/2:l.anchor==="r"?w-lw:0),by=l.y+fs+li*lh;
 if(l.extrude){for(let e=Math.round(fs*.09);e>0;e--){c.fillStyle=shade(l.c||"#fff",-.55);c.fillText(t,bx+e,by+e)}}
 if(l.shadow){sh(c,"rgba(0,0,0,.45)",fs*.18,0,fs*.06)}
 if(l.strokeC){c.lineWidth=fs*.14;c.lineJoin="round";c.strokeStyle=l.strokeC;c.strokeText(t,bx,by)}
 c.fillStyle=l.grad?lg(c,bx,by-fs,bx,by,[tint(l.c,.6),l.c,shade(l.c,-.2)]):(l.c||"#fff");
 c.fillText(t,bx,by);nsh(c);});
-c.restore();l._bb=[l.x-6,l.y-4,w+12,totH+fs*.32];}
+c.restore();l._bb=[X-6,l.y-4,w+12,totH+fs*.32];}
 function drawImgL(c,l,exportMode){
 if(l.placeholder&&!l.imgObj){if(exportMode){l._bb=null;return}
 c.save();c.globalAlpha=.7;c.setLineDash([8,6]);c.strokeStyle="#aaa";c.lineWidth=3;
@@ -1081,13 +1146,16 @@ c.drawImage(img,(K-iw)/2+(opts.imgX||0),(K-ih)/2+(opts.imgY||0),iw,ih);
 c.fillStyle="#ffffff";c.fillRect(0,0,K,K);
 }else{
 /* editor / thumbnails: checkerboard = transparency indicator */
-c.drawImage(checkerTex(),0,0);
+if(opts.demoBg){c.fillStyle=rg(c,K*.5,K*.42,60,K*.75,["#9a8f86","#5d5550","#2f2a28"]);c.fillRect(0,0,K,K)}else c.drawImage(checkerTex(),0,0);
 if(!opts.thumb){
 c.fillStyle="rgba(90,95,114,.8)";c.font="600 27px 'DM Sans',sans-serif";c.textAlign="center";c.textBaseline="middle";
 c.fillText("Transparent — product auto-renders here",K/2,K/2-16);
 c.fillStyle="rgba(90,95,114,.55)";c.font="500 20px 'DM Sans',sans-serif";
 c.fillText("Upload a product image (top-left) to preview",K/2,K/2+22);}}
 layers.forEach(l=>drawLayer(c,l,opts.exportMode));
+if(opts.safe){c.save();c.setLineDash([12,9]);c.lineWidth=3;c.strokeStyle="rgba(16,185,129,.95)";c.fillStyle="rgba(16,185,129,.08)";c.fillRect(170,200,740,610);c.strokeRect(170,200,740,610);
+c.font="700 22px 'DM Sans',sans-serif";c.textAlign="center";c.textBaseline="middle";c.fillStyle="rgba(4,120,87,.95)";c.fillText("Product focus area — keep text & badges out",K/2,228);
+c.strokeStyle="rgba(239,68,68,.8)";c.strokeRect(36,36,K-72,K-72);c.fillStyle="rgba(200,40,40,.9)";c.fillText("Edge margin — avoid text past this line",K/2,K-56);c.setLineDash([]);c.restore()}
 /* snap guides */
 if(opts.guides){c.save();c.strokeStyle="#e8b34b";c.lineWidth=2.5;c.setLineDash([14,10]);
 if(opts.guides.v){c.beginPath();c.moveTo(K/2,0);c.lineTo(K/2,K);c.stroke()}
@@ -1109,7 +1177,7 @@ c.textAlign="start";c.textBaseline="alphabetic";}
 function cornerPts(b){return[[b[0],b[1]],[b[0]+b[2],b[1]],[b[0],b[1]+b[3]],[b[0]+b[2],b[1]+b[3]]]}
 function rotPt(b){return[b[0]+b[2]/2,b[1]-46]}
 function hasRot(l){return["text","decor","strip","img"].includes(l.type)}
-function render(){renderScene(ctx,S.layers,{img:S.img,imgX:S.imgX,imgY:S.imgY,imgScale:S.imgScale,sel:S.sel,guides:S.guides})}
+function render(){renderScene(ctx,S.layers,{img:S.img,imgX:S.imgX,imgY:S.imgY,imgScale:S.imgScale,sel:S.sel,guides:S.guides,safe:S.safe})}
 
 /* ============ TEMPLATE FACTORY ============ */
 function L(o){return Object.assign({id:nid()},o)}
@@ -1456,7 +1524,267 @@ L({type:"text",name:"Offer",t:(def.off[0].includes("%")?"Flat "+def.off[0]+" OFF
 L({type:"text",name:"Code Chip",t:"CODE : SAVE"+(def.off[0].replace(/\D/g,"")||"10"),f:"'Space Grotesk',sans-serif",s:30,c:"#161616",wt:700,x:360,y:600,box:true,boxC:"#ffffff"}),
 L({type:"text",name:"Brand Line",t:"Y O U R   B R A N D",f:"'Cormorant Garamond',serif",s:50,c:"#ffffff",wt:600,x:345,y:880,shadow:true}),
 logoSlot()]})});
-/* total: 11 heroes + 16 themes × 4 palettes × 5 layouts + 16 overlays = 347 */
+/* ============ TEMPLATE ENGINE v6 — 24 layout archetypes × 45 occasions × 3 palettes ============ */
+/* Quality rules built in: text colours picked by WCAG contrast, every text auto-fits its zone (maxW / mw),
+   layouts keep text in fixed edge zones so the product centre stays clear. */
+function _lum(h){const c=hex2rgb(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function contrast(a,b){const x=_lum(a),y=_lum(b);return(Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+function inkOn(bg,pref,min){if(pref&&contrast(pref,bg)>=(min||3.2))return pref;return contrast("#ffffff",bg)>=contrast("#161616",bg)?"#ffffff":"#161616"}
+function isGoldish(h){const[r,g,b]=hex2rgb(h);const mx=Math.max(r,g,b),mn=Math.min(r,g,b);if(mx-mn<40||mx<150)return false;let hu=mx===r?((g-b)/(mx-mn))*60:mx===g?(2+(b-r)/(mx-mn))*60:(4+(r-g)/(mx-mn))*60;if(hu<0)hu+=360;return hu>=35&&hu<=58}
+function mkPal(bg1,bg2,acc,gold){const ban=gold?[shade(acc,-.4),acc,tint(acc,.55)]:[acc,shade(acc,-.18)];
+return{bg1,bg2,acc,gold:!!gold,ban,banInk:inkOn(acc,gold?shade(bg1,-.15):null,4.2),ink:inkOn(bg1),hi:inkOn(bg1,acc,3)}}
+function parseOffer(o){const m=String(o||"").match(/^(.*?)(\d+\s?%)\s*(OFF)?\s*$/i);return m?{small:(m[1].trim()||"FLAT").toUpperCase(),pct:m[2].replace(/\s/g,"")}:null}
+function titleCase(s){return String(s).toLowerCase().replace(/(^|\s)\S/g,t=>t.toUpperCase())}
+function offerBlock(X,o,c,f,s,dx,dy,mw){if(!o)return null;const p=parseOffer(o);
+if(p&&X.tone!=="luxe")return{kind:"offer",t:p.pct,small:p.small,tail:"OFF",s,c,f,dx,dy,mw};
+return{t:X.tone==="luxe"?titleCase(o):o,f,s:Math.round(s*.6),c,b:true,dx,dy,mw}}
+function offerLines(o,c){const p=parseOffer(o);if(p)return[{t:p.small,s:30,c,b:true},{t:p.pct,s:72,c,b:true},{t:"OFF",s:30,c,b:true}];
+const w=String(o).split(" ");if(o.length>8&&w.length>1){const h=Math.ceil(w.length/2);const l1=w.slice(0,h).join(" "),l2=w.slice(h).join(" ");const s=Math.min(46,Math.round(300/Math.max(l1.length,l2.length)));return[{t:l1,s,c,b:true},{t:l2,s,c,b:true}]}
+return[{t:o,s:Math.min(58,Math.round(320/Math.max(3,o.length))),c,b:true}]}
+const spaced=s=>String(s).toUpperCase().split("").join(" ");
+const TX=o=>L(Object.assign({type:"text",wt:800,opacity:1},o));
+function DC(X,kind,x,y,scale,rot,i){const a=X.P.acc;return L({type:"decor",kind,name:"Decor "+(i||1),x,y,scale,rot:rot||0,seed:(X.seed||3)+(i||0)*7,cols:kind==="leafSpray"?["#3f6b3f","#7aa05a"]:[a,tint(a,.4),shade(a,-.25)],opacity:.95})}
+function LOGO(x,y,wd){const l=logoSlot();if(x!=null){l.x=x;l.y=y;l.wd=wd||l.wd}return l}
+function BGL(X,o){return L(Object.assign({type:"bg",name:"Border",cols:[X.P.bg1,X.P.bg2],tex:X.tex,texA:.45,radius:0},o))}
+const GARLAND=["diya","lantern","star","snowflake","heart","balloon","gift","firework"];
+
+const ARCH=[
+{id:"bottomBand",name:"Bottom Band",tone:"any",fn:X=>{const{P,C,F}=X;return[
+BGL(X,{inset:{t:56,r:56,b:196,l:56},radius:6}),DC(X,X.D[0],150,150,.8,-10,1),
+L({type:"banner",name:"Offer Band",shape:X.tone==="value"?"rect":"taper",x:70,y:884,w:940,h:150,cols:P.ban,blocks:[
+{t:C.head,f:F.h,s:46,c:P.banInk,b:true,it:X.tone==="luxe",dx:C.offer?-215:0,dy:0,mw:C.offer?420:840},
+offerBlock(X,C.offer,P.banInk,F.h,72,245,0,330)].filter(Boolean)}),LOGO()]}},
+{id:"topBottom",name:"Top & Bottom Bars",tone:"any",fn:X=>{const{P,C,F}=X;const bar=[P.acc,shade(P.acc,-.12)],bi=inkOn(P.acc);return[
+BGL(X,{inset:{t:150,r:44,b:150,l:44}}),
+L({type:"banner",name:"Top Bar",shape:"rect",x:0,y:0,w:K,h:132,cols:bar,blocks:[{t:C.head,f:F.h,s:50,c:bi,b:true,it:X.tone==="luxe",dx:-120,dy:0,mw:660}]}),
+L({type:"banner",name:"Bottom Bar",shape:"rect",x:0,y:948,w:K,h:132,cols:bar,blocks:[offerBlock(X,C.offer||C.sub,bi,F.b,60,C.cta?-210:0,4,C.cta?420:860),C.cta&&{t:C.cta+" →",f:F.b,s:32,c:bi,b:true,dx:260,dy:0,mw:320}].filter(Boolean)}),
+LOGO()]}},
+{id:"sideRail",name:"Side Rail",tone:"any",fn:X=>{const{P,C,F}=X;const bi=inkOn(P.acc);return[
+BGL(X,{inset:{t:50,r:50,b:50,l:170},radius:4}),
+L({type:"strip",name:"Side Rail",x:85,y:540,w:1180,h:112,rot:-90,cols:[P.acc,bi],text:(C.head||C.cat).toUpperCase(),sep:"   ✦   ",f:F.h}),
+C.offer&&L({type:"badge",name:"Offer Badge",shape:X.tone==="luxe"?"circle":"burst",x:780,y:780,size:240,cols:[P.acc,bi],seed:X.seed,lines:offerLines(C.offer,bi)}),
+LOGO()]}},
+{id:"lShape",name:"L-Shape",tone:"any",fn:X=>{const{P,C,F}=X;return[
+BGL(X,{inset:{t:50,r:50,b:200,l:150}}),
+L({type:"strip",name:"Side Label",x:75,y:440,w:880,h:96,rot:-90,cols:[P.acc,inkOn(P.acc)],text:(C.cat||C.sub||C.head).toUpperCase(),sep:"   •   ",f:F.b}),
+TX({name:"Headline",t:C.head,f:F.h,s:56,c:P.hi,it:X.tone==="luxe",x:180,y:898,maxW:560}),
+C.offer&&TX({name:"Offer",t:C.offer,f:F.b,s:38,c:P.ink,x:180,y:972,maxW:560}),
+C.cta&&TX({name:"CTA",t:C.cta,f:F.b,s:30,c:inkOn(P.acc),x:880,y:930,anchor:"c",box:true,boxC:P.acc,maxW:250}),
+LOGO()]}},
+{id:"cornerRibbon",name:"Corner Ribbon",tone:"any",fn:X=>{const{P,C,F}=X;return[
+BGL(X,{inset:{t:40,r:40,b:40,l:40},stroke:P.acc,strokeW:5}),
+L({type:"strip",name:"Corner Ribbon",x:190,y:190,w:640,h:84,rot:-45,cols:[P.acc,inkOn(P.acc)],text:C.offer||C.cat||"NEW",sep:"   ★   ",f:F.h}),
+L({type:"banner",name:"Caption Panel",shape:"rect",x:40,y:888,w:1000,h:152,cols:[P.bg1,P.bg2],opacity:.95,blocks:[{t:C.head,f:F.h,s:50,c:P.hi,b:true,it:X.tone==="luxe",dx:0,dy:C.sub?-22:0,mw:900},C.sub&&{t:C.sub,f:F.b,s:26,c:P.ink,dx:0,dy:36,mw:820}].filter(Boolean)}),
+LOGO()]}},
+{id:"archWindow",name:"Arch Window",tone:"any",fn:X=>{const{P,C,F}=X;const d=X.D[1]||X.D[0];return[
+BGL(X,{inset:{t:150,r:70,b:210,l:70},arch:true,archH:330,stroke:P.acc,strokeW:5}),
+DC(X,d,96,260,.45,0,2),DC(X,d,984,260,.45,0,3),
+TX({name:"Headline",t:C.head,f:F.h,s:62,c:P.hi,it:X.tone!=="value",x:540,y:40,anchor:"c",maxW:640}),
+C.offer&&TX({name:"Offer",t:C.offer,f:F.b,s:54,c:P.ink,x:540,y:888,anchor:"c",maxW:760}),
+(C.trust||C.sub)&&TX({name:"Trust line",t:C.trust||C.sub,f:F.b,s:26,wt:600,c:P.hi,x:540,y:975,anchor:"c",maxW:820}),
+LOGO(40,40,150)]}},
+{id:"circleWindow",name:"Circle Window",tone:"any",fn:X=>{const{P,C,F}=X;return[
+BGL(X,{win:"circle",cy:528,r:360,stroke:P.acc,strokeW:6}),
+DC(X,X.D[0],120,850,.55,0,1),DC(X,X.D[1]||X.D[0],950,230,.55,20,2),
+TX({name:"Headline",t:C.head,f:F.h,s:60,c:P.hi,it:X.tone==="luxe",x:540,y:40,anchor:"c",maxW:620}),
+C.offer&&TX({name:"Offer",t:C.offer,f:F.h,s:60,c:P.ink,x:540,y:902,anchor:"c",maxW:620}),
+(C.sub||C.trust)&&TX({name:"Sub line",t:C.sub||C.trust,f:F.b,s:26,wt:600,c:P.hi,x:540,y:986,anchor:"c",maxW:680}),
+LOGO(40,40,150)]}},
+{id:"polaroid",name:"Polaroid",tone:"any",fn:X=>{const{P,C,F}=X;const paper="#fbfaf7",cap=inkOn(paper,shade(P.acc,-.2),4),tape=[tint(P.acc,.5),shade(P.acc,-.45)];return[
+L({type:"bg",name:"Polaroid",cols:[paper,"#f1eee6"],tex:"grain",texA:.25,inset:{t:72,r:72,b:250,l:72},radius:0,stroke:"#e4dfd3",strokeW:3}),
+L({type:"strip",name:"Tape L",x:150,y:64,w:250,h:58,rot:-32,cols:tape,text:" ",sep:" "}),
+L({type:"strip",name:"Tape R",x:930,y:64,w:250,h:58,rot:32,cols:tape,text:" ",sep:" "}),
+TX({name:"Caption",t:C.head,f:"'Kalam',cursive",s:66,wt:700,c:cap,x:540,y:856,anchor:"c",maxW:860,rot:-2}),
+(C.offer||C.sub)&&TX({name:"Offer",t:(C.offer||C.sub)+(C.cta?"  ·  "+C.cta:""),f:F.b,s:32,c:"#262626",x:540,y:964,anchor:"c",maxW:860}),
+LOGO(480,8,120)]}},
+{id:"couponTicket",name:"Coupon Ticket",tone:"value",fn:X=>{const{P,C,F}=X;return[
+BGL(X,{inset:{t:56,r:56,b:230,l:56},radius:8}),DC(X,X.D[0],150,150,.75,-8,1),
+L({type:"banner",name:"Ticket",shape:"rect",x:56,y:870,w:968,h:170,cols:P.ban,blocks:[
+offerBlock(X,C.offer||"FLAT 20% OFF",P.banInk,F.h,74,-230,8,400),
+{t:"USE CODE",f:F.b,s:24,c:P.banInk,b:true,dx:230,dy:-46,mw:300}]}),
+TX({name:"Coupon Code",t:C.code,f:"'Space Grotesk',sans-serif",s:36,wt:700,c:"#161616",x:770,y:944,anchor:"c",box:true,boxC:"#ffffff",maxW:300}),
+LOGO()]}},
+{id:"diagonalTapes",name:"Diagonal Tapes",tone:"value",fn:X=>{const{P,C,F}=X;const b2=inkOn(P.bg1);return[
+BGL(X,{inset:{t:48,r:48,b:210,l:48}}),DC(X,X.D[0],150,150,.7,0,1),
+L({type:"strip",name:"Tape 1",x:540,y:925,w:1500,h:72,rot:-6,cols:[P.acc,inkOn(P.acc)],text:C.offer||C.head,sep:"  ★  ",f:F.h,stroke:shade(P.acc,-.25)}),
+L({type:"strip",name:"Tape 2",x:540,y:948,w:1500,h:66,rot:5,cols:[b2,inkOn(b2)],text:(C.head||C.cat).toUpperCase(),sep:"  ✦  ",f:F.b}),
+LOGO()]}},
+{id:"magazine",name:"Magazine Cover",tone:"luxe",overlay:true,fn:X=>{const{C,F}=X;const serif=X.tone==="value"?F.h:"'Playfair Display',serif";return[
+L({type:"bg",name:"Hairline",fillNone:true,cols:["#ffffff"],inset:{t:34,r:34,b:34,l:34},radius:0,stroke:"#ffffff",strokeW:2}),
+TX({name:"Masthead",t:C.head,f:serif,s:84,wt:700,it:true,c:"#ffffff",x:76,y:64,shadow:true,maxW:640}),
+TX({name:"Issue line",t:spaced(X.occLabel+" edit"),f:"'Montserrat',sans-serif",s:20,wt:700,c:"#ffffff",x:80,y:176,shadow:true,maxW:640}),
+C.sub&&TX({name:"Dek",t:C.sub,f:F.b,s:30,wt:600,c:"#ffffff",x:80,y:866,shadow:true,maxW:700}),
+C.offer&&TX({name:"Offer chip",t:C.offer+(C.cta?"  ·  "+C.cta:""),f:"'Space Grotesk',sans-serif",s:30,wt:700,c:"#161616",x:96,y:944,box:true,boxC:"#ffffff",maxW:760}),
+LOGO()]}},
+{id:"priceTag",name:"Price-Tag Corner",tone:"value",fn:X=>{const{P,C,F}=X;const p=parseOffer(C.offer);const tagT=p?p.pct+"\nOFF":String(C.offer||"SALE").split(" ").slice(0,2).join("\n");return[
+BGL(X,{inset:{t:48,r:48,b:176,l:48},radius:10}),
+L({type:"decor",kind:"priceTagIcon",name:"Price Tag",x:150,y:150,scale:2.5,rot:-14,cols:[P.acc],opacity:1}),
+TX({name:"Tag text",t:tagT,f:F.h,s:44,wt:900,c:inkOn(P.acc),x:198,y:112,anchor:"c",rot:-14,maxW:96}),
+TX({name:"Headline",t:C.head,f:F.h,s:56,c:P.hi,it:X.tone==="luxe",x:540,y:900,anchor:"c",maxW:900}),
+(C.sub||C.trust)&&TX({name:"Sub",t:C.sub||C.trust,f:F.b,s:26,wt:600,c:P.ink,x:540,y:978,anchor:"c",maxW:860}),
+LOGO()]}},
+{id:"stickerBurst",name:"Sticker Burst",tone:"value",fn:X=>{const{P,C,F}=X;const bi=inkOn(P.acc);return[
+BGL(X,{inset:{t:56,r:56,b:180,l:56},radius:20,stroke:P.acc,strokeW:6}),
+L({type:"badge",name:"Burst",shape:"burst",x:792,y:28,size:250,cols:[P.acc],seed:X.seed,lines:offerLines(C.offer||"NEW",bi)}),
+TX({name:"Headline",t:C.head,f:F.h,s:60,c:P.hi,x:540,y:906,anchor:"c",maxW:920,strokeC:_lum(P.bg1)<.25?shade(P.bg1,-.45):null,shadow:_lum(P.bg1)<.25}),
+C.trust&&TX({name:"Trust",t:C.trust,f:F.b,s:24,wt:600,c:P.ink,x:540,y:998,anchor:"c",maxW:860}),
+LOGO(76,76,170)]}},
+{id:"doubleMarquee",name:"Double Marquee",tone:"value",fn:X=>{const{P,C,F}=X;return[
+BGL(X,{inset:{t:112,r:40,b:124,l:40}}),
+L({type:"strip",name:"Top Marquee",x:540,y:56,w:1200,h:72,rot:0,cols:[P.acc,inkOn(P.acc)],text:String(C.head).toUpperCase(),sep:"   ✦   ",f:F.h}),
+L({type:"strip",name:"Bottom Marquee",x:540,y:1018,w:1200,h:88,rot:0,cols:[P.hi,inkOn(P.hi)],text:[C.offer,C.cta].filter(Boolean).join("  ·  ")||C.sub,sep:"   ➤   ",f:F.b}),
+C.cat&&TX({name:"Category chip",t:C.cat.toUpperCase(),f:"'Montserrat',sans-serif",s:22,wt:800,c:P.hi,x:66,y:132,box:true,boxC:P.bg1,maxW:400}),
+LOGO(840,130,160)]}},
+{id:"luxeHairline",name:"Luxe Hairline",tone:"luxe",fn:X=>{const{P,C,F}=X;return[
+BGL(X,{inset:{t:66,r:66,b:176,l:66},stroke:P.acc,strokeW:2,tex:X.tex||"grain"}),
+L({type:"bg",name:"Inner Hairline",fillNone:true,cols:[P.acc],inset:{t:84,r:84,b:194,l:84},radius:0,stroke:P.acc,strokeW:1.5}),
+DC(X,"cornerFlourish",98,98,.5,0,1),DC(X,"cornerFlourish",982,98,.5,90,2),
+TX({name:"Headline",t:C.head,f:"'Cormorant Garamond',serif",s:60,wt:700,it:true,c:P.hi,x:540,y:914,anchor:"c",maxW:860}),
+TX({name:"Small caps",t:spaced(C.offer?titleCase(C.offer):(C.sub||C.cat||"")),f:"'Montserrat',sans-serif",s:20,wt:700,c:P.ink,x:540,y:1000,anchor:"c",maxW:860}),
+LOGO(480,4,120)]}},
+{id:"minimalChips",name:"Minimal Chips",tone:"luxe",overlay:true,fn:X=>{const{P,C,F}=X;return[
+C.cat&&TX({name:"Category chip",t:C.cat.toUpperCase(),f:"'Montserrat',sans-serif",s:24,wt:800,c:inkOn(P.bg1),x:76,y:76,box:true,boxC:P.bg1,maxW:440}),
+C.trust&&TX({name:"Trust",t:"★ "+C.trust,f:F.b,s:26,wt:700,c:"#ffffff",x:76,y:966,shadow:true,maxW:520}),
+C.offer&&TX({name:"Offer chip",t:X.tone==="luxe"?titleCase(C.offer):C.offer,f:F.h,s:32,wt:800,c:inkOn(P.acc),x:1004,y:956,anchor:"r",box:true,boxC:P.acc,maxW:360}),
+LOGO()]}},
+{id:"waveBase",name:"Wave Base",tone:"any",fn:X=>{const{P,C,F}=X;return[
+BGL(X,{inset:{t:56,r:56,b:150,l:56}}),DC(X,X.D[0],150,150,.75,-6,1),
+L({type:"banner",name:"Wave Banner",shape:"wave",x:40,y:886,w:1000,h:150,cols:P.ban,blocks:[
+offerBlock(X,C.offer,P.banInk,"'Montserrat',sans-serif",80,-300,-6,300),
+{t:String(C.head).toUpperCase(),f:F.h,s:44,c:P.banInk,b:true,dx:C.offer?170:0,dy:28,mw:C.offer?520:860}].filter(Boolean)}),
+LOGO()]}},
+{id:"garland",name:"Festive Garland",tone:"any",fn:X=>{const{P,C,F}=X;const k=GARLAND.includes(X.D[0])?X.D[0]:GARLAND.includes(X.D[1])?X.D[1]:GARLAND.includes(X.D[2])?X.D[2]:"star";
+const sc={diya:.7,lantern:.62,star:.6,snowflake:.6,heart:.65,balloon:.42,gift:.62,firework:.55}[k]||.6,yy={lantern:100,balloon:92}[k]||80;return[
+BGL(X,{inset:{t:150,r:56,b:200,l:56}}),
+...[150,345,540,735,930].map((x,i)=>L({type:"decor",kind:k,name:"Garland "+(i+1),x,y:yy,scale:sc,rot:0,seed:(X.seed||3)+i,cols:[i%2?tint(P.acc,.25):P.acc,"#ffd700"],opacity:1})),
+L({type:"banner",name:"Offer Banner",shape:X.tone==="value"?"notch":"taper",x:100,y:884,w:880,h:150,cols:P.ban,blocks:[
+{t:C.head,f:F.h,s:46,c:P.banInk,b:true,it:X.tone==="luxe",dx:C.offer?-200:0,dy:0,mw:C.offer?400:780},
+offerBlock(X,C.offer,P.banInk,F.h,70,235,0,310)].filter(Boolean)}),
+LOGO(880,166,140)]}},
+{id:"splitHeader",name:"Split Header",tone:"any",fn:X=>{const{P,C,F}=X;return[
+BGL(X,{inset:{t:232,r:40,b:92,l:40}}),
+C.cat&&TX({name:"Eyebrow",t:spaced(C.cat),f:"'Montserrat',sans-serif",s:20,wt:800,c:P.hi,x:72,y:42,maxW:680}),
+TX({name:"Headline",t:C.head,f:F.h,s:66,c:P.ink,it:X.tone==="luxe",x:70,y:76,maxW:700}),
+(C.sub||C.offer)&&TX({name:"Sub",t:C.sub||C.offer,f:F.b,s:28,wt:600,c:P.hi,x:72,y:168,maxW:700}),
+L({type:"strip",name:"Footer Strip",x:540,y:1036,w:1080,h:74,rot:0,cols:[P.acc,inkOn(P.acc)],text:[C.offer,C.trust].filter(Boolean).join("   ·   ")||C.head,sep:"        ",f:F.b}),
+LOGO()]}},
+{id:"cornerBrackets",name:"Corner Brackets",tone:"luxe",overlay:true,fn:X=>{const{P,C,F}=X;const cf=(x,y,r,i)=>L({type:"decor",kind:"cornerFlourish",name:"Corner "+i,x,y,scale:.95,rot:r,cols:[P.acc],opacity:1});return[
+cf(56,56,0,1),cf(1024,56,90,2),cf(56,1024,-90,3),cf(1024,1024,180,4),
+TX({name:"Headline",t:C.head,f:X.tone==="value"?F.h:"'Playfair Display',serif",s:58,wt:700,it:X.tone!=="value",c:"#ffffff",x:540,y:868,anchor:"c",shadow:true,maxW:760}),
+(C.offer||C.sub)&&TX({name:"Offer",t:X.tone==="luxe"&&C.offer?titleCase(C.offer):(C.offer||C.sub),f:F.b,s:30,wt:700,c:"#ffffff",x:540,y:950,anchor:"c",shadow:true,maxW:680}),
+LOGO(465,40,150)]}},
+{id:"boldBlock",name:"Bold Block",tone:"value",fn:X=>{const{P,C,F}=X;const bi=P.banInk;return[
+BGL(X,{inset:{t:44,r:44,b:44,l:44},stroke:P.acc,strokeW:4}),
+L({type:"banner",name:"Offer Block",shape:"rect",x:0,y:800,w:620,h:280,cols:P.ban,blocks:[
+{t:C.head,f:F.h,s:40,c:bi,b:true,dx:0,dy:-96,mw:540},
+offerBlock(X,C.offer||"BEST PRICE",bi,"'Montserrat',sans-serif",84,-20,18,420),
+C.cta&&{t:C.cta+" →",f:F.b,s:26,c:bi,b:true,dx:0,dy:104,mw:500}].filter(Boolean)}),
+LOGO()]}},
+{id:"trustBar",name:"Trust Bar",tone:"any",fn:X=>{const{P,C,F}=X;const star=_lum(P.bg1)>.4?"#c98a00":"#ffc83d";return[
+BGL(X,{inset:{t:48,r:48,b:196,l:48},radius:8}),
+C.cat&&TX({name:"Category chip",t:C.cat.toUpperCase(),f:"'Montserrat',sans-serif",s:24,wt:800,c:inkOn(P.acc),x:84,y:84,box:true,boxC:P.acc,maxW:420}),
+TX({name:"Stars",t:"★★★★★",f:"'DM Sans',sans-serif",s:38,wt:700,c:star,x:540,y:892,anchor:"c"}),
+TX({name:"Trust line",t:C.trust||"Loved by our customers",f:F.h,s:40,c:P.ink,x:540,y:944,anchor:"c",maxW:900}),
+(C.offer||C.cta)&&TX({name:"Offer line",t:[C.offer,C.cta].filter(Boolean).join("  ·  "),f:F.b,s:26,wt:700,c:P.hi,x:540,y:1008,anchor:"c",maxW:860}),
+LOGO()]}},
+{id:"urgency",name:"Urgency Tape",tone:"value",fn:X=>{const{P,C,F}=X;return[
+BGL(X,{inset:{t:128,r:48,b:196,l:48}}),
+L({type:"strip",name:"Urgency Tape",x:540,y:62,w:1240,h:76,rot:-2,cols:["#111111","#ffd23f"],text:C.date||"ENDS TONIGHT",sep:"   ⏰   ",f:"'Oswald',sans-serif"}),
+L({type:"banner",name:"Offer Banner",shape:"notch",x:48,y:892,w:760,h:148,cols:P.ban,blocks:[
+offerBlock(X,C.offer||"FLAT 30% OFF",P.banInk,F.h,72,-150,0,310),
+{t:C.head,f:F.h,s:32,c:P.banInk,b:true,dx:175,dy:0,mw:250}]}),
+L({type:"badge",name:"Hurry chip",shape:"chip",x:840,y:876,size:190,cols:["#e02020","#ffffff"],lines:[{t:"HURRY!",s:38,c:"#ffffff",b:true}]}),
+LOGO(860,146,150)]}},
+{id:"bigOffer",name:"Big Offer",tone:"value",fn:X=>{const{P,C,F}=X;return[
+BGL(X,{inset:{t:56,r:56,b:212,l:56},radius:24,stroke:P.acc,strokeW:6}),DC(X,X.D[0],160,160,.7,0,1),
+TX({name:"Big Offer",t:String(C.offer||C.head).toUpperCase(),f:"'Bebas Neue',sans-serif",s:104,wt:400,c:P.hi,x:540,y:858,anchor:"c",maxW:940,shadow:true}),
+(C.offer?C.head:C.sub)&&TX({name:"Sub",t:C.offer?C.head:C.sub,f:F.b,s:30,wt:700,c:P.ink,x:540,y:1002,anchor:"c",maxW:880}),
+LOGO()]}}
+];
+
+/* ---- occasions: id|label|group|texture|decor|headlines|offers|sublines|palettes(name:bg1:bg2:accent[:g=gold])|urgency line ---- */
+const OCC_RAW=[
+"diwali|Diwali|F|grain|diya,rangoli,sparkleCluster|Diwali Dhamaka;Festival of Lights Sale;Shubh Deepavali|UP TO 70% OFF;FLAT 40% OFF;EXTRA 10% OFF|Light up every celebration;Festive picks, delivered fast|Royal:3d0a2e:5a1040:ffd700:g;Midnight:0d1030:1a1e52:ffc23d:g;Ivory:fbf3e4:f1e2c4:b5121b|ENDS THIS DIWALI",
+"dhanteras|Dhanteras|F|rays|diya,sparkleCluster,star|Dhanteras Special;Shubh Dhanteras;Golden Dhanteras Deals|FLAT 25% OFF;UP TO 50% OFF;EXTRA 5% OFF|Bring home prosperity;Auspicious buys, best prices|Gold Noir:141008:221a0c:e8c56a:g;Emerald:0a3325:11503a:ffd700:g;Cream:fdf6e3:f3e6c4:8a1f11|ONLY ON DHANTERAS",
+"navratri|Navratri|F|rays|rangoli,sparkleCluster,paisley|Navratri Utsav;9 Days, 9 Colours;Garba Ready Edit|UP TO 60% OFF;FLAT 30% OFF;BUY 2 GET 1|Dress up for every night;Festive colour, everyday comfort|Garba Red:b3122e:8a0c22:ffd23f:g;Marigold:f59e0b:d97706:4a0d2e;Peacock:0b5563:094550:ffd166:g|9 DAYS ONLY",
+"durgapuja|Durga Puja|F|fabric|paisley,diya,sparkleCluster|Pujo Special;Sharodiya Shopping;Durga Puja Edit|UP TO 50% OFF;FLAT 30% OFF;EXTRA 15% OFF|Celebrate Pujo in style;Festive must-haves|Laal Paar:f7f1e3:efe3c8:c1121f;Sindoor:9b1020:7a0a18:ffd700:g;Ivory Gold:fbf6ea:f0e4c8:8a6d1f|PUJO SPECIAL",
+"dussehra|Dussehra|F|grain|sparkleCluster,firework,star|Dussehra Dhamaka;Victory Sale;Vijayadashami Deals|UP TO 60% OFF;FLAT 35% OFF;EXTRA 10% OFF|Celebrate the win;Big festive savings|Saffron:e8590c:c2410c:fff3c4;Maroon:4a0d10:6a1418:ffc23d:g;Night:101030:1c1c4a:ff8a3d|THIS WEEKEND ONLY",
+"karwachauth|Karwa Chauth|F|bokeh|lantern,heart,sparkleCluster|Karwa Chauth Special;For Your Forever;Moonlit Moments|FLAT 25% OFF;UP TO 40% OFF;GIFTS FROM ₹499|Gifts made with love;Celebrate your bond|Bridal Red:8a0f1e:6a0a16:ffd700:g;Moon Night:0d1433:182352:f4d58d:g;Rose:fbe8ea:f5cfd4:a0153e|BEFORE KARWA CHAUTH",
+"rakhi|Raksha Bandhan|F|bokeh|ribbonBow,gift,sparkleCluster|Raksha Bandhan Special;Rakhi Gifting Store;Bonds Worth Celebrating|UP TO 40% OFF;FLAT 20% OFF;FREE GIFT WRAP|Gifts your sibling will love;Rakhi hampers & more|Festive Pink:f9e1ec:f3c5d9:b0124f;Saffron Gold:7a1e00:5c1600:ffcf40:g;Mint:e3f5ee:c9ebdc:0f6b4a|ORDER BY RAKHI",
+"holi|Holi|F|bokeh|confetti,sparkleCluster,star|Holi Hai!;Colour Fest Sale;Rang Barse Deals|UP TO 50% OFF;FLAT 30% OFF;BUY 2 GET 1|Celebrate in every colour;Splash-worthy savings|Splash:fdf8ee:f6ecd8:e0447c;Neon:1c1030:2c1a4a:ff2ea6;Sunshine:ffd23f:ffc107:5a1040|HOLI WEEKEND ONLY",
+"eid|Eid|F|rays|lantern,star,sparkleCluster|Eid Mubarak;Eid Special Edit;Festive Eid Bazaar|UP TO 40% OFF;FLAT 25% OFF;EXTRA 10% OFF|Celebrate with loved ones;Festive finds for Eid|Emerald:0d3d2a:155a3e:e8c56a:g;Sapphire:0d1e4a:152e6e:e8c56a:g;Ivory:f5efe0:e8dcc4:0d5a3e|BEFORE EID",
+"christmas|Christmas|F|snow|holly,gift,snowflake|Merry Christmas;Holiday Gift Shop;Jingle All the Deals|UP TO 50% OFF;FLAT 30% OFF;BUY 2 GET 1|Gifts for everyone you love;Wrapped, ready, delivered|Classic Red:8a1515:b02020:ffffff;Evergreen:0f3d22:175932:ffd700:g;Snow:f3f7fb:e1ebf4:b3122e|TILL 25 DEC",
+"newyear|New Year|F|rays|firework,sparkleCluster,star|Happy New Year;New Year, New You;Countdown Sale|UP TO 60% OFF;FLAT 26% OFF;EXTRA 20% OFF|Start the year in style;Fresh year, fresh picks|Champagne:1a1408:2e2410:ffe08a:g;Violet:1e0a3d:331460:e8c8ff;Midnight:0a0a14:16162a:ffd700:g|TILL 1 JAN",
+"onam|Onam|F|grain|flower,leafSpray,rangoli|Happy Onam;Onam Specials;Pookalam Picks|UP TO 40% OFF;FLAT 25% OFF;EXTRA 10% OFF|Celebrate the harvest;Kerala's favourite festival deals|Kasavu:faf5e6:efe4c6:b8860b;Leaf:1f5a2a:2a7a3a:ffd166:g;Marigold:f4a020:e08a10:3a2008|ONAM WEEK ONLY",
+"pongal|Pongal & Sankranti|F|grain|sunburst,rangoli,leafSpray|Happy Pongal;Sankranti Sale;Harvest Festival Deals|UP TO 40% OFF;FLAT 20% OFF;BUY 2 GET 1|Fresh harvest, fresh savings;Celebrate new beginnings|Sun:fff3d6:ffe3a3:c2410c;Sugarcane:2f5a1e:3f7a28:ffd23f:g;Kite Sky:dff1fb:bfe3f7:d03050|THIS FESTIVE WEEK",
+"ganesh|Ganesh Chaturthi|F|rays|diya,flower,sparkleCluster|Ganpati Bappa Morya;Ganesh Chaturthi Special;Shubh Aarambh Sale|UP TO 40% OFF;FLAT 25% OFF;EXTRA 10% OFF|Begin something beautiful;Festive picks for the season|Saffron:e8590c:c2410c:fff3c4;Maroon:5a0d12:7a1418:ffd700:g;Marigold:fff3d6:ffe0a0:b3122e|10 DAYS ONLY",
+"lohri|Lohri|F|grain|firework,sparkleCluster,star|Happy Lohri;Lohri Bonfire Sale;Warm Lohri Deals|UP TO 40% OFF;FLAT 20% OFF;EXTRA 10% OFF|Warm wishes, hot deals;Celebrate the harvest|Bonfire:3a0f05:5a1a08:ffb020:g;Mustard:f5c518:e0b000:5a2008;Night:14101c:221a30:ff8a3d|LOHRI WEEKEND",
+"independence|Independence Day|F|rays|sparkleCluster,star,firework|Freedom Sale;Independence Day Special;Azadi Deals|UP TO 50% OFF;FLAT 15% OFF;EXTRA 15% OFF|Celebrate the spirit of India;Made-in-India favourites|Tiranga:ffffff:f4f4f4:ff7a00;Saffron:ff7a00:e86a00:ffffff;Navy:0a1f5c:102a78:ff9933|TILL 15 AUG",
+"republic|Republic Day|F|rays|sparkleCluster,star,firework|Republic Day Sale;Proud to Be Indian;Republic Day Deals|UP TO 50% OFF;FLAT 26% OFF;EXTRA 10% OFF|Celebrate with savings;Big deals, proudly Indian|Tiranga:ffffff:f4f4f4:138808;Green:0f6a2a:138808:ffffff;Navy:0a1f5c:102a78:ff9933|TILL 26 JAN",
+"wedding|Wedding Season|F|fabric|flower,cornerFlourish,sparkleCluster|The Wedding Edit;Shaadi Season Specials;Bridal Collection|UP TO 30% OFF;FLAT 20% OFF;NEW COLLECTION|For every ceremony;Made for the big day|Blush Gold:f5e0dc:eccac4:8a3d3d;Regal Red:7a1020:a01830:ffd88a:g;Sangria:4a1030:701848:ffd0e8|BOOK YOUR LOOK",
+"megasale|Mega Sale|S|grain|sparkleCluster,star,confetti|MEGA SALE;BIGGEST SALE OF THE YEAR;SALE IS LIVE|UP TO 80% OFF;FLAT 50% OFF;EXTRA 20% OFF|Prices dropped across the store;Grab your favourites now|Inferno:c0161c:e02028:ffe600;Electric:101040:1a1a66:00e5ff;Magenta:8a1060:b81a80:ffd23f|LAST 2 DAYS",
+"eoss|End of Season Sale|S|grain|sparkleCluster,star|End of Season Sale;EOSS Is Here;Season Finale Sale|UP TO 70% OFF;FLAT 50% OFF;MIN 40% OFF|Last chance for this season;Final markdowns|Hot Pink:ff3f6c:d92454:ffffff;Black:111111:1c1c1c:ffe500;Cream:f7ece4:f2e0d4:c81430|FINAL DAYS",
+"flash|Flash Sale|S|rays|firework,sparkleCluster,star|FLASH SALE;6 Hours Only;Lightning Deals|UP TO 70% OFF;FLAT 40% OFF;EXTRA 25% OFF|Blink and it's gone;Limited time, limited stock|Neon:07070f:101024:00e5ff;Volt:0a0a0a:161616:d8ff00;Red Alert:c0161c:a01016:ffe600|ENDS TONIGHT",
+"blackfriday|Black Friday|S|grain|sparkleCluster,star|BLACK FRIDAY;BF WEEKEND;BLACKOUT SALE|UP TO 80% OFF;FLAT 60% OFF;EXTRA 30% OFF|Our biggest price drop;Deals worth the wait|Classic:000000:121212:ffd700:g;Volt:0a0a0a:161616:d8ff00;Blood:0c0c0c:181818:ff2020|THIS WEEKEND ONLY",
+"cyber|Cyber Monday|S|grid|sparkleCluster,firework|CYBER MONDAY;Cyber Week Deals;Online Exclusive|UP TO 70% OFF;FLAT 40% OFF;EXTRA 25% OFF|Online-only prices;Tech up, pay less|Cyber:05050c:0c0c1c:00e5ff;Ultra:14061e:241038:c060ff;Matrix:04140a:082416:40ff90|24 HOURS ONLY",
+"clearance|Clearance Sale|S|grain|star,sparkleCluster|CLEARANCE SALE;Everything Must Go;Stock Clearance|UP TO 80% OFF;FLAT 60% OFF;FROM ₹199|Final stock, final prices;While stocks last|Yellow:ffd93b:ffce12:161616;Red:d7141a:b01016:ffffff;Black:161616:222222:ffd93b|WHILE STOCKS LAST",
+"weekend|Weekend Sale|S|bokeh|sparkleCluster,star,confetti|Weekend Sale;Weekend Steals;Sat–Sun Specials|UP TO 50% OFF;FLAT 30% OFF;EXTRA 10% OFF|Treat yourself this weekend;Two days of big savings|Sky:0a66ff:0850cc:ffe500;Coral:f96c5a:e85a48:ffffff;Plum:2a0a35:40104f:ffd23f|SAT & SUN ONLY",
+"payday|Payday Sale|S|grain|sparkleCluster,star|Payday Sale;Salary Day Specials;Treat-Yourself Days|UP TO 50% OFF;FLAT 30% OFF;EXTRA 15% OFF|You earned it;Spend smart this payday|Mint:0f766e:115e59:fef08a;Midnight:0f172a:1e293b:fbbf24:g;Cream:fdf6e3:f3e6c4:0f766e|1ST–5TH ONLY",
+"pricedrop|Price Drop|S|grain|star,sparkleCluster|PRICE DROP;Prices Just Dropped;Lowest Prices Ever|FLAT 40% OFF;UP TO 60% OFF;NOW FROM ₹299|Same favourites, lower prices;Never been this low|White Red:ffffff:fff5f5:e02020;Red:e02020:c01818:ffffff;Navy:0f1e46:162a60:ff4d4d|LIMITED PERIOD",
+"bogo|BOGO Fest|S|grain|confetti,star,sparkleCluster|BOGO FEST;Buy More, Save More;Double the Joy|BUY 1 GET 1;BUY 2 GET 1;3 FOR ₹999|Mix & match favourites;More for less|Navy Gold:0e1220:161c30:ffb800:g;Pink:ff3f6c:e02a58:ffffff;Lime:a8d820:93c010:1a2a08|LIMITED TIME",
+"summer|Summer|Se|bokeh|sunburst,star,sparkleCluster|Summer Sale;Hello Summer;Beat the Heat|UP TO 50% OFF;FLAT 30% OFF;EXTRA 10% OFF|Fresh picks for sunny days;Cool deals, hot season|Ocean:0d6a9c:1490cc:ffe08a;Citrus:ff9a1f:f57c00:ffffff;Lime:e9f7c2:d6efa0:2a6a10|SUMMER ONLY",
+"monsoon|Monsoon|Se|bokeh|bokehCluster,leafSpray,sparkleCluster|Monsoon Sale;Rainy Day Deals;Monsoon Magic|UP TO 50% OFF;FLAT 30% OFF;EXTRA 15% OFF|Stay dry, stay stylish;Pitter-patter, prices drop|Teal:083c44:0b5560:9be8e0;Storm:28323e:3a4856:a8e0f8;Fern:2a4a34:3a6448:d8f4d0|THIS MONSOON",
+"winter|Winter|Se|snow|snowflake,bokehCluster,sparkleCluster|Winter Sale;Cosy Season Edit;Winter Warmers|UP TO 50% OFF;FLAT 30% OFF;EXTRA 10% OFF|Warm up to great deals;Layer up for less|Ice:bfe3f7:7cc0e8:0e3a5c;Slate:3a4a5c:526a82:dff2ff;Berry:4a0b20:6a1030:f2c9c0|TILL STOCKS LAST",
+"backtoschool|Back to School|Se|grid|star,sparkleCluster,balloon|Back to School;School's In!;Ready, Set, Learn|UP TO 40% OFF;FLAT 20% OFF;COMBO OFFERS|Everything for the new term;Gear up for school|Crayon:ffd23f:ffc107:1e3a8a;Blue:1e3a8a:1e40af:ffd23f;Chalk:1f2a24:2a3830:fef3c7|TILL SCHOOL STARTS",
+"newseason|New Season|Se|bokeh|flower,leafSpray,sparkleCluster|New Season Arrivals;The Spring Edit;Fresh Drop|NEW IN;UP TO 30% OFF;JUST LANDED|The season's freshest looks;Discover what's new|Sage:dde5da:c6d2c2:2d3d2a;Blush:f5e6e2:ecd2ca:8a4438;Lilac:ece4f7:d8c8f0:5a3d8a|NEW THIS WEEK",
+"valentine|Valentine's Day|M|bokeh|heart,ribbonBow,sparkleCluster|Valentine's Special;Love Is in the Air;Gifts They'll Love|UP TO 40% OFF;FLAT 25% OFF;GIFTS FROM ₹499|Say it with a gift;Made to be loved|Maroon:4a0b20:6a1030:f2c9c0;Rose:ffe4ea:ffcdd8:c2185b;Red:c2185b:a0144a:ffffff|TILL 14 FEB",
+"womensday|Women's Day|M|bokeh|flower,sparkleCluster,heart|Happy Women's Day;Celebrating Her;She Deserves It All|UP TO 40% OFF;FLAT 25% OFF;EXTRA 10% OFF|For every woman who inspires;Treat her, treat yourself|Purple:4c1d95:5b21b6:fde68a;Lavender:f3e8ff:e9d5ff:6b21a8;Coral:fff1ee:ffdcd4:c2410c|ON 8 MARCH",
+"mothersday|Mother's Day|M|bokeh|flower,heart,ribbonBow|Happy Mother's Day;For the Best Mom;Love You, Maa|UP TO 40% OFF;FLAT 20% OFF;GIFTS FROM ₹399|Gifts as special as she is;Because she deserves it|Peony:fdf0f4:f8d8e4:b03060;Sage:eef3ec:dce7d8:3f5e3a;Plum:3a0d3d:571560:ffd0f4|ORDER BY SUNDAY",
+"fathersday|Father's Day|M|grain|star,gift,sparkleCluster|Happy Father's Day;For the Best Dad;Dad Deserves It|UP TO 40% OFF;FLAT 20% OFF;GIFTS FROM ₹499|Gifts for every kind of dad;Show him some love|Navy:0f1e46:162a60:f4c95d:g;Olive:3f4a28:56603a:f4f0d8;Charcoal:1c1e22:26282e:5fb3f0|ORDER BY SUNDAY",
+"friendship|Friendship Day|M|bokeh|confetti,heart,balloon|Happy Friendship Day;Besties Deserve the Best;Friends Forever Sale|BUY 1 GET 1;FLAT 25% OFF;UP TO 40% OFF|Gift your bestie;Twinning made easy|Sunny:fff3c4:ffe58a:be185d;Teal:0f766e:115e59:fde047;Pink:ffe4ef:ffcade:be185d|THIS SUNDAY",
+"bestseller|Bestseller|E|grain|star,sparkleCluster,crown|Our Bestseller;Customer Favourite;Most Loved|10,000+ SOLD;TOP RATED;MOST LOVED|Loved by thousands;See why everyone's buying it|Noir:111111:1c1c1c:ffc83d:g;Cream:faf5ea:efe5d0:8a3d1a;Royal:1e1b4b:312e81:fbbf24:g|ALWAYS IN DEMAND",
+"newlaunch|New Launch|E|bokeh|sparkleCluster,star,sunburst|Just Launched;New Arrival;Meet the New|NEW;JUST DROPPED;INTRO PRICE|Be the first to own it;Fresh from our studio|Mono:ffffff:f4f4f4:111111;Electric:1e1b4b:312e81:a5f3fc;Sage:e9efe6:d6e0d1:2f4a2a|LAUNCH WEEK",
+"restock|Back in Stock|E|grain|star,sparkleCluster|Back in Stock;It's Back!;Restocked by Demand|LIMITED STOCK;GET IT NOW;SELLING FAST|You asked, we restocked;Grab it before it's gone again|Teal:0f766e:115e59:fde047;Coral:fff1ee:ffdcd4:c2410c;Ink:0f172a:1e293b:38bdf8|LIMITED STOCK",
+"limited|Limited Edition|E|fabric|crown,cornerFlourish,sparkleCluster|Limited Edition;Only a Few Left;The Exclusive Drop|ONLY 100 PIECES;EXCLUSIVE;MEMBERS FIRST|Crafted in small batches;Once it's gone, it's gone|Noir Gold:0b0b0d:17171c:d4af37:g;Bordeaux:2e0a12:48101c:e8c56a:g;Ivory:f2ede2:e6dcc8:3a3020|WHILE IT LASTS",
+"freeship|Free Shipping|E|grain|star,sparkleCluster|Free Shipping;Free Delivery Pan-India;Cash on Delivery|FREE SHIPPING;COD AVAILABLE;EASY RETURNS|Delivered to your door;Shop worry-free|Blue:0a66ff:0850cc:ffffff;Green:15803d:166534:fef08a;White:ffffff:f4f6fa:0a66ff|EVERY ORDER",
+"toprated|Top Rated|E|grain|star,sparkleCluster|Rated 4.8★ by Customers;Reviewed & Loved;5-Star Favourite|4.8★ RATED;TOP RATED;LOVED BY MANY|Real reviews from real customers;Trusted by shoppers across India|Night:0f172a:1e293b:fbbf24;Cream:fdf8ee:f4ead2:92400e;Green:064e3b:065f46:fde68a|ALWAYS",
+"alwayson|Always-on Brand|E|grain|cornerFlourish,sparkleCluster,leafSpray|Made for You;Everyday Essentials;Designed to Last|SHOP NOW;EXPLORE MORE;NEW IN|Quality you can feel;Crafted for everyday|Paper:f4f2ee:e8e4dc:1a1a1a;Charcoal:1c1e22:26282e:e9ebf1;Forest:1e3a2b:274d38:e8d9b5|ALWAYS"
+];
+const OCCS=OCC_RAW.map(r=>{const[id,label,grp,tex,dec,heads,offers,subs,pals,date]=r.split("|");return{id,label,grp,tex:tex==="none"?null:tex,D:dec.split(","),heads:heads.split(";"),offers:offers.split(";"),subs:subs.split(";"),
+pals:pals.split(";").map(p=>{const[n,a,b,c,g]=p.split(":");return{n,bg1:"#"+a,bg2:"#"+b,acc:"#"+c,g:!!g}}),date}});
+/* ---- industries: copy + type that change per vertical ---- */
+const INDS=[
+["fashion","Fashion & apparel","Kurtas|Dresses|Ethnic Wear|Co-ord Sets","Loved by 50,000+ shoppers|Easy 7-day returns|Rated 4.7★ by customers","'Playfair Display',serif","'Montserrat',sans-serif"],
+["beauty","Beauty & skincare","Skincare|Lipsticks|Haircare|Fragrance","Gentle on every skin type|Loved by 20,000+ users|Rated 4.8★ by customers","'Cormorant Garamond',serif","'Poppins',sans-serif"],
+["electronics","Electronics","Earbuds|Smartwatches|Chargers|Speakers","1-year warranty|Free shipping across India|Rated 4.6★ · 10k+ reviews","'Space Grotesk',sans-serif","'Inter',sans-serif"],
+["home","Home & living","Bedsheets|Home Décor|Cookware|Lighting","Handpicked for your home|Free delivery on prepaid orders|Rated 4.7★ by customers","'DM Sans',sans-serif","'DM Sans',sans-serif"],
+["food","Food & gourmet","Snacks|Dry Fruits|Coffee|Sweets","Freshly packed|Loved by 1 lakh+ families|Small-batch goodness","'Baloo 2',sans-serif","'Poppins',sans-serif"],
+["jewellery","Jewellery","Earrings|Necklaces|Rings|Bangles","Crafted to shine|Gift-ready packaging|Handcrafted with love","'Cormorant Garamond',serif","'Montserrat',sans-serif"],
+["footwear","Footwear","Sneakers|Sandals|Heels|Running Shoes","Easy size exchanges|All-day comfort|Rated 4.6★ by customers","'Oswald',sans-serif","'Montserrat',sans-serif"],
+["kids","Kids & baby","Toys|Kidswear|Baby Care|School Bags","Parents' favourite|Made for little ones|Rated 4.8★ by parents","'Baloo 2',sans-serif","'Poppins',sans-serif"],
+["wellness","Wellness & ayurveda","Ayurveda|Herbal Teas|Hair Oils|Daily Wellness","Rooted in Ayurveda|Trusted by 1 lakh+ customers|Gentle, natural care","'Playfair Display',serif","'Poppins',sans-serif"],
+["pets","Pet care","Pet Food|Treats|Toys|Grooming","Loved by 25,000+ pet parents|Tail-wag approved|Free delivery on prepaid","'Baloo 2',sans-serif","'Poppins',sans-serif"]
+].map(([id,label,cats,trust,hf,bf])=>({id,label,cats:cats.split("|"),trust:trust.split("|"),hf,bf}));
+const GROUPCHIP={F:"🎉 Festive",S:"🏷 Sales",Se:"🌿 Seasonal",M:"💝 Moments",E:"✅ Evergreen"};
+const CTAS={value:["SHOP NOW","GRAB NOW","ORDER NOW"],mid:["SHOP NOW","EXPLORE","SHOP THE EDIT"],luxe:["DISCOVER","SHOP THE EDIT","EXPLORE"]};
+function codeFor(o,offer){const d=(String(offer||"").match(/\d+/)||[])[0];return d&&+d<100?"SAVE"+d:o.label.replace(/[^A-Za-z]/g,"").toUpperCase().slice(0,6)+"10"}
+function fontsFor(ind,tone,seed){if(tone==="luxe")return{h:seed%2?"'Cormorant Garamond',serif":"'Playfair Display',serif",b:"'Montserrat',sans-serif"};
+if(tone==="value")return{h:["'Montserrat',sans-serif","'Oswald',sans-serif","'Bebas Neue',sans-serif"][seed%3],b:"'Montserrat',sans-serif"};return{h:ind.hf,b:ind.bf}}
+function genTemplate(o,a,pl,ind,tone,seed,k){k=k||0;const D=o.D.slice(k%o.D.length).concat(o.D.slice(0,k%o.D.length));
+const offer=o.offers[(k*2+seed)%o.offers.length];
+const X={P:mkPal(pl.bg1,pl.bg2,pl.acc,pl.g),C:{head:o.heads[(k+seed)%o.heads.length],offer,sub:o.subs[(k+seed)%o.subs.length],trust:ind.trust[(k+seed)%ind.trust.length],cat:ind.cats[(k+seed)%ind.cats.length],cta:CTAS[tone][(k+seed)%3],date:o.date,code:codeFor(o,offer)},
+F:fontsFor(ind,tone,seed+k),D,tex:o.tex,tone,seed:seed%997+1,occLabel:o.label};
+return{name:`${o.label} · ${a.name} · ${pl.n}`,cat:o.label,chip:GROUPCHIP[o.grp],occ:o.id,ind:ind.id,tone,lay:a.id,overlay:!!a.overlay,
+tags:[o.label,a.name,pl.n,ind.label,tone,GROUPCHIP[o.grp]].join(" "),layers:a.fn(X).filter(Boolean)}}
+const FEAT_ARCH=["bottomBand","archWindow","waveBase","luxeHairline","stickerBurst","polaroid","circleWindow","trustBar","couponTicket"];
+OCCS.forEach((o,oi)=>ARCH.forEach((a,ai)=>o.pals.forEach((pl,pi)=>{
+const ind=INDS[(oi*7+ai*3+pi)%INDS.length];const tone=a.tone!=="any"?a.tone:["mid","value","luxe"][(oi+ai+pi)%3];
+const t=genTemplate(o,a,pl,ind,tone,oi*31+ai*7+pi*3,ai+pi);
+const f1=FEAT_ARCH[(oi*2)%FEAT_ARCH.length],f2=FEAT_ARCH[(oi*2+1)%FEAT_ARCH.length];
+if((a.id===f1&&pi===0)||(a.id===f2&&pi===(oi+1)%o.pals.length))t.feat=true;TEMPLATES.push(t)})));
+/* classic (pre-v6) templates keep their own chips */
+TEMPLATES.forEach(t=>{if(!t.chip)t.chip=["⭐ Featured","💎 Premium","✒ Overlays"].includes(t.cat)?t.cat:"🧩 Classic"});
+
 
 /* ============ TEMPLATE UI ============ */
 const tcv=document.createElement("canvas");tcv.width=K;tcv.height=K;const tctx=tcv.getContext("2d");
@@ -1466,13 +1794,13 @@ const step=()=>{const t0=performance.now();
 while(PAINTQ.length&&performance.now()-t0<12)PAINTQ.shift()();
 if(PAINTQ.length)requestAnimationFrame(step);else _painting=false};
 requestAnimationFrame(step)}
-const TS=384;
+const TS=256;
 function makeThumb(spec,myIdx){
 const th=document.createElement("div");th.className="thumb";
 const cc=document.createElement("canvas");cc.width=TS;cc.height=TS;
 const n=document.createElement("div");n.className="tn";n.textContent=spec.name;
 th.appendChild(cc);th.appendChild(n);
-PAINTQ.push(()=>{try{renderScene(tctx,spec.layers,{thumb:true,img:S.img,imgX:0,imgY:0,imgScale:1});const g=cc.getContext("2d");g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";g.drawImage(tcv,0,0,TS,TS)}catch(e){}th.classList.add("ready")});
+PAINTQ.push(()=>{try{renderScene(tctx,spec.layers,{thumb:true,img:S.img,imgX:0,imgY:0,imgScale:1,demoBg:!S.img&&(spec.overlay||spec.cat==="✒ Overlays")});const g=cc.getContext("2d");g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";g.drawImage(tcv,0,0,TS,TS)}catch(e){}th.classList.add("ready")});
 if(!_painting)pumpPaint();
 th.onclick=()=>{applyTemplate(spec)};
 if(myIdx!==undefined){
@@ -1512,30 +1840,57 @@ if(!S.designName.startsWith("✨ Surprise")){const rb=document.getElementById("r
 switchTab("layers");if(!opts.stayHome)showEditor();
 if(!opts.silent)toast("✓ "+S.designName+" — click any element to customize");
 }
-/* ===== HOME: chips + grid ===== */
+/* ===== HOME / GALLERY: chips + facets + paged grid ===== */
 let homeChip="⭐ Featured";
-const CATGROUPS={"⭐ Featured":["⭐ Featured"],"💎 Premium":["💎 Premium"],"✒ Overlays":["✒ Overlays"],"🎉 Festive":["Diwali","Christmas","NewYear","Holi","Eid","Wedding"],"🏷 Sales":["Sale","BlackFriday"],"🌿 Seasonal":["Winter","Summer","Monsoon","Organic","Floral"],"✨ Style":["Luxury","Minimal","Tech"]};
+const CHIPS=["⭐ Featured","🎉 Festive","🏷 Sales","✅ Evergreen","🌿 Seasonal","💝 Moments","💎 Premium","✒ Overlays","🧩 Classic"];
+const FACET={occ:"",ind:"",tone:"",lay:""};
+let GAL={items:[],shown:0};const GPAGE=48;
+function inChip(t,ch){if(ch==="⭐ Featured")return t.cat==="⭐ Featured"||!!t.feat;if(ch==="✒ Overlays")return t.cat==="✒ Overlays"||!!t.overlay;return t.chip===ch}
 function buildChips(){
 const host=document.getElementById("homeChips");host.innerHTML="";
-const list=(MYFRAMES.length?["💾 My Frames"]:[]).concat(Object.keys(CATGROUPS));
+const list=(MYFRAMES.length?["💾 My Frames"]:[]).concat(CHIPS);
 list.forEach(cat=>{const c=document.createElement("div");c.className="fchip"+(cat===homeChip?" on":"");c.textContent=cat;
-c.onclick=()=>{homeChip=cat;document.getElementById("tplSearch").value="";buildChips();buildTemplateList()};
+c.onclick=()=>{homeChip=cat;document.getElementById("tplSearch").value="";FACET.occ="";FACET.lay="";buildChips();buildFacets();buildTemplateList()};
 host.appendChild(c)})}
+const NOFACET=["💎 Premium","🧩 Classic","💾 My Frames"];
+function buildFacets(){
+const host=document.getElementById("facets");if(!host)return;
+host.style.display=NOFACET.includes(homeChip)?"none":"";
+const grp=Object.keys(GROUPCHIP).find(g=>GROUPCHIP[g]===homeChip);
+const occs=OCCS.filter(o=>!grp||o.grp===grp);
+const sel=(key,label,opts)=>{const s=document.createElement("select");s.setAttribute("aria-label",label);
+s.innerHTML=`<option value="">${label}: all</option>`+opts.map(([v,t])=>`<option value="${v}"${FACET[key]===v?" selected":""}>${t}</option>`).join("");
+s.onchange=()=>{FACET[key]=s.value;buildTemplateList(document.getElementById("tplSearch").value.trim().toLowerCase()||undefined)};return s};
+host.innerHTML="";
+host.appendChild(sel("occ","Occasion",occs.map(o=>[o.id,o.label])));
+host.appendChild(sel("ind","Industry",INDS.map(i=>[i.id,i.label])));
+host.appendChild(sel("tone","Tone",[["value","Value · loud offers"],["mid","Mid · balanced"],["luxe","Luxe · quiet"]]));
+host.appendChild(sel("lay","Layout",ARCH.map(a=>[a.id,a.name])));
+const n=document.createElement("span");n.className="gcount";n.id="galCount";host.appendChild(n);}
 function buildTemplateList(filter){
 const wrap=document.getElementById("tplList");wrap.innerHTML="";
-let items,myMode=false;
-if(filter){items=[...MYFRAMES.map((t,i)=>({t,i,my:true})),...TEMPLATES.map(t=>({t}))].filter(o=>(o.t.name+o.t.cat).toLowerCase().includes(filter)).slice(0,60);
-if(!items.length){wrap.innerHTML='<div class="hint" style="grid-column:1/-1;padding:26px;text-align:center">No templates match "'+filter+'".<br>Try <b>diwali</b>, <b>sale</b>, <b>luxury</b>, or <b>overlay</b>.</div>';return}}
-else if(homeChip==="💾 My Frames"){myMode=true;items=MYFRAMES.map((t,i)=>({t,i,my:true}));
+let items;
+if(filter){items=[...MYFRAMES.map((t,i)=>({t,i,my:true})),...TEMPLATES.map(t=>({t}))].filter(o=>(o.t.name+" "+o.t.cat+" "+(o.t.tags||"")).toLowerCase().includes(filter))}
+else if(homeChip==="💾 My Frames"){items=MYFRAMES.map((t,i)=>({t,i,my:true}));
 if(!items.length){wrap.innerHTML='<div class="hint" style="grid-column:1/-1;padding:26px;text-align:center">Nothing saved yet — open any template and hit 💾 Save.</div>';return}}
-else{const grp=CATGROUPS[homeChip]||[homeChip];items=TEMPLATES.filter(t=>grp.includes(t.cat)).map(t=>({t}))}
-items.forEach(o=>wrap.appendChild(makeThumb(o.t,o.my?o.i:undefined)))}
+const facOn=!NOFACET.includes(homeChip)&&!!(FACET.occ||FACET.ind||FACET.tone||FACET.lay);
+const wide=!filter&&homeChip==="⭐ Featured"&&facOn;
+if(!filter&&homeChip!=="💾 My Frames")items=wide?TEMPLATES.filter(t=>t.lay).map(t=>({t})):TEMPLATES.filter(t=>inChip(t,homeChip)).map(t=>({t}));
+if(facOn)items=items.filter(({t})=>(!FACET.occ||t.occ===FACET.occ)&&(!FACET.ind||t.ind===FACET.ind)&&(!FACET.tone||t.tone===FACET.tone)&&(!FACET.lay||t.lay===FACET.lay));
+const cnt=document.getElementById("galCount");if(cnt)cnt.textContent=items.length.toLocaleString("en-IN")+" frames"+(wide?" · from the full library":"");
+if(!items.length){wrap.innerHTML='<div class="hint" style="grid-column:1/-1;padding:26px;text-align:center">No frames match these filters.<br>Try clearing a filter, or search <b>diwali</b>, <b>sale</b>, <b>luxe</b>, <b>beauty</b>.</div>';return}
+GAL={items,shown:0};moreTemplates()}
+let _galIO=null;
+function moreTemplates(){const wrap=document.getElementById("tplList");const old=document.getElementById("galMore");if(old)old.remove();
+GAL.items.slice(GAL.shown,GAL.shown+GPAGE).forEach(o=>wrap.appendChild(makeThumb(o.t,o.my?o.i:undefined)));GAL.shown=Math.min(GAL.items.length,GAL.shown+GPAGE);
+if(GAL.shown<GAL.items.length){const b=document.createElement("button");b.id="galMore";b.className="btn btn-s gal-more";b.textContent="Load more · "+(GAL.items.length-GAL.shown).toLocaleString("en-IN")+" left";b.onclick=moreTemplates;wrap.appendChild(b);
+try{if(_galIO)_galIO.disconnect();_galIO=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){_galIO.disconnect();moreTemplates()}},{rootMargin:"300px"});_galIO.observe(b)}catch(e){}}}
 function refreshHome(){
 buildResume();buildMarquee();
 document.getElementById("haMineCount").textContent=MYFRAMES.length?MYFRAMES.length+" saved design"+(MYFRAMES.length>1?"s":""):"Your saved designs";}
 function refreshGallery(){
 if(homeChip==="💾 My Frames"&&!MYFRAMES.length)homeChip="⭐ Featured";
-buildChips();buildTemplateList(document.getElementById("tplSearch").value.trim().toLowerCase()||undefined);}
+buildChips();buildFacets();buildTemplateList(document.getElementById("tplSearch").value.trim().toLowerCase()||undefined);}
 function refreshAllViews(){refreshHome();if(curView()==="gallery")refreshGallery();}
 document.getElementById("tplSearch").addEventListener("input",function(){buildTemplateList(this.value.trim().toLowerCase()||undefined)});
 /* home marquee: real frames, tap to edit */
@@ -1549,7 +1904,7 @@ host.onpointerdown=()=>{host.style.animationPlayState="paused";clearTimeout(mqT)
 document.getElementById("haBrowse").onclick=()=>{homeChip="⭐ Featured";showGallery()};
 document.getElementById("haMine").onclick=()=>{if(!MYFRAMES.length){toast("Nothing saved yet — open any template and hit Save")}else{homeChip="💾 My Frames";showGallery()}};
 document.getElementById("haExtract").onclick=()=>{showEditor();switchTab("ai")};
-document.getElementById("haBlank").onclick=()=>{document.getElementById("newFrameBtn").click();showEditor()};
+document.getElementById("haBlank").onclick=()=>openWizard();
 document.getElementById("homeBtn").onclick=()=>{if(history.state&&history.state.v){history.back()}else{if(curView()==="editor")autosavePrevious();applyView(curView()==="editor"?"gallery":"home")}};
 /* ⋯ menu */
 const moreMenu=document.getElementById("moreMenu");
@@ -1599,18 +1954,11 @@ img.src=URL.createObjectURL(f)};
 const SURPRISE_DECOR=["confetti","firework","sunburst","crown","heart","ribbonBow","seal","paisley","balloon","sparkleCluster"];
 let surpriseN=store.get("fs_surprise_n")||0;
 function surpriseMe(){
-const names=Object.keys(THEMES);
-const tn=names[Math.floor(Math.random()*names.length)];
-const def=THEMES[tn];
-const spec=buildGen(tn,def,Math.floor(Math.random()*def.pals.length),Math.floor(Math.random()*5));
-/* remix: transplant a second theme's accent + a bonus decoration */
-const dn=names[Math.floor(Math.random()*names.length)];
-const acc2=THEMES[dn].pals[0][3];
-const kind=SURPRISE_DECOR[Math.floor(Math.random()*SURPRISE_DECOR.length)];
-const corner=[[170,170],[910,170],[170,860]][Math.floor(Math.random()*3)];
-spec.layers.splice(spec.layers.length-1,0,L({type:"decor",kind,name:"Lucky "+kind,x:corner[0],y:corner[1],scale:.9+Math.random()*.5,rot:Math.round(Math.random()*40-20),seed:Math.floor(Math.random()*999),cols:[acc2],opacity:1,text:kind==="seal"?"WOW":undefined}));
+const R=n=>Math.floor(Math.random()*n);
+const o=OCCS[R(OCCS.length)],ai=R(ARCH.length),a=ARCH[ai],pl=o.pals[R(o.pals.length)],ind=INDS[R(INDS.length)];
+const spec=genTemplate(o,a,pl,ind,a.tone!=="any"?a.tone:["value","mid","luxe"][R(3)],R(999),R(6));
 surpriseN++;store.set("fs_surprise_n",surpriseN);
-spec.name="✨ Surprise #"+surpriseN+" · "+tn+" × "+dn;
+spec.name="✨ Surprise #"+surpriseN+" · "+o.label+" · "+a.name;
 applyTemplate(spec);
 document.getElementById("rerollBtn").style.display="";
 }
@@ -1774,6 +2122,7 @@ slider("Tex Opacity","texA",0,1,.05,l);
 if(!l.inset)l.inset={t:60,r:60,b:60,l:60};
 slider("Top","t",0,340,2,l.inset);slider("Bottom","b",0,340,2,l.inset);slider("Left","l",0,340,2,l.inset);slider("Right","r",0,340,2,l.inset);
 slider("Radius","radius",0,60,1,l);
+if(l.win==="circle"){slider("Window size","r",200,520,2,l);slider("Window Y","cy",300,780,2,l)}
 check("Arch Top (dome window)",l,"arch");
 slider("Arch Height","archH",120,480,4,l);
 color("Inner Stroke",l,"stroke");slider("Stroke W","strokeW",0,16,1,l);
@@ -1799,6 +2148,7 @@ colorArr("Fill",l,0);colorArr("Ring",l,1);
 (l.lines||[]).forEach((b,i)=>{add(`<div class="st" style="margin-top:6px">Line ${i+1}</div>`);textIn("Text",b,"t");slider("Size","s",12,120,2,b);color("Color",b,"c")});
 }else if(l.type==="text"){
 textArea("Text",l,"t");fontSel("Font",l,"f");
+if(l.maxW)slider("Max width","maxW",100,1080,10,l);
 slider("Size","s",16,160,2,l);slider("Rotate","rot",-45,45,1,l);
 slider("Opacity","opacity",0,1,.05,l);
 color("Color",l,"c");color("Stroke",l,"strokeC");
@@ -1979,14 +2329,14 @@ document.getElementById("pla").textContent=on?"✓ Product · change":"Add produ
 document.getElementById("puz").classList.toggle("ok",on);document.getElementById("puzw").classList.toggle("has",on);
 document.getElementById("prodCtl").style.display=on?"block":"none";
 document.getElementById("homeProdLbl").innerHTML=on?"✓ Product set — <b>tap to change</b> photo":"<b>Upload your product photo</b> — preview it inside every template";
-document.getElementById("homeProdRm").style.display=on?"":"none";syncProdSliders()}
+document.getElementById("hpw").classList.toggle("has",on);syncProdSliders()}
 function setProduct(img){if(S.img&&S.img!==img)_revoke(S.img);S.img=img;S.imgX=0;S.imgY=0;S.imgScale=1;syncProductUI();render();refreshAllViews()}
 function clearProduct(){if(!S.img)return;_revoke(S.img);S.img=null;S.imgX=0;S.imgY=0;S.imgScale=1;S.dragImg=false;syncProductUI();render();refreshAllViews();if(curView()==="gallery")refreshGallery();toast("Product image removed — showing the transparent frame")}
 function resetProduct(){if(!S.img)return;S.imgX=0;S.imgY=0;S.imgScale=1;syncProdSliders();render();toast("↺ Product zoom & position reset")}
 document.getElementById("pi").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const img=new Image();img.onload=()=>{setProduct(img);toast("📦 Product image added")};img.src=URL.createObjectURL(f)};
 document.getElementById("pRemove").onclick=e=>{e.preventDefault();e.stopPropagation();clearProduct()};
 document.getElementById("pRemove2").onclick=clearProduct;
-document.getElementById("homeProdRm").onclick=clearProduct;
+document.getElementById("homeProdRm").onclick=e=>{e.preventDefault();e.stopPropagation();clearProduct()};
 document.getElementById("pReset").onclick=resetProduct;
 /* ---- logo: clear ---- */
 function clearLogo(){if(!S.logo)return;_revoke(S.logo);S.logo=null;
@@ -2026,18 +2376,18 @@ S.sel=null;S.designName="Untitled Frame";S.dirty=false;render();buildLayerList()
 toast("🆕 Blank frame — add elements from the Elements tab")};
 
 /* ============ RECREATE — frame extractor + look-alike (100% client-side) ============ */
-let aiImgEl=null,aiFileName="reference",aiVariant=0;
-document.getElementById("aiImg").onchange=e=>{const f=e.target.files[0];if(!f)return;
+let aiImgEl=null,aiFileName="reference",aiVariant=0,aiMime="image/png";
+document.getElementById("aiImg").onchange=e=>{const f=e.target.files[0];if(!f)return;aiMime=f.type||"image/png";aiGenerated=false;
 const r=new FileReader();r.onload=ev=>{
 const im=new Image();im.onload=()=>{aiImgEl=im;aiVariant=0;aiFileName=f.name.replace(/\.[^.]+$/,"");
 document.getElementById("aiPrev").src=ev.target.result;
 document.getElementById("aiPrevName").textContent=f.name;
-document.getElementById("aiPrevHint").textContent="Ready to extract";
+document.getElementById("aiPrevHint").textContent="Ready to generate";
 document.getElementById("aiPrevWrap").style.display="flex";
 document.getElementById("aiZone").style.display="none";
 document.getElementById("aiActions").style.display="block";
 const btn=document.getElementById("aiBtn");btn.disabled=false;btn.textContent="⚡ Extract Locally — instant, offline";
-document.getElementById("aiAiBtn").disabled=false;
+document.getElementById("aiAiBtn").disabled=false;document.getElementById("aiAiBtn").textContent="✨ Generate Editable Frame (AI)";
 document.getElementById("aiStat").textContent="";};
 im.src=ev.target.result;
 };r.readAsDataURL(f);e.target.value=""};
@@ -2295,52 +2645,173 @@ document.getElementById("aiKeyBtn").onclick=async()=>{
 const k=await askText("Anthropic API key",AIKEY||"","Get one at console.anthropic.com → API Keys → Create Key. Stored only in this browser — leave empty when running inside claude.ai.","Save key");
 if(k!==null){AIKEY=k.trim();store.set("fs_apikey",AIKEY);updKeyStat();toast(AIKEY?"🔑 Key saved":"Key cleared")}};
 updKeyStat();
-const AI_SCHEMA=`Layer schema — return ONLY minified JSON {"name":"...","layers":[...]}:
+const AI_SCHEMA=`Layer types you may use — return JSON: {"name":"...","layers":[...]}
 bg: {"type":"bg","name":"Border","cols":["#hex","#hex"],"tex":"fabric|grain|bokeh|snow|rays|grid"|null,"texA":0.5,"inset":{"t":60,"r":60,"b":150,"l":60},"radius":6,"arch":false,"archH":330,"stroke":"#hex"|null,"strokeW":6}
-banner: {"type":"banner","name":"...","shape":"taper|wave|rect|ribbon|notch","x":100,"y":870,"w":880,"h":140,"cols":["#c1","#c2","#c3"](3=metallic gold),"blocks":[{"t":"TEXT","f":"'Playfair Display',serif","s":50,"c":"#hex","b":true,"it":false,"dx":-200,"dy":0} | {"kind":"offer","t":"90%","small":"UP TO","tail":"OFF","s":90,"c":"#hex","dx":200,"dy":0}]} (blocks may be [] for a plain color band; side bands = x:0,y:0,w:80,h:1080)
-strip: {"type":"strip","name":"...","x":540,"y":1004,"w":1080,"h":84,"rot":0|-90|-15,"cols":["#band","#text"],"text":"50-80% OFF","sep":"  ➤  ","stroke":"#hex"|null}
-badge: {"type":"badge","name":"...","shape":"circle|scribble|burst|tag|chip","x":760,"y":780,"size":230,"cols":["#fill","#ring"],"lines":[{"t":"FLAT","s":30,"c":"#hex","b":true},{"t":"10%","s":72,"c":"#hex","b":true}]}
-text: {"type":"text","name":"...","t":"TEXT","f":"'Montserrat',sans-serif","s":64,"c":"#hex","wt":800,"x":110,"y":880,"it":false,"extrude":false,"shadow":true,"strokeC":"#hex"|null,"box":false,"boxC":"#ffffff","rot":0} (fonts: DM Sans, Inter, Poppins, Montserrat, Space Grotesk, Oswald, Bebas Neue, Playfair Display, Cormorant Garamond, Abril Fatface, Dancing Script, Lobster, Pacifico, Baloo 2, Kalam)
-decor: {"type":"decor","kind":"flower|leafSpray|floralCorner|diya|sparkleCluster|snowflake|holly|lantern|rangoli|star|bokehCluster|cornerFlourish|gift|balloon|confetti|crown|heart|ribbonBow|seal|firework|sunburst|paisley","name":"...","x":180,"y":140,"scale":1,"rot":0,"cols":["#hex"],"opacity":1,"seed":7}
+banner: {"type":"banner","name":"Banner","shape":"taper|wave|rect|ribbon|notch","x":100,"y":870,"w":880,"h":140,"cols":["#c1","#c2","#c3"](3=metallic gold),"blocks":[{"t":"TEXT","f":"'Playfair Display',serif","s":50,"c":"#hex","b":true,"it":false,"dx":-200,"dy":0} or {"kind":"offer","t":"90%","small":"UP TO","tail":"OFF","s":90,"c":"#hex","dx":200,"dy":0}]}
+strip (repeating tape/marquee): {"type":"strip","name":"Tape","x":540,"y":1004,"w":1080,"h":84,"rot":0(-90=vertical,-15=diagonal),"cols":["#band","#text"],"text":"50-80% OFF","sep":"  ➤  ","stroke":"#hex"|null}
+badge: {"type":"badge","name":"Badge","shape":"circle|scribble|burst|tag|chip","x":760,"y":780,"size":230,"cols":["#fill","#ring"],"lines":[{"t":"FLAT","s":30,"c":"#hex","b":true},{"t":"10%","s":72,"c":"#hex","b":true}]}
+text: {"type":"text","name":"Head","t":"TEXT","f":"'Montserrat',sans-serif","s":64,"c":"#hex","wt":800,"x":110,"y":880,"it":false,"extrude":false,"shadow":true,"strokeC":"#hex"|null,"box":false(true=coupon chip),"boxC":"#ffffff","rot":0}
+decor: {"type":"decor","kind":"flower|leafSpray|diya|sparkleCluster|snowflake|holly|lantern|rangoli|star|bokehCluster|cornerFlourish|gift","name":"...","x":180,"y":140,"scale":1,"rot":0,"cols":["#hex"],"opacity":1,"seed":7}
 logo: {"type":"img","role":"logo","placeholder":true,"x":820,"y":70,"wd":190,"name":"Logo Slot"}
-Canvas 1080x1080. CRITICAL: the image may be a finished ad = frame/overlay ON TOP of a product photo. Recreate ONLY the frame/overlay design (borders, bands, banners, badges, decorations, ALL text with its EXACT wording, matching font style/colors/positions). DO NOT recreate the product/person/photo — leave that area empty for transparency.`;
+Canvas is 1080x1080. Keep center (~y 200-780) clear for the product. Give the design a short descriptive "name". Return ONLY minified JSON, no markdown.`;
+let aiGenerated=false;
+async function callClaude(body){
+const hdrs={"Content-Type":"application/json","anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"};
+if(AIKEY)hdrs["x-api-key"]=AIKEY;
+const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:hdrs,body:JSON.stringify(body)});
+const data=await res.json().catch(()=>({}));
+if(!res.ok||data.error){const e=new Error((data.error&&(data.error.message||data.error.type))||("HTTP "+res.status));e.status=res.status;throw e}
+return data}
+function extractJSON(raw){raw=raw.replace(/```json|```/g,"").trim();const a=raw.indexOf("{"),b=raw.lastIndexOf("}");if(a<0||b<=a)throw new Error("JSON not found in response");return JSON.parse(raw.slice(a,b+1))}
 document.getElementById("aiAiBtn").onclick=async()=>{
 if(!aiImgEl)return;
 const st=document.getElementById("aiStat"),btn=document.getElementById("aiAiBtn");
-btn.disabled=true;btn.innerHTML='<span class="spin"></span>AI analyzing… (10–20s)';
-st.textContent="AI is reading the ad — separating frame design from the product photo…";
+btn.disabled=true;btn.innerHTML='<span class="spin"></span>Generating… (10–20s)';
+st.textContent="Analyzing your reference and rebuilding it as editable layers…";
 try{
 const du=document.getElementById("aiPrev").src;
-const b64=du.split(",")[1];const mime=(du.match(/^data:(.*?);/)||[])[1]||"image/png";
-const hdrs={"Content-Type":"application/json","anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"};
-if(AIKEY)hdrs["x-api-key"]=AIKEY;
-const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:hdrs,body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:3500,messages:[{role:"user",content:[{type:"image",source:{type:"base64",media_type:mime,data:b64}},{type:"text",text:"Recreate this ad's FRAME design as editable layers.\n"+AI_SCHEMA}]}]})});
-const data=await res.json().catch(()=>({}));
-if(!res.ok||data.error)throw Object.assign(new Error((data.error&&(data.error.message||data.error.type))||("HTTP "+res.status)),{status:res.status});
-const raw=(data.content||[]).map(b=>b.text||"").join("").replace(/```json|```/g,"");
-const a=raw.indexOf("{"),z=raw.lastIndexOf("}");
-const spec=JSON.parse(raw.slice(a,z+1));
-if(!spec.layers||!spec.layers.length)throw new Error("no layers");
-spec.name="AI · "+(spec.name||aiFileName);
+const aiImgData=du.split(",")[1];
+const data=await callClaude({model:"claude-sonnet-4-6",max_tokens:3000,messages:[{role:"user",content:[{type:"image",source:{type:"base64",media_type:aiMime,data:aiImgData}},{type:"text",text:"Recreate this product-frame design as layers using this exact schema. Match colors, banner shape, decorations and text as closely as possible.\n"+AI_SCHEMA}]}]});
+const raw=(data.content||[]).map(b=>b.text||"").join("");
+const spec=extractJSON(raw);
+if(!spec.layers||!spec.layers.length)throw new Error("JSON missing layers");
+spec.name="AI · "+(spec.name||"Reference Frame");
 applyTemplate(spec,{silent:true});
 saveMyFrame(spec.name,true);
+aiGenerated=true;
+btn.disabled=false;btn.textContent="↻ Regenerate (different result)";
+document.getElementById("aiPrevHint").textContent="Generated ✓ — regenerate for a variation";
+st.textContent="✅ Applied to canvas & saved to 💾 My Frames.";
+toast("✨ "+spec.name+" ready — saved to My Frames","ok");
 switchTab("layers");showEditor();
-btn.disabled=false;btn.textContent="✨ AI Recreate — reads exact text & design";
-document.getElementById("aiPrevHint").textContent="AI recreated ✓";
-st.textContent="✅ AI rebuilt the frame with its exact text as editable layers & saved to 💾 My Frames.";
-toast("✨ "+spec.name+" ready","ok");
 }catch(err){
-btn.disabled=false;btn.textContent="✨ AI Recreate — reads exact text & design";
+btn.disabled=false;btn.textContent=aiGenerated?"↻ Regenerate":"✨ Generate Editable Frame (AI)";
 let msg=err.message||String(err);
-if(/Failed to fetch|NetworkError|Load failed/i.test(msg))msg=AIKEY?"Couldn't reach api.anthropic.com — check your connection.":"Couldn't reach the AI service. Running locally? Click ⚙ Set key (console.anthropic.com) — or use ⚡ Extract Locally.";
-else if(err.status===401||/authentication|x-api-key/i.test(msg))msg="API key missing/invalid — click ⚙ Set key. (No key needed inside claude.ai.)";
-else if(err.status===429)msg="Rate limited — wait a moment and retry.";
-else if(/JSON|layers|Unexpected/i.test(msg))msg="AI returned an unexpected format — try again.";
-st.textContent="❌ "+msg;toast("AI recreate failed","err")}};
+if(/Failed to fetch|NetworkError|Load failed|CORS/i.test(msg))msg="Couldn't reach Claude. AI generation only works when this page is opened inside Claude.";
+else if(err.status===401||/authentication|x-api-key|invalid.*key/i.test(msg))msg="Not authorised — open this page inside Claude to use AI generation.";
+else if(err.status===429)msg="Rate limited — wait a few seconds and try again.";
+else if(/JSON|layers/i.test(msg))msg="AI returned an unexpected format — click Regenerate.";
+st.textContent="❌ "+msg;toast("Generation failed","err")}};
 [["Luxury Gold","Luxury"],["Diwali Glow","Diwali"],["Winter Frost","Winter"],["Mega Sale","Sale"],["Floral Soft","Floral"],["Neon Tech","Tech"],["Eid Emerald","Eid"],["Organic Fresh","Organic"]].forEach(([lb,theme])=>{
 const c=document.createElement("span");c.className="chip";c.textContent=lb;
 c.onclick=()=>{const t=TEMPLATES.filter(t=>t.cat===theme);applyTemplate(t[Math.floor(Math.random()*t.length)])};
 document.getElementById("aiChips").appendChild(c)});
+
+/* ============ BUILD YOUR FRAME — guided 5-step builder ============ */
+const GOALS=[["sale","🏷","Sale or discount","Lead with the offer","megasale","S"],["launch","✨","New launch","Introduce something new","newlaunch","E"],["best","🏆","Bestseller","Lead with social proof","toprated","E"],["festive","🪔","Festive / occasion","Diwali, Eid, Christmas…","diwali","F"],["brand","💎","Always-on brand","Clean & evergreen","alwayson","E"]];
+const FONTPAIRS=[["Modern","'Montserrat',sans-serif","'Inter',sans-serif"],["Editorial","'Playfair Display',serif","'Montserrat',sans-serif"],["Luxe","'Cormorant Garamond',serif","'Montserrat',sans-serif"],["Bold","'Bebas Neue',sans-serif","'Poppins',sans-serif"],["Friendly","'Baloo 2',sans-serif","'Poppins',sans-serif"],["Tech","'Space Grotesk',sans-serif","'Inter',sans-serif"]];
+const WSTEPS=["What's this frame for?","Pick a structure","Your brand look","Your words","Pick your favourite"];
+const WZ={step:0,goal:"sale",occ:"megasale",ind:"fashion",tone:"mid",arch:"bottomBand",p:"#1a1a2e",a:"#e0447c",fp:0,copy:{},seed:1};
+const occById=id=>OCCS.find(o=>o.id===id)||OCCS[0];
+const indById=id=>INDS.find(i=>i.id===id)||INDS[0];
+function wzDefaults(){const o=occById(WZ.occ),ind=indById(WZ.ind);
+WZ.copy={head:o.heads[0],offer:WZ.goal==="brand"?"":o.offers[0],sub:o.subs[0],trust:ind.trust[0],cat:ind.cats[0],cta:CTAS[WZ.tone][0],date:o.date,code:codeFor(o,o.offers[0])}}
+function wzCtx(variant){const o=occById(WZ.occ);let P;
+if(variant===1)P=mkPal(tint(WZ.p,.9),tint(WZ.p,.8),contrast(WZ.p,tint(WZ.p,.9))>3?WZ.p:WZ.a,false);
+else if(variant===2)P=mkPal("#141416","#1d1d22",WZ.a,isGoldish(WZ.a));
+else P=mkPal(WZ.p,shade(WZ.p,-.22),WZ.a,isGoldish(WZ.a));
+const fp=FONTPAIRS[WZ.fp],k=(WZ.seed+variant)%o.D.length;
+return{P,C:Object.assign({},WZ.copy,{code:codeFor(o,WZ.copy.offer)}),F:{h:fp[1],b:fp[2]},D:o.D.slice(k).concat(o.D.slice(0,k)),tex:variant===1?null:o.tex,tone:WZ.tone,seed:WZ.seed*13+variant*5,occLabel:o.label}}
+function wzSpec(archId,variant){const a=ARCH.find(x=>x.id===archId)||ARCH[0];
+const layers=a.fn(wzCtx(variant||0)).filter(Boolean);
+if(S.logo)layers.forEach(l=>{if(l.role==="logo"){l.imgObj=S.logo;l.placeholder=false}});
+return{name:(WZ.copy.head||"My frame")+" · "+a.name,layers,overlay:!!a.overlay}}
+function miniThumb(spec,size,on,label,onclick){const d=document.createElement("div");d.className="wthumb"+(on?" on":"");
+const c=document.createElement("canvas");c.width=size;c.height=size;d.appendChild(c);
+if(label){const n=document.createElement("div");n.className="tn";n.textContent=label;d.appendChild(n)}
+PAINTQ.push(()=>{try{renderScene(tctx,spec.layers,{thumb:true,img:S.img,demoBg:!S.img&&spec.overlay});const g=c.getContext("2d");g.imageSmoothingQuality="high";g.drawImage(tcv,0,0,size,size)}catch(e){}});
+if(!_painting)pumpPaint();if(onclick)d.onclick=onclick;return d}
+function logoColors(img){const c=document.createElement("canvas");c.width=c.height=64;const g=c.getContext("2d");g.drawImage(img,0,0,64,64);
+const d=g.getImageData(0,0,64,64).data,bk={};
+for(let i=0;i<d.length;i+=4){if(d[i+3]<128)continue;const r=d[i],gg=d[i+1],b=d[i+2],mx=Math.max(r,gg,b),mn=Math.min(r,gg,b);
+if(mx-mn<38||mx<40||mn>225)continue;const k=(r>>4)+"_"+(gg>>4)+"_"+(b>>4);const v=bk[k]=bk[k]||[0,0,0,0];v[0]+=r;v[1]+=gg;v[2]+=b;v[3]++}
+const cs=Object.values(bk).sort((a,b)=>b[3]-a[3]).map(v=>rgb2hex(v[0]/v[3],v[1]/v[3],v[2]/v[3]));const out=[];
+for(const h of cs){if(out.every(o=>{const a=hex2rgb(o),b=hex2rgb(h);return Math.abs(a[0]-b[0])+Math.abs(a[1]-b[1])+Math.abs(a[2]-b[2])>90}))out.push(h);if(out.length===2)break}
+return out}
+function wzApplyLogoColors(img){const cs=logoColors(img);
+if(!cs.length){toast("Couldn't find strong colours in that logo — pick them manually");return}
+if(cs.length===1){WZ.a=cs[0];WZ.p=shade(cs[0],-.6)}else{const[a,b]=cs;if(_lum(a)<=_lum(b)){WZ.p=a;WZ.a=b}else{WZ.p=b;WZ.a=a}}
+toast("🎨 Colours picked from your logo","ok");wzRender()}
+function wzSetLogo(img){if(S.logo&&S.logo!==img)_revoke(S.logo);S.logo=img;
+S.layers.forEach(l=>{if(l.role==="logo"){l.imgObj=img;l.placeholder=false}});
+document.getElementById("lla").textContent="✓ Logo · change";document.getElementById("luz").classList.add("ok");document.getElementById("luzw").classList.add("has");render();buildLayerList()}
+function openWizard(){WZ.step=0;WZ.p=BK.p;WZ.a=BK.s;wzDefaults();document.getElementById("wizBg").classList.add("show");wzRender()}
+function closeWizard(){document.getElementById("wizBg").classList.remove("show")}
+function wzRender(){const body=document.getElementById("wizBody");body.innerHTML="";body.scrollTop=0;
+document.getElementById("wizTitle").textContent=WSTEPS[WZ.step];
+document.getElementById("wizSteps").innerHTML=WSTEPS.map((_,i)=>`<span class="${i<=WZ.step?"on":""}"></span>`).join("");
+document.getElementById("wizBack").style.visibility=WZ.step?"visible":"hidden";
+const nx=document.getElementById("wizNext");nx.style.display=WZ.step===4?"none":"";nx.textContent=WZ.step===3?"See my designs →":"Next →";
+document.getElementById("wizHint").textContent="Step "+(WZ.step+1)+" of 5";
+[wzGoal,wzStructure,wzBrand,wzWords,wzPick][WZ.step](body)}
+function wLab(body,t){body.insertAdjacentHTML("beforeend",`<div class="wlab">${t}</div>`)}
+function wSel(opts,val,onch){const s=document.createElement("select");s.className="selc";s.style.maxWidth="320px";s.innerHTML=opts.map(([v,t])=>`<option value="${v}"${v===val?" selected":""}>${t}</option>`).join("");s.onchange=()=>onch(s.value);return s}
+function wSeg(opts,val,onch){const w=document.createElement("div");w.className="wseg";opts.forEach(([v,t])=>{const b=document.createElement("button");b.type="button";b.textContent=t;if(v===val)b.className="on";b.onclick=()=>onch(v);w.appendChild(b)});return w}
+function wzGoal(body){
+const g=document.createElement("div");g.className="wgrid";body.appendChild(g);
+GOALS.forEach(([id,ic,t,s,occ,grp])=>{const c=document.createElement("div");c.className="wcard"+(WZ.goal===id?" on":"");c.innerHTML=`<div class="wi">${ic}</div><b>${t}</b><span>${s}</span>`;
+c.onclick=()=>{WZ.goal=id;WZ.occ=occ;if(id==="brand")WZ.tone="luxe";else if(id==="sale")WZ.tone="value";else if(WZ.tone==="luxe"&&id!=="launch")WZ.tone="mid";wzDefaults();wzRender()};g.appendChild(c)});
+const goal=GOALS.find(x=>x[0]===WZ.goal);const grps=goal[5]==="F"?["F","M","Se"]:goal[5]==="S"?["S"]:["E","Se","M"];
+wLab(body,"Occasion");body.appendChild(wSel(OCCS.filter(o=>grps.includes(o.grp)).map(o=>[o.id,o.label]),WZ.occ,v=>{WZ.occ=v;wzDefaults()}));
+wLab(body,"What do you sell?");body.appendChild(wSel(INDS.map(i=>[i.id,i.label]),WZ.ind,v=>{WZ.ind=v;wzDefaults()}));
+wLab(body,"Brand tone");body.appendChild(wSeg([["value","Value · loud offers"],["mid","Balanced"],["luxe","Luxe · quiet"]],WZ.tone,v=>{WZ.tone=v;WZ.copy.cta=CTAS[v][0];wzRender()}))}
+function wzStructure(body){
+const g=document.createElement("div");g.className="wthumbs";body.appendChild(g);
+const order=[...ARCH].sort((a,b)=>(a.tone===WZ.tone?0:a.tone==="any"?1:2)-(b.tone===WZ.tone?0:b.tone==="any"?1:2));
+order.forEach(a=>{const d=miniThumb(wzSpec(a.id,0),240,WZ.arch===a.id,a.name,()=>{WZ.arch=a.id;g.querySelectorAll(".wthumb").forEach(x=>x.classList.remove("on"));d.classList.add("on")});g.appendChild(d)})}
+function wzPreview(host){host.innerHTML="";host.appendChild(miniThumb(wzSpec(WZ.arch,0),300,false,"Preview"))}
+let _wzT=null;function wzLater(fn){clearTimeout(_wzT);_wzT=setTimeout(fn,180)}
+function wzBrand(body){
+body.insertAdjacentHTML("beforeend",`<div class="wcols"><div id="wL"></div><div class="wprev" id="wP"></div></div>`);
+const L1=body.querySelector("#wL"),P1=body.querySelector("#wP");
+wLab(L1,"Brand colours");
+const row=document.createElement("div");row.className="wrow";row.style.marginTop="0";
+row.innerHTML=`<label class="wcolor">Primary<input type="color" id="wzP" value="${WZ.p}"></label><label class="wcolor">Accent<input type="color" id="wzA" value="${WZ.a}"></label>`;
+const lb=document.createElement("button");lb.className="btn btn-s";lb.type="button";lb.textContent=S.logo?"🎨 Use my logo's colours":"🎨 Upload logo & use its colours";
+lb.onclick=()=>{if(S.logo)wzApplyLogoColors(S.logo);else document.getElementById("wzLogo").click()};row.appendChild(lb);L1.appendChild(row);
+row.querySelector("#wzP").oninput=e=>{WZ.p=e.target.value;wzLater(()=>wzPreview(P1))};
+row.querySelector("#wzA").oninput=e=>{WZ.a=e.target.value;wzLater(()=>wzPreview(P1))};
+wLab(L1,"Type pairing");const fr=document.createElement("div");fr.className="wrow";fr.style.marginTop="0";
+FONTPAIRS.forEach(([n,h,b],i)=>{const c=document.createElement("div");c.className="wfp"+(WZ.fp===i?" on":"");
+c.innerHTML=`<div style="font-family:${h.replace(/"/g,"'")};font-size:20px;font-weight:700;color:var(--tx)">Aa</div><div style="font-size:11px;color:var(--tx3);font-weight:700">${n}</div>`;
+c.onclick=()=>{WZ.fp=i;fr.querySelectorAll(".wfp").forEach(x=>x.classList.remove("on"));c.classList.add("on");wzPreview(P1)};fr.appendChild(c)});L1.appendChild(fr);
+wzPreview(P1)}
+const WLIM={head:30,offer:18,sub:44,trust:44,cat:22,cta:16};
+function wzWords(body){
+body.insertAdjacentHTML("beforeend",`<div class="wcols"><div id="wL"></div><div class="wprev" id="wP"></div></div>`);
+const L1=body.querySelector("#wL"),P1=body.querySelector("#wP");
+const o=occById(WZ.occ),ind=indById(WZ.ind);
+const fields=[["head","Headline",o.heads],["offer","Offer (leave empty for none)",o.offers.concat(o.offers.some(x=>/%/.test(x))?[]:["UP TO 50% OFF"])],["sub","Supporting line",o.subs],["trust","Trust line",ind.trust],["cat","Category",ind.cats],["cta","Call to action",CTAS[WZ.tone]]];
+fields.forEach(([k,lab,sug])=>{const f=document.createElement("div");f.className="wfield";
+f.innerHTML=`<div class="fl">${lab} <span class="locked-note">· max ${WLIM[k]}</span></div>`;
+const inp=document.createElement("input");inp.className="inp";inp.maxLength=WLIM[k];inp.value=WZ.copy[k]||"";
+inp.oninput=()=>{WZ.copy[k]=inp.value;wzLater(()=>wzPreview(P1))};f.appendChild(inp);
+const sg=document.createElement("div");sg.className="wsugs";sug.slice(0,4).forEach(s=>{const c=document.createElement("span");c.className="chip";c.textContent=s;c.onclick=()=>{inp.value=s.slice(0,WLIM[k]);inp.oninput()};sg.appendChild(c)});
+f.appendChild(sg);L1.appendChild(f)});
+wzPreview(P1)}
+function wzPick(body){
+const go=spec=>{autosavePrevious();BK.p=WZ.p;BK.s=WZ.a;store.set("fs_brand",BK);document.getElementById("bkP").value=BK.p;document.getElementById("bkS").value=BK.s;
+applyTemplate(spec);closeWizard();toast("✓ Your frame is ready — click anything to fine-tune")};
+const a=ARCH.find(x=>x.id===WZ.arch)||ARCH[0];
+wLab(body,"Your structure · three colour treatments");
+const g1=document.createElement("div");g1.className="wthumbs big";body.appendChild(g1);
+["Brand colours","Light","Dark"].forEach((n,v)=>{const sp=wzSpec(a.id,v);g1.appendChild(miniThumb(sp,360,false,n,()=>go(sp)))});
+wLab(body,"Same look, other structures");
+const g2=document.createElement("div");g2.className="wthumbs";body.appendChild(g2);
+const pool=ARCH.filter(x=>x.id!==a.id&&(x.tone===WZ.tone||x.tone==="any"));const st=(WZ.seed*5)%pool.length;
+pool.slice(st).concat(pool.slice(0,st)).slice(0,6).forEach(x=>{const sp=wzSpec(x.id,0);g2.appendChild(miniThumb(sp,240,false,x.name,()=>go(sp)))});
+const row=document.createElement("div");row.className="wrow";
+const sh=document.createElement("button");sh.className="btn btn-s";sh.type="button";sh.textContent="🎲 Shuffle decorations & picks";sh.onclick=()=>{WZ.seed++;wzRender()};
+row.appendChild(sh);row.insertAdjacentHTML("beforeend",'<span class="hint" style="margin:0">Tap a design to open it in the editor.</span>');body.appendChild(row)}
+document.getElementById("wizNext").onclick=()=>{if(WZ.step===3&&!String(WZ.copy.head||"").trim()){toast("Add a headline first","err");return}WZ.step=Math.min(4,WZ.step+1);wzRender()};
+document.getElementById("wizBack").onclick=()=>{WZ.step=Math.max(0,WZ.step-1);wzRender()};
+document.getElementById("wizClose").onclick=closeWizard;
+document.getElementById("wizBg").onclick=e=>{if(e.target.id==="wizBg")closeWizard()};
+document.getElementById("wzLogo").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const img=new Image();img.onload=()=>{wzSetLogo(img);wzApplyLogoColors(img)};img.src=URL.createObjectURL(f)};
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&document.getElementById("wizBg").classList.contains("show"))closeWizard()});
+document.getElementById("wizMenuBtn").onclick=()=>{moreMenu.classList.remove("show");openWizard()};
+/* safe-zone overlay toggle */
+document.getElementById("safeBtn").onclick=function(){S.safe=!S.safe;this.classList.toggle("on",S.safe);render()};
 
 /* ============ WELCOME / HELP ============ */
 const modal=document.getElementById("modalBg");
@@ -2361,9 +2832,11 @@ modal.onclick=e=>{if(e.target===modal)modal.classList.remove("show")};
 window.addEventListener("error",e=>{try{store.set("fs_lasterr",{m:String(e.message),ts:Date.now()})}catch(_){}});
 window.addEventListener("unhandledrejection",e=>{try{store.set("fs_lasterr",{m:String(e.reason),ts:Date.now()})}catch(_){}});
 document.getElementById("diagBtn").onclick=async()=>{
-const d={version:"5.0",ua:navigator.userAgent,templates:TEMPLATES.length,myFrames:MYFRAMES.length,storage:store.ok?"persistent":"memory",lastError:store.get("fs_lasterr")||null};
+const d={version:"5.1-ai",ua:navigator.userAgent,templates:TEMPLATES.length,myFrames:MYFRAMES.length,storage:store.ok?"persistent":"memory",lastError:store.get("fs_lasterr")||null};
 try{await navigator.clipboard.writeText(JSON.stringify(d,null,1));toast("📋 Diagnostics copied","ok")}catch(e){toast("Copy blocked — "+JSON.stringify(d).slice(0,60),"err")}};
 
+/* live template counts */
+{const tc=Math.floor(TEMPLATES.length/100)*100;document.querySelectorAll(".tcount").forEach(e=>e.textContent=tc.toLocaleString("en-IN")+"+")}
 /* icon hydration */
 document.querySelectorAll("i.ich").forEach(el=>{el.outerHTML=ICON[el.dataset.i]||""});
 document.getElementById("brandLogo").innerHTML=ICON.frame;
