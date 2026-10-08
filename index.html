@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0B0B14">
+<meta name="theme-color" content="#faf5f1">
 <meta name="description" content="Frame Studio — design transparent catalog frames for Meta ads. 3,000+ templates and a guided frame builder. All data stays on your device.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -325,24 +325,35 @@ input[type=checkbox]{accent-color:var(--ac);width:15px;height:15px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
 /* ============ LIGHT THEME (default) — warm paper editorial ============ */
-html[data-theme="light"]{--bg:#f6f6fa;--panel:#ffffff;--card:#f0e5ff;--card2:#e6d5f8;--bd:#ececf2;--bdh:#d5d5e0;--tx:#140f29;--tx2:#707080;--tx3:#9b9fb8;--ac:#AF46FD;--ac2:#DA3BC2;--acb:rgba(175,70,253,.08);--acbd:rgba(175,70,253,.35);--ok:#15803d}
-html[data-theme="light"] .topbar{background:rgba(255,255,255,.85);border-bottom-color:var(--bd)}
-html[data-theme="light"] .selbar{background:rgba(255,255,255,.92);border-color:var(--bdh);box-shadow:0 8px 26px rgba(20,15,41,.1)}
-html[data-theme="light"] .toast{background:rgba(20,15,41,.92);border-color:transparent;color:#f6f6fa}
-html[data-theme="light"] .moremenu{background:rgba(255,255,255,.97);box-shadow:0 16px 44px rgba(20,15,41,.14)}
-html[data-theme="light"] .canvas-hint .ghost{background:rgba(246,246,250,.8)}
-html[data-theme="light"] #homeView{background:radial-gradient(900px 480px at 50% -8%,rgba(175,70,253,.06),transparent 62%),radial-gradient(rgba(20,15,41,.05) 1px,transparent 1.4px);background-size:auto,26px 26px}
-html[data-theme="light"] .pv{background:radial-gradient(700px 420px at 50% 30%,rgba(175,70,253,.045),transparent 65%),radial-gradient(rgba(20,15,41,.05) 1px,transparent 1.3px);background-size:auto,24px 24px}
-html[data-theme="light"] .cw{box-shadow:0 18px 50px rgba(20,15,41,.12)}
-html[data-theme="light"] .home-search{box-shadow:0 10px 32px rgba(20,15,41,.08);background:#fff}
-html[data-theme="light"] .home-search:focus{box-shadow:0 10px 32px rgba(175,70,253,.12)}
-html[data-theme="light"] .hact{background:#fff}
+/* ===== LIGHT THEME — Fastrr Ads palette (cream, white cards, coral) ===== */
+html[data-theme="light"]{
+/* ── Surface / Background ── */
+--bg:#faf5f1;--panel:#ffffff;--card:#f6f6f6;--card2:#eeeeef;
+/* ── Border ── */
+--bd:#e8e3e0;--bdh:#dededf;
+/* ── Text ── */
+--tx:#16151e;--tx2:#6b6b7a;--tx3:#6f6f7d;
+/* ── Primary (coral) — --ac is the readable TEXT value; fills use --ac2 ── */
+--ac:#bf402d;--ac2:#de8274;--acb:#f9eae8;--acbd:#f2cfc9;--ok:#3c7c49;
+--grad:linear-gradient(90deg,#de8375 0%,#e7a991 50%,#de8475 100%);
+color-scheme:light}
+html[data-theme="light"] .topbar{background:#faf5f1;border-bottom-color:#e8e3e0;backdrop-filter:none;-webkit-backdrop-filter:none}
+html[data-theme="light"] .selbar{background:#ffffff;border-color:#dededf;box-shadow:0 8px 24px rgba(22,21,30,.06)}
+html[data-theme="light"] .toast{background:#16151e;border-color:transparent;color:#ffffff}
+html[data-theme="light"] .moremenu{background:#ffffff;border-color:#dededf;box-shadow:0 8px 24px rgba(22,21,30,.08)}
+html[data-theme="light"] .canvas-hint .ghost{background:#f6f6f6;border-color:#dededf;color:#6b6b7a}
+html[data-theme="light"] #homeView{background:#faf5f1}
+html[data-theme="light"] .pv{background:#faf5f1}
+html[data-theme="light"] .cw{box-shadow:0 8px 24px rgba(22,21,30,.08);border:1px solid #e8e3e0}
+html[data-theme="light"] .home-search{box-shadow:none;background:#fff;border-color:#dededf}
+html[data-theme="light"] .home-search:focus{border-color:#f2cfc9;box-shadow:0 0 0 3px #f9eae8}
+html[data-theme="light"] .hact{background:#fff;border-color:#dededf;box-shadow:none}
 html[data-theme="light"] .thumb{background:#fff;border-color:var(--bd)}
-html[data-theme="light"] .thumb:hover{box-shadow:0 14px 30px rgba(20,15,41,.12)}
-html[data-theme="light"] #modalBg{background:rgba(20,15,41,.4)}
+html[data-theme="light"] .thumb:hover{box-shadow:0 8px 24px rgba(22,21,30,.08);border-color:#f2cfc9}
+html[data-theme="light"] #modalBg{background:rgba(22,21,30,.35)}
 html[data-theme="light"] .modal,html[data-theme="light"] .mhero{background-color:var(--panel)}
-html[data-theme="light"] .tbtn.primary,html[data-theme="light"] .btn-p{box-shadow:0 4px 16px rgba(175,70,253,.28);color:#fff}
-html[data-theme="light"] .brand .logo{box-shadow:0 3px 12px rgba(175,70,253,.3)}
+html[data-theme="light"] .tbtn.primary,html[data-theme="light"] .btn-p{background:var(--grad);box-shadow:none;color:#fff}
+html[data-theme="light"] .brand .logo{background:var(--grad);box-shadow:none}
 html[data-theme="light"] .inp,html[data-theme="light"] textarea.inp,html[data-theme="light"] select{background:#fff}
 
 /* ===== views: home | gallery | editor ===== */
@@ -352,7 +363,7 @@ body.gallery .app{display:none}
 body.gallery #homeView{display:none}
 body.gallery .tb-center,body.gallery #undoBtn,body.gallery #redoBtn,body.gallery #saveBtn,body.gallery #expBtn,body.gallery #expPrevBtn,body.gallery #moreBtn,body.gallery .tb-sep{display:none}
 #galleryView{background:radial-gradient(900px 480px at 50% -8%,rgba(175,70,253,.07),transparent 62%),radial-gradient(rgba(255,255,255,.03) 1px,transparent 1.4px);background-size:auto,26px 26px}
-html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 50% -8%,rgba(175,70,253,.06),transparent 62%),radial-gradient(rgba(20,15,41,.05) 1px,transparent 1.4px);background-size:auto,26px 26px}
+html[data-theme="light"] #galleryView{background:#faf5f1}
 .gal-wrap{padding-top:30px}
 .gal-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:18px;flex-wrap:wrap}
 .gal-title{font-family:var(--serif);font-size:27px;font-weight:700;color:var(--tx)}
@@ -432,6 +443,35 @@ html[data-theme="light"] #galleryView{background:radial-gradient(900px 480px at 
 .hpw.has .resume-btn{padding-right:42px}
 .hpw .uzx{right:9px}
 .hpw.has .uzx{display:flex}
+/* ── Light theme: coral replacements for hard-coded purple ── */
+html[data-theme="light"] ::selection{background:#f2cfc9}
+html[data-theme="light"] .home-hero h1 em,html[data-theme="light"] .resume-btn b{background:none;-webkit-text-fill-color:#bf402d;color:#bf402d}
+html[data-theme="light"] .resume-btn{background:#fff;border-color:#dededf;color:#6b6b7a}
+html[data-theme="light"] .resume-btn:hover{border-color:#f2cfc9;color:#16151e}
+html[data-theme="light"] .resume-btn .ic,html[data-theme="light"] .hact .hi{color:#de8274}
+html[data-theme="light"] .hact .hi{background:#f9eae8!important;border-color:#f2cfc9}
+html[data-theme="light"] .hact:hover{border-color:#f2cfc9;box-shadow:none}
+html[data-theme="light"] .brand .bg{border-color:#dededf;color:#6f6f7d}
+html[data-theme="light"] .tab.on{background:#ffffff;box-shadow:inset 0 0 0 1px #dededf}
+html[data-theme="light"] .tab.on .ic,html[data-theme="light"] .lrow.sel .li,html[data-theme="light"] .mitem:hover .ic,html[data-theme="light"] .pvchip .ic,html[data-theme="light"] .uz.big .ic,html[data-theme="light"] .sbname .ic{color:#de8274}
+html[data-theme="light"] .lrow.sel{box-shadow:inset 2px 0 0 #de8274}
+html[data-theme="light"] input[type=range],html[data-theme="light"] input[type=checkbox]{accent-color:#de8274}
+html[data-theme="light"] :focus-visible{outline-color:#de8274}
+html[data-theme="light"] .uz.big:hover{background:#fcf2f0}
+html[data-theme="light"] .mhero{background:linear-gradient(180deg,#fcf2f0,#ffffff);border-bottom-color:#e8e3e0}
+html[data-theme="light"] .mhero h2{background:none;-webkit-text-fill-color:#16151e;color:#16151e}
+html[data-theme="light"] .mhero-badge{color:#bf402d;background:#f9eae8;border-color:#f2cfc9}
+html[data-theme="light"] .modal{background:#ffffff;border-color:#dededf;box-shadow:0 8px 24px rgba(22,21,30,.1)}
+html[data-theme="light"] .wiz-steps span.on{background:var(--grad)}
+html[data-theme="light"] .wizbg{background:rgba(22,21,30,.35)}
+html[data-theme="light"] .wiz{border-color:#dededf;box-shadow:0 8px 24px rgba(22,21,30,.1)}
+html[data-theme="light"] .dlgbg{background:rgba(22,21,30,.35)}
+html[data-theme="light"] #tipbox{background:#16151e}
+html[data-theme="light"] .thumb .tn,html[data-theme="light"] .wthumb .tn{background:rgba(22,21,30,.84)}
+html[data-theme="light"] .qbtn .i{color:#bf402d}
+html[data-theme="light"] .qbtn .i .ic{color:#de8274}
+html[data-theme="light"] .wcard.on,html[data-theme="light"] .wfp.on{background:#fcf2f0}
+html[data-theme="light"] .wcard span,html[data-theme="light"] .wfp div:last-child,html[data-theme="light"] .mstat span,html[data-theme="light"] .mhero .sub{color:#5c5c6a!important}
 /* v6: facets, paging, wizard */
 .facets{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:-4px 0 14px}
 .facets select{padding:7px 10px;border-radius:10px;border:1px solid var(--bd);background:var(--panel);color:var(--tx);font:inherit;font-size:12px;font-weight:600;cursor:pointer;max-width:220px}
@@ -691,6 +731,7 @@ const S={img:null,imgX:0,imgY:0,imgScale:1,logo:null,layers:[],sel:null,drag:nul
 let LID=1; const nid=()=>"L"+(LID++);
 /* ---- toast ---- */
 const IC=(d,extra)=>`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" ${extra||""}>${d}</svg>`;
+function uiAccent(){return document.documentElement.dataset.theme==="light"?"#de8274":"#AF46FD"}
 const ICON={
 home:IC('<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>'),
 back:IC('<path d="M14.5 5.5 8 12l6.5 6.5"/>'),
@@ -1359,16 +1400,16 @@ if(opts.guides){c.save();c.strokeStyle="#e8b34b";c.lineWidth=2.5;c.setLineDash([
 if(opts.guides.v){c.beginPath();c.moveTo(K/2,0);c.lineTo(K/2,K);c.stroke()}
 if(opts.guides.h){c.beginPath();c.moveTo(0,K/2);c.lineTo(K,K/2);c.stroke()}
 c.setLineDash([]);c.restore()}
-if(opts.sel&&opts.sel._bb){const b=opts.sel._bb;c.save();c.strokeStyle="#AF46FD";c.lineWidth=3;c.setLineDash([10,7]);c.strokeRect(b[0],b[1],b[2],b[3]);c.setLineDash([]);
+if(opts.sel&&opts.sel._bb){const b=opts.sel._bb;c.save();c.strokeStyle=uiAccent();c.lineWidth=3;c.setLineDash([10,7]);c.strokeRect(b[0],b[1],b[2],b[3]);c.setLineDash([]);
 const canT=opts.sel.type!=="bg"&&!opts.sel.locked;
 if(canT){
 /* corner resize handles */
-c.fillStyle="#fff";c.strokeStyle="#AF46FD";c.lineWidth=3.5;
+c.fillStyle="#fff";c.strokeStyle=uiAccent();c.lineWidth=3.5;
 cornerPts(b).forEach(([hx2,hy2])=>{c.beginPath();c.rect(hx2-11,hy2-11,22,22);c.fill();c.stroke()});
 /* rotate handle */
 if(hasRot(opts.sel)){const rc=rotPt(b);
 c.beginPath();c.moveTo(b[0]+b[2]/2,b[1]);c.lineTo(rc[0],rc[1]+14);c.stroke();
-c.beginPath();c.arc(rc[0],rc[1],14,0,7);c.fillStyle="#AF46FD";c.fill();
+c.beginPath();c.arc(rc[0],rc[1],14,0,7);c.fillStyle=uiAccent();c.fill();
 c.fillStyle="#fff";c.font="700 16px sans-serif";c.textAlign="center";c.textBaseline="middle";c.fillText("⟳",rc[0],rc[1]+1)}}
 c.restore()}
 c.textAlign="start";c.textBaseline="alphabetic";}
@@ -2636,7 +2677,7 @@ if(!l)return;
 if(l.type==="text"){
 const b=l._bb,sc=cv.getBoundingClientRect().width/K;
 const inp=document.createElement("textarea");inp.className="inline-edit";inp.value=l.t||"";
-inp.style.cssText=`position:absolute;left:${b[0]*sc}px;top:${b[1]*sc}px;min-width:${Math.max(120,b[2]*sc)}px;height:${Math.max(34,b[3]*sc)}px;font-size:${Math.max(12,(l.s||44)*sc)}px;font-family:${l.f||"sans-serif"};z-index:20;background:rgba(15,17,22,.92);color:#fff;border:2px solid #AF46FD;border-radius:6px;padding:2px 6px;resize:none;outline:none;line-height:1.16`;
+inp.style.cssText=`position:absolute;left:${b[0]*sc}px;top:${b[1]*sc}px;min-width:${Math.max(120,b[2]*sc)}px;height:${Math.max(34,b[3]*sc)}px;font-size:${Math.max(12,(l.s||44)*sc)}px;font-family:${l.f||"sans-serif"};z-index:20;background:rgba(15,17,22,.92);color:#fff;border:2px solid ${uiAccent()};border-radius:6px;padding:2px 6px;resize:none;outline:none;line-height:1.16`;
 document.querySelector(".cw").appendChild(inp);inp.focus();inp.select();
 let done=false;
 const commit=()=>{if(done)return;done=true;l.t=inp.value;inp.remove();render();histNow()};
@@ -3230,7 +3271,7 @@ const _rb=document.getElementById("rerollBtn");if(_rb)_rb.innerHTML=ICON.dice;
 /* ============ THEME ============ */
 let THEME=store.get("fs_theme")||"light";
 function applyTheme(){document.documentElement.dataset.theme=THEME;
-const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=THEME==="light"?"#f6f6fa":"#0B0B14";
+const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=THEME==="light"?"#faf5f1":"#0B0B14";
 const tb=document.getElementById("themeBtn");if(tb)tb.innerHTML=THEME==="light"?ICON.moon:ICON.sun;}
 document.getElementById("themeBtn").onclick=()=>{THEME=THEME==="light"?"dark":"light";store.set("fs_theme",THEME);applyTheme();toast(THEME==="light"?"☀️ Light theme":"🌙 Dark theme")};
 applyTheme();
