@@ -10,7 +10,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236037d7'/%3E%3Crect x='12' y='12' width='40' height='40' rx='6' fill='none' stroke='white' stroke-width='6'/%3E%3Crect x='24' y='24' width='16' height='16' rx='3' fill='white'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236037d7'/%3E%3Crect x='12' y='12' width='40' height='40' rx='6' fill='none' stroke='white' stroke-width='6'/%3E%3Crect x='24' y='24' width='16' height='16' rx='3' fill='white'/%3E%3C/svg%3E">
 <link rel="manifest" href='data:application/json,{"name":"Frame Studio","short_name":"FrameStudio","display":"standalone","background_color":"%230B0B14","theme_color":"%230B0B14","start_url":".","icons":[{"src":"data:image/svg+xml,%253Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%253E%253Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%25236037d7%27/%253E%253C/svg%253E","sizes":"any","type":"image/svg+xml"}]}'>
-<title>Frame Studio Pro · AI (Claude)</title>
+<title>Frame Studio — 3,000+ Meta catalog frame templates</title>
 <script>try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem("fs_theme")||'"light"')}catch(e){document.documentElement.dataset.theme="light"}</script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,600;1,800&family=Montserrat:wght@400;600;700;800;900&family=Oswald:wght@400;600;700&family=Bebas+Neue&family=Dancing+Script:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&family=Lobster&family=Pacifico&family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Baloo+2:wght@600;700;800&family=Kalam:wght@700&display=swap" rel="stylesheet">
 <style>
@@ -467,7 +467,6 @@ html[data-theme="light"] .wizbg{background:rgba(22,21,30,.35)}
 html[data-theme="light"] .wiz{border-color:#dededf;box-shadow:0 8px 24px rgba(22,21,30,.1)}
 html[data-theme="light"] .dlgbg{background:rgba(22,21,30,.35)}
 html[data-theme="light"] #tipbox{background:#16151e}
-html[data-theme="light"] .thumb .tn,html[data-theme="light"] .wthumb .tn{background:rgba(22,21,30,.84)}
 html[data-theme="light"] .qbtn .i{color:#bf402d}
 html[data-theme="light"] .qbtn .i .ic{color:#de8274}
 html[data-theme="light"] .wcard.on,html[data-theme="light"] .wfp.on{background:#fcf2f0}
@@ -490,6 +489,28 @@ html[data-theme="light"] .qbtn .ql{color:#16151e}
 .panel .tabs{margin:10px 12px 0}
 @media (max-width:920px){.tb-right{flex-wrap:wrap;gap:4px;min-width:0}.tb-right .tbtn{padding:6px 8px}.helpbtn{flex:0 0 auto}}
 .panel{min-width:0;max-width:100%}
+/* ── Thumbnails v10: caption below the art, skeleton until painted ── */
+.thumb{opacity:1!important;translate:none!important;background:var(--panel)}
+.thumb canvas{opacity:0;transition:opacity .35s;background:var(--card)}
+.thumb.ready canvas{opacity:1}
+.thumb .tn,.home-grid .thumb .tn,.wthumb .tn{position:static;display:block;background:var(--panel)!important;color:var(--tx2);font-size:10.5px;font-weight:700;letter-spacing:.01em;padding:7px 9px;border-top:1px solid var(--bd);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wthumb{background:var(--panel)}
+.wthumbs .wthumb .tn,.wprev .wthumb .tn{position:static!important;color:var(--tx2)!important;background:var(--panel)!important}
+.wthumbs .wthumb.on .tn{color:var(--ac)!important}
+.wthumb.on .tn{color:var(--ac)}
+/* selection toolbar floats above the canvas instead of pushing it down */
+.pv{position:relative}
+#selbar{position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:30;max-width:calc(100% - 24px)}
+/* element tiles show real previews */
+.elbtn{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:6px 6px 8px;border:1px solid var(--bd);background:var(--panel);border-radius:12px}
+.elbtn:hover{border-color:var(--acbd);background:var(--panel)}
+.elbtn canvas.elprev{width:100%;height:58px;border-radius:8px;display:block}
+.elbtn .elname{font-size:10.5px;font-weight:700;color:var(--tx);text-align:center;line-height:1.15}
+/* colour swatches: visible edge, and a clear "none" state */
+input[type=color].cin::-webkit-color-swatch{border:1px solid rgba(0,0,0,.18)!important}
+input[type=color].cin.none{background:repeating-conic-gradient(#e6e6e9 0 25%,#ffffff 0 50%) 50%/12px 12px}
+input[type=color].cin.none::-webkit-color-swatch{opacity:0}
+.fl .nonetag{font-weight:600;letter-spacing:0;text-transform:none;color:var(--tx3)}
 /* v6: facets, paging, wizard */
 .facets{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:-4px 0 14px}
 .facets select{padding:7px 10px;border-radius:10px;border:1px solid var(--bd);background:var(--panel);color:var(--tx);font:inherit;font-size:12px;font-weight:600;cursor:pointer;max-width:220px}
@@ -2247,18 +2268,17 @@ TEMPLATES.forEach(t=>{if(!t.chip)t.chip=t.cat==="💎 Premium"?"💎 Premium":"�
 /* ============ TEMPLATE UI ============ */
 const tcv=document.createElement("canvas");tcv.width=K;tcv.height=K;const tctx=tcv.getContext("2d");
 const PAINTQ=[];let _painting=false;
-function pumpPaint(){_painting=true;
-const step=()=>{const t0=performance.now();
-while(PAINTQ.length&&performance.now()-t0<12)PAINTQ.shift()();
-if(PAINTQ.length)requestAnimationFrame(step);else _painting=false};
-requestAnimationFrame(step)}
+function pumpPaint(){_painting=true;const tick=cb=>document.hidden?setTimeout(cb,0):requestAnimationFrame(cb);
+const step=()=>{const t0=performance.now();while(PAINTQ.length&&performance.now()-t0<(document.hidden?40:12))PAINTQ.shift()();
+if(PAINTQ.length)tick(step);else _painting=false};tick(step)}
+document.addEventListener("visibilitychange",()=>{if(PAINTQ.length&&!document.hidden){_painting=false;pumpPaint()}});
 const TS=256;
 function makeThumb(spec,myIdx){
 const th=document.createElement("div");th.className="thumb";
 const cc=document.createElement("canvas");cc.width=TS;cc.height=TS;
 const n=document.createElement("div");n.className="tn";n.textContent=spec.name;
 th.appendChild(cc);th.appendChild(n);
-PAINTQ.push(()=>{try{renderScene(tctx,spec.layers,{thumb:true,img:S.img,imgX:0,imgY:0,imgScale:1});const g=cc.getContext("2d");g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";g.drawImage(tcv,0,0,TS,TS)}catch(e){}th.classList.add("ready")});
+PAINTQ.push(()=>{if(!th.isConnected){th.classList.add("ready");return}try{renderScene(tctx,spec.layers,{thumb:true,img:S.img,imgX:0,imgY:0,imgScale:1});const g=cc.getContext("2d");g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";g.drawImage(tcv,0,0,TS,TS)}catch(e){}th.classList.add("ready")});
 if(!_painting)pumpPaint();
 th.onclick=()=>{applyTemplate(spec)};
 if(myIdx!==undefined){
@@ -2437,7 +2457,19 @@ l.x=x0+(K/2-cx);l.y=y0+(K*.47-cy)}
 function addLayer(l){S.layers.push(l);S.sel=l;placeFree(l);render();buildLayerList();buildProps();switchTab("layers");histNow();toast("＋ "+(l.name||l.type)+" added — drag it into place")}
 function duplicateLayer(l){if(!l||l.type==="bg")return;const c=JSON.parse(JSON.stringify(serializeLayers([l])[0]));c.id=nid();c.name=(c.name||c.type)+" copy";c.x=(c.x||0)+30;c.y=(c.y||0)+30;if(c.role==="logo"&&S.logo){c.imgObj=S.logo;c.placeholder=false}S.layers.push(c);S.sel=c;render();buildLayerList();buildProps();histNow();toast("⧉ Duplicated")}
 function egBtn(i,label,accent){const d=document.createElement("div");d.className="elbtn";d.innerHTML=`<span class="i"${accent?` style="color:${accent}"`:""}>${i}</span>${label}`;return d}
-function egAdd(host,i,label,accent,fn){const b=egBtn(i,label,accent);b.onclick=fn;document.getElementById(host).appendChild(b)}
+const EL_PREVIEWS=[];
+function elPreview(cvs,l){const g=cvs.getContext("2d"),W=cvs.width,H=cvs.height;const o=document.createElement("canvas");o.width=o.height=K;const c=o.getContext("2d");
+const darkBg=l.type==="text"&&_lum(String(l.c||"#ffffff").slice(0,7))>.55||l.type==="decor"&&["snowflake","bokehCluster","sparkleCluster"].includes(l.kind);
+g.clearRect(0,0,W,H);g.fillStyle=darkBg?"#2a2930":"#f4f1ec";g.fillRect(0,0,W,H);
+if(l.type==="bg"){const k2=Object.assign({},l,{inset:{t:150,r:150,b:150,l:150}});drawLayer(c,k2);g.drawImage(o,(W-H*1.4)/2,0,H*1.4,H);return}
+try{drawLayer(c,l)}catch(e){return}let b=l._bb;if(!b)return;let[x,y,w,h]=b;x=Math.max(0,x);y=Math.max(0,y);w=Math.min(K-x,w);h=Math.min(K-y,h);if(w<4||h<4)return;
+const pad=7,sc=Math.min((W-pad*2)/w,(H-pad*2)/h);g.drawImage(o,x,y,w,h,(W-w*sc)/2,(H-h*sc)/2,w*sc,h*sc)}
+function egAdd(host,i,label,accent,fn,pl){const d=document.createElement("div");d.className="elbtn";d.title=label;
+const cvs=document.createElement("canvas");cvs.className="elprev";cvs.width=240;cvs.height=116;const n=document.createElement("div");n.className="elname";n.textContent=label;d.appendChild(cvs);d.appendChild(n);
+let prev=pl;if(!prev){const real=addLayer;addLayer=x=>{prev=x};try{fn()}catch(e){}finally{addLayer=real}}
+if(prev){EL_PREVIEWS.push([cvs,prev]);PAINTQ.push(()=>elPreview(cvs,prev));if(!_painting)pumpPaint()}
+d.onclick=fn;document.getElementById(host).appendChild(d)}
+document.fonts&&document.fonts.ready.then(()=>EL_PREVIEWS.forEach(([c,l])=>PAINTQ.push(()=>elPreview(c,l))));
 
 /* --- BANNERS & STRIPS --- */
 const BAN_PRESETS=[
@@ -2521,7 +2553,7 @@ BASE_PRESETS.forEach(([nm,ic,ac,cfg])=>egAdd("egBase",ic,nm,ac,()=>{
 const ex=S.layers.findIndex(l=>l.type==="bg");
 const nl=L({type:"bg",name:nm+" Base",cols:[...cfg.cols],tex:cfg.tex,texA:.5,inset:{t:cfg.arch?96:60,r:60,b:60,l:60},radius:cfg.arch?0:6,arch:cfg.arch||false,archH:cfg.archH,stroke:cfg.stroke||null,strokeW:cfg.strokeW||4});
 if(ex>=0){nl.id=S.layers[ex].id;S.layers[ex]=nl}else S.layers.unshift(nl);
-S.sel=nl;render();buildLayerList();buildProps();histNow();toast("🖼 Base changed")}));
+S.sel=nl;render();buildLayerList();buildProps();histNow();toast("🖼 Base changed")},L({type:"bg",name:nm,cols:[...cfg.cols],tex:cfg.tex,texA:.5,inset:{t:60,r:60,b:60,l:60},radius:cfg.arch?0:6,arch:cfg.arch||false,archH:cfg.archH,stroke:cfg.stroke||null,strokeW:cfg.strokeW||4})));
 
 /* --- CUSTOM UPLOADS --- */
 let CUSTOM=store.get("fs_custom")||[]; // {name,dataUrl}
@@ -2574,8 +2606,8 @@ if(!l){p.innerHTML='<div class="hint">Select a layer to edit. Click an element o
 const _tc=p.closest('.tc');if(_tc&&!buildProps._keep)_tc.scrollTo({top:0,behavior:'smooth'});
 const add=h=>{const d=document.createElement("div");d.innerHTML=h;p.appendChild(d);return d};
 add(`<div class="st" style="display:flex;align-items:center;gap:6px">${ICON.pencil} ${String(l.name||l.type).replace(/</g,"&lt;")}</div>`);
-const slider=(label,key,min,max,step,obj)=>{const dv=obj[key]??(key==="opacity"||key==="texA"?1:min);const d=add(`<div class="sr"><span>${label}</span><input type="range" min="${min}" max="${max}" step="${step}" value="${dv}"><span class="vv">${dv}</span></div>`);bindNum(d.querySelector("input"),obj,key)};
-const color=(label,obj,key)=>{const d=add(`<div><div class="fl">${label}</div><input type="color" class="cin" value="${(obj[key]||"#ffffff").substring(0,7)}"></div>`);d.querySelector("input").oninput=e=>{obj[key]=e.target.value;render();markDirty()}};
+const slider=(label,key,min,max,step,obj)=>{const dv=obj[key]??(key==="opacity"||key==="texA"?1:(min<0&&max>0?0:min));const d=add(`<div class="sr"><span>${label}</span><input type="range" min="${min}" max="${max}" step="${step}" value="${dv}"><span class="vv">${dv}</span></div>`);bindNum(d.querySelector("input"),obj,key)};
+const color=(label,obj,key)=>{const has=!!obj[key];const d=add(`<div><div class="fl">${label}${has?"":' <span class="nonetag">· none — pick a colour to add</span>'}</div><input type="color" class="cin${has?"":" none"}" value="${(obj[key]||"#ffffff").substring(0,7)}"></div>`);const inp=d.querySelector("input");inp.oninput=e=>{obj[key]=e.target.value;inp.classList.remove("none");const t=d.querySelector(".nonetag");if(t)t.remove();render();markDirty()}};
 const colorArr=(label,obj,idx)=>{const cur=(obj.cols&&obj.cols[idx])||"#ffffff";const d=add(`<div><div class="fl">${label}</div><input type="color" class="cin" value="${cur.substring(0,7)}"></div>`);d.querySelector("input").oninput=e=>{if(!obj.cols)obj.cols=[];obj.cols[idx]=e.target.value;render();markDirty()}};
 const textIn=(label,obj,key)=>{const d=add(`<div><div class="fl">${label}</div><input class="inp" value="${(obj[key]??"").toString().replace(/"/g,"&quot;")}"></div>`);d.querySelector("input").oninput=e=>{obj[key]=e.target.value;render();markDirty()}};
 const textArea=(label,obj,key)=>{const d=add(`<div><div class="fl">${label} <span class="locked-note">(Enter = new line)</span></div><textarea class="inp" rows="2" style="resize:vertical;min-height:50px;font-family:inherit"></textarea></div>`);const ta=d.querySelector("textarea");ta.value=obj[key]??"";ta.oninput=()=>{obj[key]=ta.value;render();markDirty()}};
@@ -2662,13 +2694,13 @@ const b=l._bb;
 if(hasRot(l)){const[rx,ry]=rotPt(b);if(Math.hypot(mx-rx,my-ry)<24)return{mode:"rotate"}}
 for(const[hx2,hy2]of cornerPts(b))if(Math.abs(mx-hx2)<20&&Math.abs(my-hy2)<20)return{mode:"resize"};
 return null}
-let _lastTap={t:0,x:0,y:0};
+let _lastTap={t:0,x:0,y:0},_down={x:0,y:0,armed:false};
 cv.addEventListener("pointerdown",e=>{
 if(e.pointerType==="touch"){const now=Date.now();
 if(now-_lastTap.t<320&&Math.hypot(e.clientX-_lastTap.x,e.clientY-_lastTap.y)<24){_lastTap.t=0;cv.dispatchEvent(new MouseEvent("dblclick",{clientX:e.clientX,clientY:e.clientY}));return}
 _lastTap={t:now,x:e.clientX,y:e.clientY}}
 try{cv.setPointerCapture(e.pointerId)}catch(_){}
-e.preventDefault();
+e.preventDefault();_down={x:e.clientX,y:e.clientY,armed:true};
 const[mx,my]=evPos(e);
 const h=hitHandle(mx,my);
 if(h){const l=S.sel,b=l._bb,cx2=b[0]+b[2]/2,cy2=b[1]+b[3]/2;
@@ -2686,6 +2718,7 @@ if(S.img){S.dragImg=true;S.dragOff={x:mx-S.imgX,y:my-S.imgY}}}
 });
 cv.addEventListener("pointermove",e=>{const[mx,my]=evPos(e);
 const l=S.sel;
+if(S.tmode&&_down.armed){if(Math.hypot(e.clientX-_down.x,e.clientY-_down.y)<4)return;_down.armed=false}
 if(S.tmode==="drag"&&l){
 let nx=mx-S.dragOff.x,ny=my-S.dragOff.y;
 S.guides={v:false,h:false};
@@ -3170,16 +3203,16 @@ document.getElementById("aiChips").appendChild(c)});
 const GOALS=[["sale","🏷","Sale or discount","Lead with the offer","megasale","S"],["launch","✨","New launch","Introduce something new","newlaunch","E"],["best","🏆","Bestseller","Lead with social proof","toprated","E"],["festive","🪔","Festive / occasion","Diwali, Eid, Christmas…","diwali","F"],["brand","💎","Always-on brand","Clean & evergreen","alwayson","E"]];
 const FONTPAIRS=[["Modern","'Montserrat',sans-serif","'Inter',sans-serif"],["Editorial","'Playfair Display',serif","'Montserrat',sans-serif"],["Luxe","'Cormorant Garamond',serif","'Montserrat',sans-serif"],["Bold","'Bebas Neue',sans-serif","'Poppins',sans-serif"],["Friendly","'Baloo 2',sans-serif","'Poppins',sans-serif"],["Tech","'Space Grotesk',sans-serif","'Inter',sans-serif"]];
 const WSTEPS=["What's this frame for?","Pick a structure","Your brand look","Your words","Pick your favourite"];
-const WZ={step:0,goal:"sale",occ:"megasale",ind:"fashion",tone:"mid",arch:"bottomBand",p:"#1a1a2e",a:"#e0447c",fp:0,copy:{},seed:1};
+const WZ={step:0,goal:"sale",occ:"megasale",ind:"fashion",tone:"value",arch:"bottomBand",p:"#1a1a2e",a:"#e0447c",fp:0,copy:{},seed:1};
 const occById=id=>OCCS.find(o=>o.id===id)||OCCS[0];
 const indById=id=>INDS.find(i=>i.id===id)||INDS[0];
 function wzDefaults(){const o=occById(WZ.occ),ind=indById(WZ.ind);
 WZ.copy={head:o.heads[0],offer:WZ.goal==="brand"?"":o.offers[0],sub:o.subs[0],trust:ind.trust[0],cat:ind.cats[0],cta:CTAS[WZ.tone][0],date:o.date,code:codeFor(o,o.offers[0])}}
 const TONE_FP={value:3,mid:0,luxe:2};
-const TONE_VARIANTS={value:["Bold brand","Pop","Black & bright"],mid:["Brand colours","Light","Dark"],luxe:["Deep & gold","Ivory","Noir"]};
+const TONE_VARIANTS={value:["Bold brand","Pop","Black & bright"],mid:["Brand colours","Light","Dark"],luxe:["Deep & gold","Ivory","Jewel tone"]};
 function wzPal(v){const p=WZ.p,a=WZ.a,t=WZ.tone;
 if(t==="value"){if(v===1){const b=vivid(a,.5);return mkPal(b,shade(b,-.2),contrast("#ffd23f",b)>1.8?"#ffd23f":"#111111",false)}if(v===2)return mkPal("#111111","#1c1c1c",vivid(a,.55),false);return tonePal(p,shade(p,-.22),a,false,"value")}
-if(t==="luxe"){if(v===1)return tonePal("#f6f1e7","#ece4d4",a,false,"luxe");if(v===2)return mkPal("#0c0c0e","#161618",mixHex("#d4af37",a,.12),true);return tonePal(p,shade(p,-.22),a,false,"luxe")}
+if(t==="luxe"){if(v===1)return tonePal("#f6f1e7","#ece4d4",a,false,"luxe");if(v===2){const[H,S2]=hexHsl(a);return mkPal(hslHex(H,Math.max(.45,S2*.8),.17),hslHex(H,Math.max(.4,S2*.7),.11),mixHex("#d4af37",a,.1),true)}return tonePal(p,shade(p,-.22),a,false,"luxe")}
 if(v===1)return mkPal(tint(WZ.p,.9),tint(WZ.p,.8),contrast(WZ.p,tint(WZ.p,.9))>3?WZ.p:WZ.a,false);
 if(v===2)return mkPal("#141416","#1d1d22",WZ.a,isGoldish(WZ.a));
 return mkPal(WZ.p,shade(WZ.p,-.22),WZ.a,isGoldish(WZ.a))}
