@@ -472,6 +472,24 @@ html[data-theme="light"] .qbtn .i{color:#bf402d}
 html[data-theme="light"] .qbtn .i .ic{color:#de8274}
 html[data-theme="light"] .wcard.on,html[data-theme="light"] .wfp.on{background:#fcf2f0}
 html[data-theme="light"] .wcard span,html[data-theme="light"] .wfp div:last-child,html[data-theme="light"] .mstat span,html[data-theme="light"] .mhero .sub{color:#5c5c6a!important}
+/* ── Quick-add tiles (v9) ── */
+.qadd{gap:8px;margin-bottom:14px}
+.qbtn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px 9px;border-radius:12px;border:1px solid var(--bd);background:var(--panel);color:var(--tx2);cursor:pointer;font-family:inherit;transition:border-color .15s,background .15s,transform .15s}
+.qbtn:hover{border-color:var(--acbd);background:var(--acb);transform:translateY(-1px)}
+.qbtn:active{transform:none}
+.qbtn .i{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin:0;background:var(--acb);color:var(--ac2,var(--ac));font-size:0}
+.qbtn .i .ic{width:17px;height:17px}
+.qbtn .ql{font-size:10.5px;font-weight:700;letter-spacing:.01em;color:var(--tx);line-height:1.1}
+html[data-theme="light"] .qbtn .i{background:#f9eae8;color:#de8274}
+html[data-theme="light"] .qbtn .ql{color:#16151e}
+/* props now sit above the layer list */
+.props{border-top:none;padding-top:0;margin:0 0 14px}
+.props:not(:empty){border-bottom:1px solid var(--bd);padding-bottom:12px}
+/* toasts at the bottom, clear of the toolbar and selection bar */
+#toasts{top:auto!important;bottom:28px!important}
+.panel .tabs{margin:10px 12px 0}
+@media (max-width:920px){.tb-right{flex-wrap:wrap;gap:4px;min-width:0}.tb-right .tbtn{padding:6px 8px}.helpbtn{flex:0 0 auto}}
+.panel{min-width:0;max-width:100%}
 /* v6: facets, paging, wizard */
 .facets{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:-4px 0 14px}
 .facets select{padding:7px 10px;border-radius:10px;border:1px solid var(--bd);background:var(--panel);color:var(--tx);font:inherit;font-size:12px;font-weight:600;cursor:pointer;max-width:220px}
@@ -627,14 +645,14 @@ html[data-theme="light"] .wcard span,html[data-theme="light"] .wfp div:last-chil
 <div class="st">Frame Base</div><div class="elgrid" id="egBase"></div>
 </div>
 <div class="tp on" id="tp-layers">
-<div class="st" style="margin-bottom:6px">＋ Add Custom Layer</div>
+<div class="st" style="margin-bottom:8px">Add to your frame</div>
 <div class="qadd">
-<div class="qbtn" id="qaText"><span class="i"><i class="ich" data-i="type"></i>Text</div>
-<div class="qbtn" id="qaBanner"><span class="i"><i class="ich" data-i="banner"></i>Banner</div>
-<div class="qbtn" id="qaBadge"><span class="i"><i class="ich" data-i="badge"></i>Badge</div>
-<div class="qbtn" id="qaTape"><span class="i"><i class="ich" data-i="tape"></i>Tape</div>
-<div class="qbtn" id="qaSticker"><span class="i"><i class="ich" data-i="sticker"></i>Sticker<input type="file" accept="image/*" id="quickImg" style="display:none"></div>
-<div class="qbtn" id="qaMore"><span class="i"><i class="ich" data-i="plus"></i>More…</div>
+<button type="button" class="qbtn" id="qaText"><span class="i"><i class="ich" data-i="type"></i></span><span class="ql">Text</span></button>
+<button type="button" class="qbtn" id="qaBanner"><span class="i"><i class="ich" data-i="banner"></i></span><span class="ql">Banner</span></button>
+<button type="button" class="qbtn" id="qaBadge"><span class="i"><i class="ich" data-i="badge"></i></span><span class="ql">Badge</span></button>
+<button type="button" class="qbtn" id="qaTape"><span class="i"><i class="ich" data-i="tape"></i></span><span class="ql">Tape</span></button>
+<button type="button" class="qbtn" id="qaSticker"><span class="i"><i class="ich" data-i="sticker"></i></span><span class="ql">Image</span></button><input type="file" accept="image/*" id="quickImg" style="display:none">
+<button type="button" class="qbtn" id="qaMore"><span class="i"><i class="ich" data-i="plus"></i></span><span class="ql">More…</span></button>
 </div>
 <div class="prodctl" id="prodCtl" style="display:none">
 <div class="st" style="margin-bottom:6px">📦 Product Image</div>
@@ -644,9 +662,9 @@ html[data-theme="light"] .wcard span,html[data-theme="light"] .wfp div:last-chil
 <div class="hint" style="margin:0">Tip: you can also drag the empty canvas area to pan.</div>
 <div class="prodacts"><button class="linkbtn" id="pReset" type="button">↺ Reset zoom &amp; position</button><button class="linkbtn danger" id="pRemove2" type="button">✕ Remove product</button></div>
 </div>
-<div class="st">Layer Stack <span style="color:var(--tx3);font-weight:500">(top = front · double-click name to rename)</span></div>
-<div id="layerList"></div>
 <div class="props" id="props"><div class="hint">Select a layer to edit its properties. Click elements on the canvas to select, drag to move.</div></div>
+<div class="st">Layers <span style="color:var(--tx3);font-weight:500;letter-spacing:.04em;text-transform:none">· top = front · double-click to rename</span></div>
+<div id="layerList"></div>
 </div>
 <div class="tp" id="tp-ai">
 <div class="st">Recreate From Reference<i class="tipdot" data-tip="Upload any frame — or a finished ad (frame over a product photo). Both work." data-tip-pos="left">i</i></div>
@@ -1725,6 +1743,21 @@ function inkOn(bg,pref,min){if(pref&&contrast(pref,bg)>=(min||3.2))return pref;r
 function isGoldish(h){const[r,g,b]=hex2rgb(h);const mx=Math.max(r,g,b),mn=Math.min(r,g,b);if(mx-mn<40||mx<150)return false;let hu=mx===r?((g-b)/(mx-mn))*60:mx===g?(2+(b-r)/(mx-mn))*60:(4+(r-g)/(mx-mn))*60;if(hu<0)hu+=360;return hu>=35&&hu<=58}
 function mkPal(bg1,bg2,acc,gold){const ban=gold?[shade(acc,-.4),acc,tint(acc,.55)]:[acc,shade(acc,-.18)];
 return{bg1,bg2,acc,gold:!!gold,ban,banInk:inkOn(acc,gold?shade(bg1,-.15):null,4.2),ink:inkOn(bg1),hi:inkOn(bg1,acc,3)}}
+function hexHsl(h){const[r,g,b]=hex2rgb(h).map(v=>v/255);const mx=Math.max(r,g,b),mn=Math.min(r,g,b);let H=0,S2=0;const L2=(mx+mn)/2;
+if(mx!==mn){const d=mx-mn;S2=L2>.5?d/(2-mx-mn):d/(mx+mn);H=(mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4)/6}return[H,S2,L2]}
+function hslHex(H,S2,L2){const f=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;return t<1/6?p+(q-p)*6*t:t<1/2?q:t<2/3?p+(q-p)*(2/3-t)*6:p};
+if(!S2)return rgb2hex(L2*255,L2*255,L2*255);const q=L2<.5?L2*(1+S2):L2+S2-L2*S2,p=2*L2-q;return rgb2hex(f(p,q,H+1/3)*255,f(p,q,H)*255,f(p,q,H-1/3)*255)}
+const mixHex=(a,b,t)=>{const A=hex2rgb(a),B=hex2rgb(b);return rgb2hex(A[0]+(B[0]-A[0])*t,A[1]+(B[1]-A[1])*t,A[2]+(B[2]-A[2])*t)};
+const _cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+function vivid(h,l){const[H,S2,L2]=hexHsl(h);if(S2<.08)return h;return hslHex(H,Math.max(.78,S2),l==null?_cl(L2,.42,.56):l)}
+/* tone recipes: value = loud & saturated · mid = brand as-is · luxe = deep, desaturated, metallic gold */
+function tonePal(bg1,bg2,acc,gold,tone){
+if(tone==="value"){const light=_lum(bg1)>.6,[,,L2]=hexHsl(bg1);const b1=light?bg1:vivid(bg1,_cl(L2,.3,.46));let a=vivid(acc,.55);if(contrast(a,b1)<2.2)a="#ffd23f";return mkPal(b1,shade(b1,-.2),a,false)}
+if(tone==="luxe"){const g=mixHex(isGoldish(acc)?acc:"#d4af37",acc,.12);
+if(_lum(bg1)>.6){const b1=mixHex(bg1,"#f4efe4",.7);return mkPal(b1,shade(b1,-.05),shade(g,-.32),true)}
+const[H,S2]=hexHsl(bg1);return mkPal(hslHex(H,S2*.55,.1),hslHex(H,S2*.5,.065),g,true)}
+return mkPal(bg1,bg2,acc,gold)}
+const TONE_TEX={value:t=>(!t||t==="grain")?"dots":t,mid:t=>t,luxe:t=>["dots","grid","stripes","rays"].includes(t)?"grain":(t||"grain")};
 function parseOffer(o){const m=String(o||"").match(/^(.*?)(\d+\s?%)\s*(OFF)?\s*$/i);return m?{small:(m[1].trim()||"FLAT").toUpperCase(),pct:m[2].replace(/\s/g,"")}:null}
 function titleCase(s){return String(s).toLowerCase().replace(/(^|\s)\S/g,t=>t.toUpperCase())}
 function offerBlock(X,o,c,f,s,dx,dy,mw){if(!o)return null;const p=parseOffer(o);
@@ -2182,11 +2215,11 @@ function fontsFor(o,a,tone,seed){const set=GFONTS[o.grp];let h=set[seed%set.leng
 if(tone==="luxe")h=seed%2?"'Cormorant Garamond',serif":"'Playfair Display',serif";
 if(isScript(h)&&!SCRIPT_OK.includes(a.id))h=set.find(f=>!isScript(f));
 const u=isScript(h)?"'Oswald',sans-serif":h;
-return{h,u,b:["'Montserrat',sans-serif","'Poppins',sans-serif","'Inter',sans-serif"][seed%3],it:/Playfair|Cormorant/.test(h)&&seed%2===0,script:"'Dancing Script',cursive"}}
+return{h,u,b:["'Montserrat',sans-serif","'Poppins',sans-serif","'Inter',sans-serif"][seed%3],it:/Playfair|Cormorant/.test(h)&&(tone==="luxe"||seed%2===0),script:"'Dancing Script',cursive"}}
 function genTemplate(o,a,pl,ind,tone,seed,k){k=k||0;const D=o.D.slice(k%o.D.length).concat(o.D.slice(0,k%o.D.length));
 const offer=o.offers[(k*2+seed)%o.offers.length];const M=o.M.slice(k%o.M.length).concat(o.M.slice(0,k%o.M.length));
-const X={P:mkPal(pl.bg1,pl.bg2,pl.acc,pl.g),C:{head:o.heads[(k+seed)%o.heads.length],offer,sub:o.subs[(k*3+seed)%o.subs.length],trust:ind.trust[(k+seed)%ind.trust.length],cat:ind.cats[(k+seed)%ind.cats.length],cta:CTAS[tone][(k+seed)%3],date:o.date,code:codeFor(o,offer)},
-F:fontsFor(o,a,tone,seed+k),D,M,hang:o.hang,badge:o.badge,badgeFlat:o.badge.replace("\n"," "),indian:o.indian,grp:o.grp,tex:o.tex,tone,seed:seed%997+1,occLabel:o.label};
+const X={P:tonePal(pl.bg1,pl.bg2,pl.acc,pl.g,tone),C:{head:o.heads[(k+seed)%o.heads.length],offer,sub:o.subs[(k*3+seed)%o.subs.length],trust:ind.trust[(k+seed)%ind.trust.length],cat:ind.cats[(k+seed)%ind.cats.length],cta:CTAS[tone][(k+seed)%3],date:o.date,code:codeFor(o,offer)},
+F:fontsFor(o,a,tone,seed+k),D,M,hang:o.hang,badge:o.badge,badgeFlat:o.badge.replace("\n"," "),indian:o.indian,grp:o.grp,tex:TONE_TEX[tone](o.tex),tone,seed:seed%997+1,occLabel:o.label};
 return{name:`${o.label} · ${a.name} · ${pl.n}`,cat:o.label,chip:GROUPCHIP[o.grp],occ:o.id,ind:ind.id,tone,lay:a.id,
 tags:[o.label,a.name,pl.n,ind.label,tone,GROUPCHIP[o.grp]].join(" "),layers:a.fn(X).filter(Boolean)}}
 /* each category draws from its own design family first, then a few shared structures */
@@ -2334,6 +2367,8 @@ document.getElementById("haBlank").onclick=()=>openWizard();
 document.getElementById("homeBtn").onclick=()=>{if(history.state&&history.state.v){history.back()}else{if(curView()==="editor")autosavePrevious();applyView(curView()==="editor"?"gallery":"home")}};
 /* ⋯ menu */
 const moreMenu=document.getElementById("moreMenu");
+moreMenu.addEventListener("click",e=>{const it=e.target.closest(".mitem");if(it&&it.tagName!=="LABEL")setTimeout(()=>moreMenu.classList.remove("show"),0)});
+document.getElementById("impJson").addEventListener("change",()=>moreMenu.classList.remove("show"));
 document.getElementById("moreBtn").onclick=e=>{e.stopPropagation();moreMenu.classList.toggle("show")};
 document.addEventListener("click",e=>{if(!moreMenu.contains(e.target))moreMenu.classList.remove("show")});
 document.getElementById("dupDesignBtn").onclick=()=>{
@@ -2392,7 +2427,14 @@ document.getElementById("surpriseBtn").onclick=surpriseMe;
 document.getElementById("rerollBtn").onclick=surpriseMe;
 
 /* ============ ELEMENTS TAB ============ */
-function addLayer(l){S.layers.push(l);S.sel=l;render();buildLayerList();buildProps();switchTab("layers");histNow();toast("＋ "+(l.name||l.type)+" added — drag it into place")}
+function _ovl(a,b){return a[0]<b[0]+b[2]&&b[0]<a[0]+a[2]&&a[1]<b[1]+b[3]&&b[1]<a[1]+a[3]}
+function placeFree(l){render();const bb=l._bb;if(!bb)return;const others=S.layers.filter(o=>o!==l&&o._bb&&o.type!=="bg"&&!o.hidden);
+if(!others.some(o=>_ovl(bb,o._bb)))return;
+const cx=bb[0]+bb[2]/2,cy=bb[1]+bb[3]/2,x0=l.x||0,y0=l.y||0;
+for(const ty of [.47,.3,.64,.2,.78]){const dx=K/2-cx,dy=K*ty-cy;const nb=[bb[0]+dx,bb[1]+dy,bb[2],bb[3]];
+if(!others.some(o=>_ovl(nb,o._bb))){l.x=x0+dx;l.y=y0+dy;return}}
+l.x=x0+(K/2-cx);l.y=y0+(K*.47-cy)}
+function addLayer(l){S.layers.push(l);S.sel=l;placeFree(l);render();buildLayerList();buildProps();switchTab("layers");histNow();toast("＋ "+(l.name||l.type)+" added — drag it into place")}
 function duplicateLayer(l){if(!l||l.type==="bg")return;const c=JSON.parse(JSON.stringify(serializeLayers([l])[0]));c.id=nid();c.name=(c.name||c.type)+" copy";c.x=(c.x||0)+30;c.y=(c.y||0)+30;if(c.role==="logo"&&S.logo){c.imgObj=S.logo;c.placeholder=false}S.layers.push(c);S.sel=c;render();buildLayerList();buildProps();histNow();toast("⧉ Duplicated")}
 function egBtn(i,label,accent){const d=document.createElement("div");d.className="elbtn";d.innerHTML=`<span class="i"${accent?` style="color:${accent}"`:""}>${i}</span>${label}`;return d}
 function egAdd(host,i,label,accent,fn){const b=egBtn(i,label,accent);b.onclick=fn;document.getElementById(host).appendChild(b)}
@@ -2528,7 +2570,8 @@ function buildProps(){
 updateSelbar();
 const p=document.getElementById("props");p.innerHTML="";
 const l=S.sel;
-if(!l){p.innerHTML='<div class="hint">Select a layer to edit. Click canvas elements or layer rows above.</div>';return}
+if(!l){p.innerHTML='<div class="hint">Select a layer to edit. Click an element on the canvas or a layer below.</div>';return}
+const _tc=p.closest('.tc');if(_tc&&!buildProps._keep)_tc.scrollTo({top:0,behavior:'smooth'});
 const add=h=>{const d=document.createElement("div");d.innerHTML=h;p.appendChild(d);return d};
 add(`<div class="st" style="display:flex;align-items:center;gap:6px">${ICON.pencil} ${String(l.name||l.type).replace(/</g,"&lt;")}</div>`);
 const slider=(label,key,min,max,step,obj)=>{const dv=obj[key]??(key==="opacity"||key==="texA"?1:min);const d=add(`<div class="sr"><span>${label}</span><input type="range" min="${min}" max="${max}" step="${step}" value="${dv}"><span class="vv">${dv}</span></div>`);bindNum(d.querySelector("input"),obj,key)};
@@ -2798,8 +2841,8 @@ document.getElementById("newFrameBtn").onclick=()=>{
 autosavePrevious();
 S.layers=[L({type:"bg",name:"Border",cols:["#1a1a2e","#2e2e52"],inset:{t:60,r:60,b:60,l:60},radius:6}),logoSlot()];
 if(S.logo){const slot=S.layers.find(l=>l.role==="logo");slot.imgObj=S.logo;slot.placeholder=false}
-S.sel=null;S.designName="Untitled Frame";S.dirty=false;render();buildLayerList();buildProps();HIST.push();
-toast("🆕 Blank frame — add elements from the Elements tab")};
+S.sel=null;S.designName="Untitled Frame";S.dirty=false;render();buildLayerList();buildProps();HIST.push();{const pv=document.getElementById("pvLabel");pv.innerHTML=ICON.pencil+'<span>Editing ·</span><span class="pvname">Untitled Frame</span>';pv.title="Untitled Frame";}document.getElementById("rerollBtn").style.display="none";
+toast("🆕 Blank frame — add text, banners & badges from the Add tab")};
 
 /* ============ RECREATE — frame extractor + look-alike (100% client-side) ============ */
 let aiImgEl=null,aiFileName="reference",aiVariant=0,aiMime="image/png";
@@ -3132,12 +3175,17 @@ const occById=id=>OCCS.find(o=>o.id===id)||OCCS[0];
 const indById=id=>INDS.find(i=>i.id===id)||INDS[0];
 function wzDefaults(){const o=occById(WZ.occ),ind=indById(WZ.ind);
 WZ.copy={head:o.heads[0],offer:WZ.goal==="brand"?"":o.offers[0],sub:o.subs[0],trust:ind.trust[0],cat:ind.cats[0],cta:CTAS[WZ.tone][0],date:o.date,code:codeFor(o,o.offers[0])}}
-function wzCtx(variant){const o=occById(WZ.occ);let P;
-if(variant===1)P=mkPal(tint(WZ.p,.9),tint(WZ.p,.8),contrast(WZ.p,tint(WZ.p,.9))>3?WZ.p:WZ.a,false);
-else if(variant===2)P=mkPal("#141416","#1d1d22",WZ.a,isGoldish(WZ.a));
-else P=mkPal(WZ.p,shade(WZ.p,-.22),WZ.a,isGoldish(WZ.a));
+const TONE_FP={value:3,mid:0,luxe:2};
+const TONE_VARIANTS={value:["Bold brand","Pop","Black & bright"],mid:["Brand colours","Light","Dark"],luxe:["Deep & gold","Ivory","Noir"]};
+function wzPal(v){const p=WZ.p,a=WZ.a,t=WZ.tone;
+if(t==="value"){if(v===1){const b=vivid(a,.5);return mkPal(b,shade(b,-.2),contrast("#ffd23f",b)>1.8?"#ffd23f":"#111111",false)}if(v===2)return mkPal("#111111","#1c1c1c",vivid(a,.55),false);return tonePal(p,shade(p,-.22),a,false,"value")}
+if(t==="luxe"){if(v===1)return tonePal("#f6f1e7","#ece4d4",a,false,"luxe");if(v===2)return mkPal("#0c0c0e","#161618",mixHex("#d4af37",a,.12),true);return tonePal(p,shade(p,-.22),a,false,"luxe")}
+if(v===1)return mkPal(tint(WZ.p,.9),tint(WZ.p,.8),contrast(WZ.p,tint(WZ.p,.9))>3?WZ.p:WZ.a,false);
+if(v===2)return mkPal("#141416","#1d1d22",WZ.a,isGoldish(WZ.a));
+return mkPal(WZ.p,shade(WZ.p,-.22),WZ.a,isGoldish(WZ.a))}
+function wzCtx(variant){const o=occById(WZ.occ);const P=wzPal(variant);
 const fp=FONTPAIRS[WZ.fp],k=(WZ.seed+variant)%o.D.length;
-return{P,C:Object.assign({},WZ.copy,{code:codeFor(o,WZ.copy.offer)}),F:{h:fp[1],b:fp[2],u:isScript(fp[1])?"'Oswald',sans-serif":fp[1],it:false,script:"'Dancing Script',cursive"},D:o.D.slice(k).concat(o.D.slice(0,k)),M:o.M.slice(k%o.M.length).concat(o.M.slice(0,k%o.M.length)),hang:o.hang,badge:o.badge,badgeFlat:o.badge.replace("\n"," "),indian:o.indian,grp:o.grp,tex:variant===1?null:o.tex,tone:WZ.tone,seed:WZ.seed*13+variant*5,occLabel:o.label}}
+return{P,C:Object.assign({},WZ.copy,{code:codeFor(o,WZ.copy.offer)}),F:{h:fp[1],b:fp[2],u:isScript(fp[1])?"'Oswald',sans-serif":fp[1],it:WZ.tone==="luxe"&&/Playfair|Cormorant/.test(fp[1]),script:"'Dancing Script',cursive"},D:o.D.slice(k).concat(o.D.slice(0,k)),M:o.M.slice(k%o.M.length).concat(o.M.slice(0,k%o.M.length)),hang:o.hang,badge:o.badge,badgeFlat:o.badge.replace("\n"," "),indian:o.indian,grp:o.grp,tex:variant===1&&WZ.tone==="mid"?null:TONE_TEX[WZ.tone](o.tex),tone:WZ.tone,seed:WZ.seed*13+variant*5,occLabel:o.label}}
 function wzSpec(archId,variant){const a=ARCH.find(x=>x.id===archId)||ARCH[0];
 const layers=a.fn(wzCtx(variant||0)).filter(Boolean);
 if(S.logo)layers.forEach(l=>{if(l.role==="logo"){l.imgObj=S.logo;l.placeholder=false}});
@@ -3161,7 +3209,7 @@ toast("🎨 Colours picked from your logo","ok");wzRender()}
 function wzSetLogo(img){if(S.logo&&S.logo!==img)_revoke(S.logo);S.logo=img;
 S.layers.forEach(l=>{if(l.role==="logo"){l.imgObj=img;l.placeholder=false}});
 document.getElementById("lla").textContent="✓ Logo · change";document.getElementById("luz").classList.add("ok");document.getElementById("luzw").classList.add("has");render();buildLayerList()}
-function openWizard(){WZ.step=0;WZ.p=BK.p;WZ.a=BK.s;wzDefaults();document.getElementById("wizBg").classList.add("show");wzRender()}
+function openWizard(){WZ.step=0;WZ.p=BK.p;WZ.a=BK.s;WZ.fp=TONE_FP[WZ.tone];wzDefaults();document.getElementById("wizBg").classList.add("show");wzRender()}
 function closeWizard(){document.getElementById("wizBg").classList.remove("show")}
 function wzRender(){const body=document.getElementById("wizBody");body.innerHTML="";body.scrollTop=0;
 document.getElementById("wizTitle").textContent=WSTEPS[WZ.step];
@@ -3176,14 +3224,14 @@ function wSeg(opts,val,onch){const w=document.createElement("div");w.className="
 function wzGoal(body){
 const g=document.createElement("div");g.className="wgrid";body.appendChild(g);
 GOALS.forEach(([id,ic,t,s,occ,grp])=>{const c=document.createElement("div");c.className="wcard"+(WZ.goal===id?" on":"");c.innerHTML=`<div class="wi">${ic}</div><b>${t}</b><span>${s}</span>`;
-c.onclick=()=>{WZ.goal=id;WZ.occ=occ;if(id==="brand")WZ.tone="luxe";else if(id==="sale")WZ.tone="value";else if(WZ.tone==="luxe"&&id!=="launch")WZ.tone="mid";wzDefaults();wzRender()};g.appendChild(c)});
+c.onclick=()=>{WZ.goal=id;WZ.occ=occ;if(id==="brand")WZ.tone="luxe";else if(id==="sale")WZ.tone="value";else if(WZ.tone==="luxe"&&id!=="launch")WZ.tone="mid";WZ.fp=TONE_FP[WZ.tone];wzDefaults();wzRender()};g.appendChild(c)});
 const goal=GOALS.find(x=>x[0]===WZ.goal);const grps=goal[5]==="F"?["F","M","Se"]:goal[5]==="S"?["S"]:["E","Se","M"];
 wLab(body,"Occasion");body.appendChild(wSel(OCCS.filter(o=>grps.includes(o.grp)).map(o=>[o.id,o.label]),WZ.occ,v=>{WZ.occ=v;wzDefaults()}));
 wLab(body,"What do you sell?");body.appendChild(wSel(INDS.map(i=>[i.id,i.label]),WZ.ind,v=>{WZ.ind=v;wzDefaults()}));
-wLab(body,"Brand tone");body.appendChild(wSeg([["value","Value · loud offers"],["mid","Balanced"],["luxe","Luxe · quiet"]],WZ.tone,v=>{WZ.tone=v;WZ.copy.cta=CTAS[v][0];wzRender()}))}
+wLab(body,"Brand tone");body.appendChild(wSeg([["value","Value · loud offers"],["mid","Balanced"],["luxe","Luxe · quiet"]],WZ.tone,v=>{WZ.tone=v;WZ.fp=TONE_FP[v];WZ.copy.cta=CTAS[v][0];wzRender()}))}
 function wzStructure(body){
 const g=document.createElement("div");g.className="wthumbs";body.appendChild(g);
-const order=LAY_POOLS[occById(WZ.occ).grp].map(id=>ARCH_BY[id]);if(!order.some(a=>a.id===WZ.arch))WZ.arch=order[0].id;
+const rank=a=>a.tone===WZ.tone?0:a.tone==="any"?1:2;const order=LAY_POOLS[occById(WZ.occ).grp].map(id=>ARCH_BY[id]).map((a,i)=>[a,i]).sort((x,y)=>rank(x[0])-rank(y[0])||x[1]-y[1]).map(x=>x[0]);if(!order.some(a=>a.id===WZ.arch))WZ.arch=order[0].id;
 order.forEach(a=>{const d=miniThumb(wzSpec(a.id,0),240,WZ.arch===a.id,a.name,()=>{WZ.arch=a.id;g.querySelectorAll(".wthumb").forEach(x=>x.classList.remove("on"));d.classList.add("on")});g.appendChild(d)})}
 function wzPreview(host){host.innerHTML="";host.appendChild(miniThumb(wzSpec(WZ.arch,0),300,false,"Preview"))}
 let _wzT=null;function wzLater(fn){clearTimeout(_wzT);_wzT=setTimeout(fn,180)}
@@ -3219,12 +3267,12 @@ function wzPick(body){
 const go=spec=>{autosavePrevious();BK.p=WZ.p;BK.s=WZ.a;store.set("fs_brand",BK);document.getElementById("bkP").value=BK.p;document.getElementById("bkS").value=BK.s;
 applyTemplate(spec);closeWizard();toast("✓ Your frame is ready — click anything to fine-tune")};
 const a=ARCH.find(x=>x.id===WZ.arch)||ARCH[0];
-wLab(body,"Your structure · three colour treatments");
+wLab(body,"Your structure · three "+({value:"loud",mid:"colour",luxe:"luxe"}[WZ.tone])+" treatments");
 const g1=document.createElement("div");g1.className="wthumbs big";body.appendChild(g1);
-["Brand colours","Light","Dark"].forEach((n,v)=>{const sp=wzSpec(a.id,v);g1.appendChild(miniThumb(sp,360,false,n,()=>go(sp)))});
+TONE_VARIANTS[WZ.tone].forEach((n,v)=>{const sp=wzSpec(a.id,v);g1.appendChild(miniThumb(sp,360,false,n,()=>go(sp)))});
 wLab(body,"Same look, other structures");
 const g2=document.createElement("div");g2.className="wthumbs";body.appendChild(g2);
-const pool=LAY_POOLS[occById(WZ.occ).grp].map(id=>ARCH_BY[id]).filter(x=>x.id!==a.id);const st=(WZ.seed*5)%pool.length;
+const pool=LAY_POOLS[occById(WZ.occ).grp].map(id=>ARCH_BY[id]).filter(x=>x.id!==a.id&&(x.tone===WZ.tone||x.tone==="any"));const st=(WZ.seed*5)%pool.length;
 pool.slice(st).concat(pool.slice(0,st)).slice(0,6).forEach(x=>{const sp=wzSpec(x.id,0);g2.appendChild(miniThumb(sp,240,false,x.name,()=>go(sp)))});
 const row=document.createElement("div");row.className="wrow";
 const sh=document.createElement("button");sh.className="btn btn-s";sh.type="button";sh.textContent="🎲 Shuffle decorations & picks";sh.onclick=()=>{WZ.seed++;wzRender()};
