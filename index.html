@@ -534,6 +534,10 @@ button.pvchip:hover{border-color:var(--acbd);background:var(--acb)}
 .pvchip .pvedit{display:inline-flex;margin-left:6px;opacity:.75}
 .pvchip .pvedit .ic{width:13px;height:13px;color:var(--ac2,var(--ac))}
 button.pvchip:hover .pvedit{opacity:1}
+/* ── Product placement buttons ── */
+.wfit{display:flex;gap:4px;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:3px;margin:2px 0 0}
+.wfit button{flex:1;border:0;background:transparent;border-radius:8px;padding:7px 4px;font:inherit;font-size:11px;font-weight:700;color:var(--tx2);cursor:pointer}
+.wfit button.on{background:var(--panel);color:var(--tx);box-shadow:inset 0 0 0 1px var(--bdh)}
 /* v6: facets, paging, wizard */
 .facets{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:-4px 0 14px}
 .facets select{padding:7px 10px;border-radius:10px;border:1px solid var(--bd);background:var(--panel);color:var(--tx);font:inherit;font-size:12px;font-weight:600;cursor:pointer;max-width:220px}
@@ -697,9 +701,11 @@ button.pvchip:hover .pvedit{opacity:1}
 </div>
 <div class="prodctl" id="prodCtl" style="display:none">
 <div class="st" style="margin-bottom:6px">📦 Product Image</div>
-<div class="sr"><span>Zoom</span><input type="range" min="1" max="2.5" step=".02" value="1" id="pZoom"><span id="pZoomV">1</span></div>
-<div class="sr"><span>Pan X</span><input type="range" min="-400" max="400" step="4" value="0" id="pPanX"><span id="pPanXV">0</span></div>
-<div class="sr"><span>Pan Y</span><input type="range" min="-400" max="400" step="4" value="0" id="pPanY"><span id="pPanYV">0</span></div>
+<div class="wfit" id="prodFit" role="group" aria-label="Product placement"><button type="button" data-fit="fit">Fit in window</button><button type="button" data-fit="fill">Fill window</button><button type="button" data-fit="full">Full canvas</button></div>
+<div class="hint" style="margin:6px 0 10px">Full canvas is how Meta places your catalog photo behind the frame. Fit / Fill help you preview it inside the frame's window.</div>
+<div class="sr"><span>Zoom</span><input type="range" min=".2" max="3" step=".01" value="1" id="pZoom"><span id="pZoomV">1</span></div>
+<div class="sr"><span>Pan X</span><input type="range" min="-540" max="540" step="4" value="0" id="pPanX"><span id="pPanXV">0</span></div>
+<div class="sr"><span>Pan Y</span><input type="range" min="-540" max="540" step="4" value="0" id="pPanY"><span id="pPanYV">0</span></div>
 <div class="hint" style="margin:0">Tip: you can also drag the empty canvas area to pan.</div>
 <div class="prodacts"><button class="linkbtn" id="pReset" type="button">↺ Reset zoom &amp; position</button><button class="linkbtn danger" id="pRemove2" type="button">✕ Remove product</button></div>
 </div>
@@ -1321,7 +1327,7 @@ else if(l.arch){const ar=Math.min(iw2/2,l.archH||330);sp.moveTo(i.l+2,i.t+ar);sp
 else if(l.win==="circle"){sp.arc(K/2,l.cy||K/2,(l.r||360)-2,0,Math.PI*2)}
 else rrP(sp,i.l+2,i.t+2,iw2-4,ih2-4,Math.max(0,(l.radius||0)-2));
 c.stroke(sp)}
-c.restore();l._bb=null;l._inset=i;}
+c.restore();l._bb=null;l._inset=i;l._path=p;}
 function bannerPath(c,shape,x,y,w,h){
 const p=new Path2D();
 if(shape==="taper"){const e=Math.min(h*.6,w*.12);p.moveTo(x,y+h/2);p.lineTo(x+e,y);p.lineTo(x+w-e,y);p.lineTo(x+w,y+h/2);p.lineTo(x+w-e,y+h);p.lineTo(x+e,y+h);p.closePath()}
@@ -1399,7 +1405,7 @@ function drawImgL(c,l,exportMode){
 if(l.role==="logo"&&!l.imgObj&&S.logo){l={...l,imgObj:S.logo,placeholder:false};const o=arguments[1];drawImgL(c,l,exportMode);o._bb=l._bb;return}
 if(l.placeholder&&!l.imgObj){if(exportMode){l._bb=null;return}
 c.save();c.globalAlpha=.7;c.setLineDash([8,6]);c.strokeStyle="#aaa";c.lineWidth=3;
-c.strokeRect(l.x,l.y,l.wd,l.wd*.5);c.font="600 22px 'DM Sans',sans-serif";c.fillStyle="#999";c.textAlign="center";c.textBaseline="middle";c.fillText("LOGO",l.x+l.wd/2,l.y+l.wd*.25);c.setLineDash([]);c.restore();
+c.strokeRect(l.x,l.y,l.wd,l.wd*.5);c.font="700 "+Math.max(14,Math.min(24,l.wd*.12))+"px 'DM Sans',sans-serif";c.fillStyle="#9a9aa6";c.textAlign="center";c.textBaseline="middle";c.fillText("+ ADD LOGO",l.x+l.wd/2,l.y+l.wd*.25);c.setLineDash([]);c.restore();
 l._bb=[l.x,l.y,l.wd,l.wd*.5];return}
 if(!l.imgObj){l._bb=null;return}
 const ratio=l.imgObj.height/l.imgObj.width;const hh=l.wd*ratio;
@@ -1465,6 +1471,7 @@ if(opts.guides){c.save();c.strokeStyle="#e8b34b";c.lineWidth=2.5;c.setLineDash([
 if(opts.guides.v){c.beginPath();c.moveTo(K/2,0);c.lineTo(K/2,K);c.stroke()}
 if(opts.guides.h){c.beginPath();c.moveTo(0,K/2);c.lineTo(K,K/2);c.stroke()}
 c.setLineDash([]);c.restore()}
+if(opts.sel&&opts.sel.type==="bg"&&opts.sel._path&&!opts.sel.locked){c.save();c.fillStyle=alpha(uiAccent(),.14);if(!opts.sel.fillNone)c.fill(opts.sel._path,"evenodd");c.strokeStyle=uiAccent();c.lineWidth=4;c.setLineDash([12,8]);c.stroke(opts.sel._path);c.setLineDash([]);c.restore()}
 if(opts.sel&&opts.sel._bb){const b=opts.sel._bb;c.save();c.strokeStyle=uiAccent();c.lineWidth=3;c.setLineDash([10,7]);c.strokeRect(b[0],b[1],b[2],b[3]);c.setLineDash([]);
 const canT=opts.sel.type!=="bg"&&!opts.sel.locked;
 if(canT){
@@ -2304,7 +2311,7 @@ const th=document.createElement("div");th.className="thumb";
 const cc=document.createElement("canvas");cc.width=TS;cc.height=TS;
 const n=document.createElement("div");n.className="tn";n.textContent=spec.name;
 th.appendChild(cc);th.appendChild(n);
-PAINTQ.push(()=>{if(!th.isConnected){th.classList.add("ready");return}try{renderScene(tctx,spec.layers,{thumb:true,img:S.img,imgX:0,imgY:0,imgScale:1});const g=cc.getContext("2d");g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";g.drawImage(tcv,0,0,TS,TS)}catch(e){}th.classList.add("ready")});
+PAINTQ.push(()=>{if(!th.isConnected){th.classList.add("ready");return}try{renderScene(tctx,spec.layers,{thumb:true,img:S.gImg,imgX:0,imgY:0,imgScale:1});const g=cc.getContext("2d");g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";g.drawImage(tcv,0,0,TS,TS)}catch(e){}th.classList.add("ready")});
 if(!_painting)pumpPaint();
 th.onclick=()=>{applyTemplate(spec)};
 if(myIdx!==undefined){
@@ -2323,7 +2330,7 @@ function navTo(v){if(curView()===v)return;
 if(curView()==="editor")autosavePrevious();
 try{history.pushState({v},"")}catch(e){}
 applyView(v)}
-function applyView(v){setView(v);
+function applyView(v){if(v!=="editor"&&S.img!==(S.gImg||null)){S.img=S.gImg||null;S.imgX=0;S.imgY=0;S.imgScale=1;S.dragImg=false;syncProductUI()}setView(v);
 if(v==="home"){refreshHome();pulse(".home-wrap")}
 else if(v==="gallery"){refreshGallery();pulse(".gal-wrap")}
 else pulse(".app")}
@@ -2337,8 +2344,9 @@ applyView(v)});
 function applyTemplate(spec,opts={}){
 if(!opts.noAutosave)autosavePrevious();
 S.layers=reviveLayers(JSON.parse(JSON.stringify(spec.layers)));
+S.img=S.gImg||null;S.imgFit=S.imgFit||"fit";S.imgX=0;S.imgY=0;S.imgScale=1;
 S.sel=null;S.designName=spec.name||"Untitled Frame";S.dirty=false;
-render();buildLayerList();buildProps();HIST.push(opts.noSession);
+if(S.img)fitProduct(S.imgFit,true);syncProductUI();render();buildLayerList();buildProps();HIST.push(opts.noSession);
 if(!S.designName.startsWith("✨ Surprise")){const rb=document.getElementById("rerollBtn");if(rb)rb.style.display="none"}
 setPvLabel(S.designName);
 switchTab("layers");if(!opts.stayHome)showEditor();
@@ -2371,17 +2379,35 @@ host.appendChild(sel("ind","Industry",INDS.map(i=>[i.id,i.label])));
 host.appendChild(sel("tone","Tone",[["value","Value · loud offers"],["mid","Mid · balanced"],["luxe","Luxe · quiet"]]));
 host.appendChild(sel("lay","Layout",ARCH.map(a=>[a.id,a.name])));
 const n=document.createElement("span");n.className="gcount";n.id="galCount";host.appendChild(n);}
+const SYN=[["diwali","deepavali","deepawali","dipawali","festival of lights","diya"],["christmas","xmas","x-mas","santa","noel"],["new year","newyear","nye"],["holi","colour","color","rang"],["eid","ramadan","ramzan","chand raat"],["raksha bandhan","rakhi","raksha","sibling","brother","sister"],["navratri","garba","dandiya"],["durga puja","pujo","durga"],["wedding","shaadi","shadi","bridal","bride","marriage"],["sale","discount","offer","deal","deals","off","savings","markdown","price drop"],["clearance","stock clearance","everything must go"],["luxe","luxury","premium","elegant","classy","royal","quiet"],["value","loud","bold","budget"],["minimal","clean","simple","minimalist"],["free shipping","free delivery","delivery","cod","cash on delivery","shipping"],["bestseller","best seller","popular","top rated","trending","favourite","favorite"],["new launch","launch","new arrival","arrival","just launched","new in"],["valentine","love","heart","romance","couple"],["mother's day","mothers day","mother","mom","mum","maa"],["father's day","fathers day","father","dad","papa"],["summer","sun","beach","heat"],["monsoon","rain","rainy"],["winter","cold","snow","cosy","cozy"],["back to school","school","student","stationery"],["independence day","independence","15 august","azadi","freedom","tiranga"],["republic day","republic","26 january"],["black friday","blackfriday","bf"],["cyber monday","cyber"],["bogo","buy 1 get 1","buy one get one","b1g1","combo","buy 2 get 1"],["flash sale","flash","hurry","limited time","countdown","urgent"],["fashion","apparel","clothing","kurta","kurtas","dress","dresses","ethnic","saree","clothes"],["beauty","skincare","skin care","cosmetics","makeup","lipstick","haircare"],["electronics","gadget","gadgets","tech","earbuds","phone","mobile"],["home","decor","décor","furniture","kitchen","living","cookware"],["food","snacks","sweets","gourmet","grocery","mithai"],["jewellery","jewelry","jewel","earrings","necklace","rings"],["footwear","shoes","sneakers","sandals","heels"],["kids","baby","toys","children","kidswear"],["wellness","ayurveda","ayurvedic","herbal","health"],["pets","pet","dog","cat"],["onam","kerala","pookalam"],["pongal","sankranti","makar sankranti","kite","harvest"],["lohri","bonfire"],["ganesh chaturthi","ganesh","ganpati","ganapati","bappa"],["karwa chauth","karva chauth","karwa"],["dhanteras","dhan teras"],["dussehra","dasara","vijayadashami"],["friendship day","friendship","friends","bff","bestie"],["women's day","womens day","women","her"],["end of season","eoss","season sale"],["mega sale","mega","big sale","biggest sale"],["gold","golden","metallic"],["festive","festival","celebration","occasion"],["evergreen","always on","always-on","brand"]];
+const STOP=new Set(["for","the","and","a","an","of","with","frame","frames","template","templates","design","designs","ad","ads","meta","catalog"]);
+function lev1(a,b){if(Math.abs(a.length-b.length)>1)return false;let i=0,j=0,e=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;continue}if(++e>1)return false;if(a.length>b.length)i++;else if(b.length>a.length)j++;else{i++;j++}}return e+(a.length-i)+(b.length-j)<=1}
+const TONE_WORDS={value:"value loud bold",mid:"balanced mid",luxe:"luxe luxury quiet premium elegant"};
+function hayFor(t){const o=t.occ&&OCCS.find(x=>x.id===t.occ),n=t.ind&&INDS.find(x=>x.id===t.ind),a=t.lay&&ARCH_BY[t.lay];
+return [t.name,t.cat,t.tags,o&&[o.label,o.heads.join(" "),o.subs.join(" "),o.offers.join(" ")].join(" "),n&&[n.label,n.cats.join(" ")].join(" "),t.tone&&TONE_WORDS[t.tone],a&&a.name,t.chip].filter(Boolean).join(" ").toLowerCase()}
+function queryConcepts(q){q=q.toLowerCase().replace(/[^a-z0-9₹%'& -]+/g," ").replace(/\s+/g," ").trim();const concepts=[];
+for(const g of SYN)for(const term of g)if(term.includes(" ")&&q.includes(term)){concepts.push(g);q=q.replace(term," ");break}
+q.split(" ").filter(w=>w&&!STOP.has(w)).forEach(w=>{const alts=new Set([w]);for(const g of SYN)if(g.some(x=>x===w||(w.length>=4&&x.startsWith(w))||(x.length>=4&&!x.includes(" ")&&w.startsWith(x))))g.forEach(x=>alts.add(x));concepts.push([...alts].sort((a,b)=>(b===w)-(a===w)))});
+return concepts}
+function searchTemplates(list,q){const cs=queryConcepts(q);if(!cs.length)return{items:list,related:false};
+const scored=list.map(o=>{const t=o.t,h=t._hay||(t._hay=hayFor(t)),words=t._words||(t._words=h.split(/[^a-z0-9₹%★']+/).filter(Boolean));let score=0,hit=0;
+for(const alts of cs){let best=0;for(const a of alts){if(h.includes(a))best=Math.max(best,a===alts[0]?3:2);else if(a.length>=4&&!a.includes(" ")&&words.some(w=>w.length>=4&&lev1(w,a)))best=Math.max(best,1)}if(best)hit++;score+=best}
+return{o,score,hit}}).filter(x=>x.hit);
+const all=scored.filter(x=>x.hit===cs.length);const pick=all.length?all:scored;
+pick.sort((a,b)=>b.hit-a.hit||b.score-a.score);return{items:pick.map(x=>x.o),related:!all.length&&pick.length>0}}
+let _lastSearchNote="";
 function buildTemplateList(filter){
 const wrap=document.getElementById("tplList");wrap.innerHTML="";
 let items;
-if(filter){items=[...MYFRAMES.map((t,i)=>({t,i,my:true})),...TEMPLATES.map(t=>({t}))].filter(o=>(o.t.name+" "+o.t.cat+" "+(o.t.tags||"")).toLowerCase().includes(filter))}
+_lastSearchNote="";
+if(filter){const r=searchTemplates([...MYFRAMES.map((t,i)=>({t,i,my:true})),...TEMPLATES.map(t=>({t}))],filter);items=r.items;_lastSearchNote=r.related?" · closest matches for “"+filter+"”":" for “"+filter+"”"}
 else if(homeChip==="💾 My Frames"){items=MYFRAMES.map((t,i)=>({t,i,my:true}));
 if(!items.length){wrap.innerHTML='<div class="hint" style="grid-column:1/-1;padding:26px;text-align:center">Nothing saved yet — open any template and hit 💾 Save.</div>';return}}
 const facOn=!NOFACET.includes(homeChip)&&!!(FACET.occ||FACET.ind||FACET.tone||FACET.lay);
 const wide=!filter&&homeChip==="⭐ Featured"&&facOn;
 if(!filter&&homeChip!=="💾 My Frames")items=wide?TEMPLATES.filter(t=>t.lay).map(t=>({t})):TEMPLATES.filter(t=>inChip(t,homeChip)).map(t=>({t}));
 if(facOn)items=items.filter(({t})=>(!FACET.occ||t.occ===FACET.occ)&&(!FACET.ind||t.ind===FACET.ind)&&(!FACET.tone||t.tone===FACET.tone)&&(!FACET.lay||t.lay===FACET.lay));
-const cnt=document.getElementById("galCount");if(cnt)cnt.textContent=items.length.toLocaleString("en-IN")+" frames"+(wide?" · from the full library":"");
+const cnt=document.getElementById("galCount");if(cnt)cnt.textContent=items.length.toLocaleString("en-IN")+" frames"+(wide?" · from the full library":"")+_lastSearchNote;
 if(!items.length){wrap.innerHTML='<div class="hint" style="grid-column:1/-1;padding:26px;text-align:center">No frames match these filters.<br>Try clearing a filter, or search <b>diwali</b>, <b>sale</b>, <b>luxe</b>, <b>beauty</b>.</div>';return}
 for(let i=1;i<items.length;i++){const L0=items[i-1].t.lay;if(L0&&items[i].t.lay===L0){for(let j=i+1;j<items.length;j++)if(items[j].t.lay!==L0){[items[i],items[j]]=[items[j],items[i]];break}}}
 GAL={items,shown:0};moreTemplates()}
@@ -2456,8 +2482,8 @@ b.onclick=()=>{applyTemplate({name:ses.name,layers:ses.layers},{noAutosave:true}
 slot.appendChild(b)}
 /* WOW 1 — your product inside every template preview */
 document.getElementById("homeProd").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
-const img=new Image();img.onload=()=>{setProduct(img);if(curView()==="home")showGallery();else refreshGallery();
-toast("Every template now previews with YOUR product","ok")};
+const img=new Image();img.onload=()=>{setGlobalProduct(img);if(curView()==="home")showGallery();else refreshGallery();
+toast("Every template now previews with your product — photos added inside a frame stay with that frame","ok")};
 img.src=URL.createObjectURL(f)};
 /* WOW 2 — Surprise Me generator */
 const SURPRISE_DECOR=["confetti","firework","sunburst","crown","heart","ribbonBow","seal","paisley","balloon","sparkleCluster"];
@@ -2700,6 +2726,8 @@ colorArr("Color 1",l,0);colorArr("Color 2",l,1);
 if(l.kind==="waveRibbon")textIn("Ribbon text",l,"text");
 const rb=add(`<button class="btn btn-s" style="width:100%;padding:7px">🎲 Reshuffle</button>`);rb.querySelector("button").onclick=()=>{l.seed=Math.floor(Math.random()*999);render();markDirty()};
 }else if(l.type==="img"){
+if(l.role==="logo"){const d=add(S.logo?'<div class="wrow" style="margin:0 0 10px"><button type="button" class="btn btn-s" id="pLogoChange">Change logo</button><button type="button" class="linkbtn danger" id="pLogoRemove">Remove logo</button></div>':'<div style="margin:0 0 10px"><button type="button" class="btn btn-p" style="width:100%" id="pLogoUp">⬆ Upload your logo</button><div class="hint" style="margin:6px 0 0">Upload once — it\'s saved and placed on every frame automatically.</div></div>');
+const u=d.querySelector("#pLogoUp,#pLogoChange");if(u)u.onclick=()=>document.getElementById("li").click();const r=d.querySelector("#pLogoRemove");if(r)r.onclick=clearLogo}
 slider("Width","wd",50,700,2,l);slider("Rotate","rot",-45,45,1,l);slider("Opacity","opacity",0,1,.05,l);
 check("Sticker outline",l,"sticker");
 }
@@ -2712,6 +2740,10 @@ function hitTest(mx,my){
 for(let i=S.layers.length-1;i>=0;i--){const l=S.layers[i];
 if(l.hidden||l.locked||!l._bb)continue;const b=l._bb;
 if(mx>=b[0]&&mx<=b[0]+b[2]&&my>=b[1]&&my<=b[1]+b[3])return l}
+for(let i=S.layers.length-1;i>=0;i--){const l=S.layers[i];
+if(l.type!=="bg"||l.hidden||l.locked||!l._path)continue;
+if(l.fillNone){ctx.save();ctx.lineWidth=14;const hit=ctx.isPointInStroke(l._path,mx,my);ctx.restore();if(hit)return l;continue}
+if(ctx.isPointInPath(l._path,mx,my,"evenodd"))return l}
 return null}
 function evPos(e){const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*K/r.width,(e.clientY-r.top)*K/r.width]}
 /* ============ CANVAS INTERACTION ENGINE ============ */
@@ -2737,10 +2769,11 @@ S.tdata={cx:cx2,cy:cy2,d0:Math.max(12,Math.hypot(mx-cx2,my-cy2)),a0:Math.atan2(m
 sz0:SIZE_KEY[l.type]?l[SIZE_KEY[l.type][0]]:null,w0:l.w,h0:l.h,x0:l.x,y0:l.y};
 return}
 const l=hitTest(mx,my);
-if(l){S.sel=l;S.tmode="drag";S._dragMoved=false;
+if(l){S.sel=l;S.tmode=l.type==="bg"?null:"drag";S._dragMoved=false;
 S.dragOff={x:mx-(l.x||0),y:my-(l.y||0)};
 S.dragStart={lx:l.x||0,ly:l.y||0,bbcx:l._bb?l._bb[0]+l._bb[2]/2:mx,bbcy:l._bb?l._bb[1]+l._bb[3]/2:my};
-switchTab("layers");buildLayerList();buildProps();render()}
+switchTab("layers");buildLayerList();buildProps();render();
+S._logoAsk=l.role==="logo"&&!S.logo&&!l.imgObj;}
 else{S.sel&&(S.sel=null,buildLayerList(),buildProps(),render());
 if(S.img){S.dragImg=true;S.dragOff={x:mx-S.imgX,y:my-S.imgY}}}
 });
@@ -2775,6 +2808,7 @@ cv.style.cursor=h?(h.mode==="rotate"?"crosshair":"nwse-resize"):(hitTest(mx,my)?
 if(S.tmode&&S._dragMoved){markDirty();buildProps()}
 if(S.guides){S.guides=null;render()}
 S.tmode=null;S.dragImg=false;syncProdSliders()}));
+cv.addEventListener("click",()=>{if(S._logoAsk&&!S._dragMoved){S._logoAsk=false;document.getElementById("li").click();toast("Upload your logo — it's saved and used on every frame")}S._logoAsk=false});
 /* inline text editing */
 cv.addEventListener("dblclick",e=>{const[mx,my]=evPos(e);const l=hitTest(mx,my);
 if(!l)return;
@@ -2854,19 +2888,33 @@ if(x){x.value=S.imgX;document.getElementById("pPanXV").textContent=Math.round(S.
 if(y){y.value=S.imgY;document.getElementById("pPanYV").textContent=Math.round(S.imgY)}}
 /* ---- product image: set / clear (single source of truth for all product UI) ---- */
 function _revoke(im){try{if(im&&im.src&&im.src.startsWith("blob:"))URL.revokeObjectURL(im.src)}catch(e){}}
-function syncProductUI(){const on=!!S.img;
-document.getElementById("pla").textContent=on?"✓ Product · change":"Add product image";
+function syncProductUI(){const on=!!S.img,g=!!S.gImg;
+document.getElementById("pla").textContent=on?(S.img===S.gImg?"✓ Preview photo · change":"✓ Product · change"):"Add product image";
 document.getElementById("puz").classList.toggle("ok",on);document.getElementById("puzw").classList.toggle("has",on);
 document.getElementById("prodCtl").style.display=on?"block":"none";
-document.getElementById("homeProdLbl").innerHTML=on?"✓ Product set — <b>tap to change</b> photo":"<b>Upload your product photo</b> — preview it inside every template";
-document.getElementById("hpw").classList.toggle("has",on);syncProdSliders()}
-function setProduct(img){if(S.img&&S.img!==img)_revoke(S.img);S.img=img;S.imgX=0;S.imgY=0;S.imgScale=1;syncProductUI();render();refreshAllViews()}
-function clearProduct(){if(!S.img)return;_revoke(S.img);S.img=null;S.imgX=0;S.imgY=0;S.imgScale=1;S.dragImg=false;syncProductUI();render();refreshAllViews();if(curView()==="gallery")refreshGallery();toast("Product image removed — showing the transparent frame")}
-function resetProduct(){if(!S.img)return;S.imgX=0;S.imgY=0;S.imgScale=1;syncProdSliders();render();toast("↺ Product zoom & position reset")}
-document.getElementById("pi").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const img=new Image();img.onload=()=>{setProduct(img);toast("📦 Product image added")};img.src=URL.createObjectURL(f)};
-document.getElementById("pRemove").onclick=e=>{e.preventDefault();e.stopPropagation();clearProduct()};
-document.getElementById("pRemove2").onclick=clearProduct;
-document.getElementById("homeProdRm").onclick=e=>{e.preventDefault();e.stopPropagation();clearProduct()};
+document.getElementById("homeProdLbl").innerHTML=g?"✓ Previewing your product — <b>tap to change</b>":"<b>Upload your product photo</b> — preview it inside every template";
+document.getElementById("hpw").classList.toggle("has",g);
+document.querySelectorAll("#prodFit button").forEach(b=>b.classList.toggle("on",b.dataset.fit===S.imgFit));syncProdSliders()}
+/* the frame's product window: where the product shows through */
+function productWindow(){const bg=S.layers.find(l=>l.type==="bg"&&!l.fillNone&&!l.hidden);if(!bg)return[60,60,K-120,K-120];
+if(bg.win==="circle"){const r=bg.r||360,cy=bg.cy||K/2;return[K/2-r,cy-r,r*2,r*2]}
+const i=bg.inset||{t:44,r:44,b:44,l:44};return[i.l,i.t,K-i.l-i.r,K-i.t-i.b]}
+function fitProduct(mode,quiet){if(!S.img)return;S.imgFit=mode;const w=S.img.width,h=S.img.height,base=Math.max(K/w,K/h);
+if(mode==="full"){S.imgScale=1;S.imgX=0;S.imgY=0}
+else{const[x,y,W,H]=productWindow();const t=mode==="fill"?Math.max(W/w,H/h):Math.min(W/w,H/h)*.94;S.imgScale=t/base;S.imgX=x+W/2-K/2;S.imgY=y+H/2-K/2}
+syncProductUI();render();if(!quiet)toast({fit:"Product fitted inside the frame window",fill:"Product fills the frame window",full:"Full canvas — how Meta places your catalog photo"}[mode])}
+function setGlobalProduct(img){S.gImg=img;if(curView()==="editor"){S.img=img;fitProduct(S.imgFit||"fit",true)}syncProductUI();refreshAllViews()}
+function clearGlobalProduct(){if(!S.gImg)return;if(S.img===S.gImg){S.img=null}S.gImg=null;S.dragImg=false;syncProductUI();render();refreshAllViews();if(curView()==="gallery")refreshGallery();toast("Preview photo removed from the gallery")}
+function setFrameProduct(img){S.img=img;fitProduct(S.imgFit||"fit",true);toast("📦 Product added to this frame — try Fit / Fill / Full canvas below")}
+function clearFrameProduct(){if(!S.img)return;S.img=null;S.imgX=0;S.imgY=0;S.imgScale=1;S.dragImg=false;syncProductUI();render();toast("Product removed from this frame")}
+function setProduct(img){setGlobalProduct(img)}
+function clearProduct(){clearGlobalProduct()}
+function resetProduct(){if(!S.img)return;fitProduct(S.imgFit||"fit",true);toast("↺ Product position reset")}
+document.getElementById("pi").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const img=new Image();img.onload=()=>setFrameProduct(img);img.src=URL.createObjectURL(f)};
+document.getElementById("pRemove").onclick=e=>{e.preventDefault();e.stopPropagation();clearFrameProduct()};
+document.getElementById("pRemove2").onclick=clearFrameProduct;
+document.getElementById("homeProdRm").onclick=e=>{e.preventDefault();e.stopPropagation();clearGlobalProduct()};
+document.querySelectorAll("#prodFit button").forEach(b=>b.onclick=()=>fitProduct(b.dataset.fit));
 document.getElementById("pReset").onclick=resetProduct;
 /* ---- logo: clear ---- */
 function logoUI(on){document.getElementById("lla").textContent=on?"✓ Your logo · change":"Add logo";document.getElementById("luz").classList.toggle("ok",on);document.getElementById("luzw").classList.toggle("has",on)}
@@ -3255,7 +3303,7 @@ return{name:(WZ.copy.head||"My frame")+" · "+a.name,layers}}
 function miniThumb(spec,size,on,label,onclick){const d=document.createElement("div");d.className="wthumb"+(on?" on":"");
 const px=Math.min(1080,Math.round(size*DPR));const c=document.createElement("canvas");c.width=px;c.height=px;d.appendChild(c);size=px;
 if(label){const n=document.createElement("div");n.className="tn";n.textContent=label;d.appendChild(n)}
-PAINTQ.push(()=>{try{renderScene(tctx,spec.layers,{thumb:true,img:S.img});const g=c.getContext("2d");g.imageSmoothingQuality="high";g.drawImage(tcv,0,0,size,size)}catch(e){}});
+PAINTQ.push(()=>{try{renderScene(tctx,spec.layers,{thumb:true,img:S.gImg});const g=c.getContext("2d");g.imageSmoothingQuality="high";g.drawImage(tcv,0,0,size,size)}catch(e){}});
 if(!_painting)pumpPaint();if(onclick)d.onclick=onclick;return d}
 function logoColors(img){const c=document.createElement("canvas");c.width=c.height=64;const g=c.getContext("2d");g.drawImage(img,0,0,64,64);
 const d=g.getImageData(0,0,64,64).data,bk={};
@@ -3297,7 +3345,7 @@ const rank=a=>a.tone===WZ.tone?0:a.tone==="any"?1:2;const order=LAY_POOLS[occByI
 order.forEach(a=>{const d=miniThumb(wzSpec(a.id,0),240,WZ.arch===a.id,a.name,()=>{WZ.arch=a.id;WZ.variant=0;g.querySelectorAll(".wthumb").forEach(x=>x.classList.remove("on"));d.classList.add("on")});g.appendChild(d)})}
 function wzZoom(spec){const z=document.createElement("div");z.className="wzoom";z.setAttribute("role","dialog");z.setAttribute("aria-label","Frame preview");
 z.innerHTML='<div class="wzoom-box"><canvas width="1080" height="1080"></canvas><div class="wzoom-cap"><span>'+String(spec.name).replace(/</g,"&lt;")+'</span><button type="button" class="btn btn-s">Close · Esc</button></div></div>';
-const c=z.querySelector("canvas");try{renderScene(c.getContext("2d"),spec.layers,{thumb:true,img:S.img})}catch(e){}
+const c=z.querySelector("canvas");try{renderScene(c.getContext("2d"),spec.layers,{thumb:true,img:S.gImg})}catch(e){}
 const close=()=>{z.remove();document.removeEventListener("keydown",esc,true)};const esc=e=>{if(e.key==="Escape"){e.stopPropagation();close()}};
 z.onclick=e=>{if(e.target===z||e.target.tagName==="BUTTON")close()};document.addEventListener("keydown",esc,true);document.body.appendChild(z)}
 function wzPreview(host){host.innerHTML="";const sp=wzSpec(WZ.arch,0);const t=miniThumb(sp,300,false,"🔍 Preview · click to enlarge",()=>wzZoom(sp));t.title="Click to enlarge";host.appendChild(t)}
