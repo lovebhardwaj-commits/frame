@@ -495,7 +495,7 @@ html[data-theme="light"] .qbtn .ql{color:#16151e}
 .thumb.ready canvas{opacity:1}
 .thumb .tn,.home-grid .thumb .tn,.wthumb .tn{position:static;display:block;background:var(--panel)!important;color:var(--tx2);font-size:10.5px;font-weight:700;letter-spacing:.01em;padding:7px 9px;border-top:1px solid var(--bd);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .wthumb{background:var(--panel)}
-.wthumbs .wthumb .tn,.wprev .wthumb .tn{position:static!important;color:var(--tx2)!important;background:var(--panel)!important}
+.wiz .wthumb .tn,.wthumbs .wthumb .tn,.wprev .wthumb .tn{position:static!important;color:var(--tx2)!important;background:var(--panel)!important}
 .wthumbs .wthumb.on .tn{color:var(--ac)!important}
 .wthumb.on .tn{color:var(--ac)}
 /* selection toolbar floats above the canvas instead of pushing it down */
@@ -511,6 +511,23 @@ input[type=color].cin::-webkit-color-swatch{border:1px solid rgba(0,0,0,.18)!imp
 input[type=color].cin.none{background:repeating-conic-gradient(#e6e6e9 0 25%,#ffffff 0 50%) 50%/12px 12px}
 input[type=color].cin.none::-webkit-color-swatch{opacity:0}
 .fl .nonetag{font-weight:600;letter-spacing:0;text-transform:none;color:var(--tx3)}
+/* ── Builder v11: crisp previews, lightbox, final step ── */
+.wthumb canvas{width:100%;height:auto}
+.wprev .wthumb,.wthumb.wbig{cursor:zoom-in}
+.wlayout{font-size:12px;color:var(--tx2);background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:9px 12px;margin:2px 0 14px}
+.wlayout b{color:var(--tx)}
+.whelp{font-size:11px;color:var(--tx2);margin:2px 0 2px}
+.wunused{font-size:11.5px;color:var(--tx2);border-top:1px dashed var(--bd);padding-top:10px;margin-top:4px}
+.wfinal{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}
+.wnext{display:flex;flex-direction:column;gap:5px;background:var(--acb);border:1px solid var(--acbd);border-radius:12px;padding:12px 14px;font-size:12px;line-height:1.5;color:var(--tx2)}
+html[data-theme="light"] .wnext{background:#fcf2f0;color:#4f4f5c}
+.wnext b{color:var(--tx);font-size:12.5px}
+.wthumbs.wmini{grid-template-columns:repeat(3,1fr)}
+.wzoom{position:fixed;inset:0;z-index:300;background:rgba(22,21,30,.6);display:flex;align-items:center;justify-content:center;padding:20px;animation:menuIn .15s ease;cursor:zoom-out}
+.wzoom-box{background:var(--panel);border-radius:16px;padding:12px;box-shadow:0 20px 60px rgba(0,0,0,.35);cursor:default}
+.wzoom canvas{display:block;width:min(78vh,78vw,760px);height:auto;border-radius:10px}
+.wzoom-cap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 4px 2px;font-size:12px;font-weight:700;color:var(--tx2)}
+@media(max-width:720px){.wfinal{grid-template-columns:1fr}.wthumbs.wmini{grid-template-columns:repeat(3,1fr)}}
 /* v6: facets, paging, wizard */
 .facets{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:-4px 0 14px}
 .facets select{padding:7px 10px;border-radius:10px;border:1px solid var(--bd);background:var(--panel);color:var(--tx);font:inherit;font-size:12px;font-weight:600;cursor:pointer;max-width:220px}
@@ -2272,7 +2289,7 @@ function pumpPaint(){_painting=true;const tick=cb=>document.hidden?setTimeout(cb
 const step=()=>{const t0=performance.now();while(PAINTQ.length&&performance.now()-t0<(document.hidden?40:12))PAINTQ.shift()();
 if(PAINTQ.length)tick(step);else _painting=false};tick(step)}
 document.addEventListener("visibilitychange",()=>{if(PAINTQ.length&&!document.hidden){_painting=false;pumpPaint()}});
-const TS=256;
+const DPR=Math.min(2.5,window.devicePixelRatio||1);const TS=DPR>1?400:256;
 function makeThumb(spec,myIdx){
 const th=document.createElement("div");th.className="thumb";
 const cc=document.createElement("canvas");cc.width=TS;cc.height=TS;
@@ -3202,7 +3219,7 @@ document.getElementById("aiChips").appendChild(c)});
 /* ============ BUILD YOUR FRAME — guided 5-step builder ============ */
 const GOALS=[["sale","🏷","Sale or discount","Lead with the offer","megasale","S"],["launch","✨","New launch","Introduce something new","newlaunch","E"],["best","🏆","Bestseller","Lead with social proof","toprated","E"],["festive","🪔","Festive / occasion","Diwali, Eid, Christmas…","diwali","F"],["brand","💎","Always-on brand","Clean & evergreen","alwayson","E"]];
 const FONTPAIRS=[["Modern","'Montserrat',sans-serif","'Inter',sans-serif"],["Editorial","'Playfair Display',serif","'Montserrat',sans-serif"],["Luxe","'Cormorant Garamond',serif","'Montserrat',sans-serif"],["Bold","'Bebas Neue',sans-serif","'Poppins',sans-serif"],["Friendly","'Baloo 2',sans-serif","'Poppins',sans-serif"],["Tech","'Space Grotesk',sans-serif","'Inter',sans-serif"]];
-const WSTEPS=["What's this frame for?","Pick a structure","Your brand look","Your words","Pick your favourite"];
+const WSTEPS=["What's this frame for?","Pick a structure","Your brand look","Your words","Your frame"];
 const WZ={step:0,goal:"sale",occ:"megasale",ind:"fashion",tone:"value",arch:"bottomBand",p:"#1a1a2e",a:"#e0447c",fp:0,copy:{},seed:1};
 const occById=id=>OCCS.find(o=>o.id===id)||OCCS[0];
 const indById=id=>INDS.find(i=>i.id===id)||INDS[0];
@@ -3224,7 +3241,7 @@ const layers=a.fn(wzCtx(variant||0)).filter(Boolean);
 if(S.logo)layers.forEach(l=>{if(l.role==="logo"){l.imgObj=S.logo;l.placeholder=false}});
 return{name:(WZ.copy.head||"My frame")+" · "+a.name,layers}}
 function miniThumb(spec,size,on,label,onclick){const d=document.createElement("div");d.className="wthumb"+(on?" on":"");
-const c=document.createElement("canvas");c.width=size;c.height=size;d.appendChild(c);
+const px=Math.min(1080,Math.round(size*DPR));const c=document.createElement("canvas");c.width=px;c.height=px;d.appendChild(c);size=px;
 if(label){const n=document.createElement("div");n.className="tn";n.textContent=label;d.appendChild(n)}
 PAINTQ.push(()=>{try{renderScene(tctx,spec.layers,{thumb:true,img:S.img});const g=c.getContext("2d");g.imageSmoothingQuality="high";g.drawImage(tcv,0,0,size,size)}catch(e){}});
 if(!_painting)pumpPaint();if(onclick)d.onclick=onclick;return d}
@@ -3242,13 +3259,13 @@ toast("🎨 Colours picked from your logo","ok");wzRender()}
 function wzSetLogo(img){if(S.logo&&S.logo!==img)_revoke(S.logo);S.logo=img;
 S.layers.forEach(l=>{if(l.role==="logo"){l.imgObj=img;l.placeholder=false}});
 document.getElementById("lla").textContent="✓ Logo · change";document.getElementById("luz").classList.add("ok");document.getElementById("luzw").classList.add("has");render();buildLayerList()}
-function openWizard(){WZ.step=0;WZ.p=BK.p;WZ.a=BK.s;WZ.fp=TONE_FP[WZ.tone];wzDefaults();document.getElementById("wizBg").classList.add("show");wzRender()}
+function openWizard(){WZ.step=0;WZ.variant=0;WZ.p=BK.p;WZ.a=BK.s;WZ.fp=TONE_FP[WZ.tone];wzDefaults();document.getElementById("wizBg").classList.add("show");wzRender()}
 function closeWizard(){document.getElementById("wizBg").classList.remove("show")}
 function wzRender(){const body=document.getElementById("wizBody");body.innerHTML="";body.scrollTop=0;
 document.getElementById("wizTitle").textContent=WSTEPS[WZ.step];
 document.getElementById("wizSteps").innerHTML=WSTEPS.map((_,i)=>`<span class="${i<=WZ.step?"on":""}"></span>`).join("");
 document.getElementById("wizBack").style.visibility=WZ.step?"visible":"hidden";
-const nx=document.getElementById("wizNext");nx.style.display=WZ.step===4?"none":"";nx.textContent=WZ.step===3?"See my designs →":"Next →";
+const nx=document.getElementById("wizNext");nx.style.display="";nx.textContent=WZ.step===3?"Preview my frame →":WZ.step===4?"Customise in editor →":"Next →";
 document.getElementById("wizHint").textContent="Step "+(WZ.step+1)+" of 5";
 [wzGoal,wzStructure,wzBrand,wzWords,wzPick][WZ.step](body)}
 function wLab(body,t){body.insertAdjacentHTML("beforeend",`<div class="wlab">${t}</div>`)}
@@ -3265,8 +3282,13 @@ wLab(body,"Brand tone");body.appendChild(wSeg([["value","Value · loud offers"],
 function wzStructure(body){
 const g=document.createElement("div");g.className="wthumbs";body.appendChild(g);
 const rank=a=>a.tone===WZ.tone?0:a.tone==="any"?1:2;const order=LAY_POOLS[occById(WZ.occ).grp].map(id=>ARCH_BY[id]).map((a,i)=>[a,i]).sort((x,y)=>rank(x[0])-rank(y[0])||x[1]-y[1]).map(x=>x[0]);if(!order.some(a=>a.id===WZ.arch))WZ.arch=order[0].id;
-order.forEach(a=>{const d=miniThumb(wzSpec(a.id,0),240,WZ.arch===a.id,a.name,()=>{WZ.arch=a.id;g.querySelectorAll(".wthumb").forEach(x=>x.classList.remove("on"));d.classList.add("on")});g.appendChild(d)})}
-function wzPreview(host){host.innerHTML="";host.appendChild(miniThumb(wzSpec(WZ.arch,0),300,false,"Preview"))}
+order.forEach(a=>{const d=miniThumb(wzSpec(a.id,0),240,WZ.arch===a.id,a.name,()=>{WZ.arch=a.id;WZ.variant=0;g.querySelectorAll(".wthumb").forEach(x=>x.classList.remove("on"));d.classList.add("on")});g.appendChild(d)})}
+function wzZoom(spec){const z=document.createElement("div");z.className="wzoom";z.setAttribute("role","dialog");z.setAttribute("aria-label","Frame preview");
+z.innerHTML='<div class="wzoom-box"><canvas width="1080" height="1080"></canvas><div class="wzoom-cap"><span>'+String(spec.name).replace(/</g,"&lt;")+'</span><button type="button" class="btn btn-s">Close · Esc</button></div></div>';
+const c=z.querySelector("canvas");try{renderScene(c.getContext("2d"),spec.layers,{thumb:true,img:S.img})}catch(e){}
+const close=()=>{z.remove();document.removeEventListener("keydown",esc,true)};const esc=e=>{if(e.key==="Escape"){e.stopPropagation();close()}};
+z.onclick=e=>{if(e.target===z||e.target.tagName==="BUTTON")close()};document.addEventListener("keydown",esc,true);document.body.appendChild(z)}
+function wzPreview(host){host.innerHTML="";const sp=wzSpec(WZ.arch,0);const t=miniThumb(sp,300,false,"🔍 Preview · click to enlarge",()=>wzZoom(sp));t.title="Click to enlarge";host.appendChild(t)}
 let _wzT=null;function wzLater(fn){clearTimeout(_wzT);_wzT=setTimeout(fn,180)}
 function wzBrand(body){
 body.insertAdjacentHTML("beforeend",`<div class="wcols"><div id="wL"></div><div class="wprev" id="wP"></div></div>`);
@@ -3284,33 +3306,55 @@ c.innerHTML=`<div style="font-family:${h.replace(/"/g,"'")};font-size:20px;font-
 c.onclick=()=>{WZ.fp=i;fr.querySelectorAll(".wfp").forEach(x=>x.classList.remove("on"));c.classList.add("on");wzPreview(P1)};fr.appendChild(c)});L1.appendChild(fr);
 wzPreview(P1)}
 const WLIM={head:30,offer:18,sub:44,trust:44,cat:22,cta:16};
+const WFIELDS={head:"Headline",offer:"Offer",sub:"Supporting line",trust:"Trust line",cat:"Category tag",cta:"Button text"};
+const WHELP={head:"The main message, shown largest.",offer:"Your discount or deal. Leave empty for no offer.",sub:"A short line that backs up the headline.",trust:"Social proof: a rating, reviews or a guarantee.",cat:"Small tag naming what you sell, e.g. KURTAS.",cta:"Short action text on a button or chip, e.g. SHOP NOW."};
+function wzFieldUse(id){const keep=WZ.copy,toks={head:"QQHEADQQ",sub:"QQSUBQQ",trust:"QQTRUSTQQ",cat:"QQCATQQ",cta:"QQCTAQQ"};
+const norm=t=>String(t).replace(/[\s·•]/g,"").toUpperCase();
+const scan=copy=>{WZ.copy=copy;let t="";try{t=norm(JSON.stringify(wzSpec(id,0).layers.map(l=>[l.t,l.text,l.title,l.rows,l.lines,l.blocks,l.t2])))}catch(e){}WZ.copy=keep;return t};
+const fill=o=>Object.assign({},keep,o);
+const all=scan(fill(toks));
+const cur=scan(fill(Object.fromEntries(Object.keys(toks).map(k=>[k,String(keep[k]||"").trim()?toks[k]:""]))));
+const tokOffer=scan(fill(Object.assign({},toks,{offer:"QQOFFERQQ"})));
+const used=Object.keys(toks).filter(k=>k==="head"||all.includes(toks[k])||cur.includes(toks[k]));
+const p=parseOffer(keep.offer),sig=norm(p?p.pct:(keep.offer||""));
+if((sig&&all.includes(sig))||tokOffer.includes("QQOFFERQQ"))used.splice(1,0,"offer");
+return used}
 function wzWords(body){
 body.insertAdjacentHTML("beforeend",`<div class="wcols"><div id="wL"></div><div class="wprev" id="wP"></div></div>`);
 const L1=body.querySelector("#wL"),P1=body.querySelector("#wP");
-const o=occById(WZ.occ),ind=indById(WZ.ind);
-const fields=[["head","Headline",o.heads],["offer","Offer (leave empty for none)",o.offers.concat(o.offers.some(x=>/%/.test(x))?[]:["UP TO 50% OFF"])],["sub","Supporting line",o.subs],["trust","Trust line",ind.trust],["cat","Category",ind.cats],["cta","Call to action",CTAS[WZ.tone]]];
-fields.forEach(([k,lab,sug])=>{const f=document.createElement("div");f.className="wfield";
-f.innerHTML=`<div class="fl">${lab} <span class="locked-note">· max ${WLIM[k]}</span></div>`;
-const inp=document.createElement("input");inp.className="inp";inp.maxLength=WLIM[k];inp.value=WZ.copy[k]||"";
-inp.oninput=()=>{WZ.copy[k]=inp.value;wzLater(()=>wzPreview(P1))};f.appendChild(inp);
-const sg=document.createElement("div");sg.className="wsugs";sug.slice(0,4).forEach(s=>{const c=document.createElement("span");c.className="chip";c.textContent=s;c.onclick=()=>{inp.value=s.slice(0,WLIM[k]);inp.oninput()};sg.appendChild(c)});
+const o=occById(WZ.occ),ind=indById(WZ.ind),a=ARCH_BY[WZ.arch]||ARCH[0];
+const SUG={head:o.heads,offer:o.offers.concat(o.offers.some(x=>/%/.test(x))?[]:["UP TO 50% OFF"]),sub:o.subs,trust:ind.trust,cat:ind.cats,cta:CTAS[WZ.tone]};
+const used=wzFieldUse(a.id),unused=Object.keys(WFIELDS).filter(k=>!used.includes(k));
+L1.insertAdjacentHTML("beforeend",`<div class="wlayout">Layout: <b>${a.name}</b> · shows ${used.map(k=>WFIELDS[k].toLowerCase()).join(", ")}</div>`);
+used.forEach(k=>{const f=document.createElement("div");f.className="wfield";
+f.innerHTML=`<div class="fl">${WFIELDS[k]} <span class="locked-note">· max ${WLIM[k]}</span></div><div class="whelp">${WHELP[k]}</div>`;
+const inp=document.createElement("input");inp.className="inp";inp.maxLength=WLIM[k];inp.value=WZ.copy[k]||"";inp.setAttribute("aria-label",WFIELDS[k]);
+inp.oninput=()=>{WZ.copy[k]=inp.value;wzLater(()=>wzPreview(P1))};
+inp.onchange=()=>{const now=wzFieldUse(a.id);if(now.join()!==used.join())wzRender()};f.appendChild(inp);
+const sg=document.createElement("div");sg.className="wsugs";SUG[k].slice(0,4).forEach(s=>{const c=document.createElement("span");c.className="chip";c.textContent=s;c.onclick=()=>{inp.value=s.slice(0,WLIM[k]);inp.oninput();inp.onchange()};sg.appendChild(c)});
 f.appendChild(sg);L1.appendChild(f)});
+if(unused.length){const n=document.createElement("div");n.className="wunused";n.innerHTML=`This layout doesn't use: ${unused.map(k=>WFIELDS[k]).join(", ")}. `;
+const b=document.createElement("button");b.type="button";b.className="linkbtn";b.textContent="Change layout";b.onclick=()=>{WZ.step=1;wzRender()};n.appendChild(b);L1.appendChild(n)}
 wzPreview(P1)}
-function wzPick(body){
-const go=spec=>{autosavePrevious();BK.p=WZ.p;BK.s=WZ.a;store.set("fs_brand",BK);document.getElementById("bkP").value=BK.p;document.getElementById("bkS").value=BK.s;
-applyTemplate(spec);closeWizard();toast("✓ Your frame is ready — click anything to fine-tune")};
-const a=ARCH.find(x=>x.id===WZ.arch)||ARCH[0];
-wLab(body,"Your structure · three "+({value:"loud",mid:"colour",luxe:"luxe"}[WZ.tone])+" treatments");
-const g1=document.createElement("div");g1.className="wthumbs big";body.appendChild(g1);
-TONE_VARIANTS[WZ.tone].forEach((n,v)=>{const sp=wzSpec(a.id,v);g1.appendChild(miniThumb(sp,360,false,n,()=>go(sp)))});
-wLab(body,"Same look, other structures");
-const g2=document.createElement("div");g2.className="wthumbs";body.appendChild(g2);
-const pool=LAY_POOLS[occById(WZ.occ).grp].map(id=>ARCH_BY[id]).filter(x=>x.id!==a.id&&(x.tone===WZ.tone||x.tone==="any"));const st=(WZ.seed*5)%pool.length;
-pool.slice(st).concat(pool.slice(0,st)).slice(0,6).forEach(x=>{const sp=wzSpec(x.id,0);g2.appendChild(miniThumb(sp,240,false,x.name,()=>go(sp)))});
+function wzOpenEditor(spec){autosavePrevious();BK.p=WZ.p;BK.s=WZ.a;store.set("fs_brand",BK);document.getElementById("bkP").value=BK.p;document.getElementById("bkS").value=BK.s;
+applyTemplate(spec);closeWizard();switchTab("elements");toast("✓ Your frame is open — add your product photo, text or stickers, then export")}
+function wzDownload(spec){const oc=document.createElement("canvas");oc.width=oc.height=K;renderScene(oc.getContext("2d"),spec.layers,{transparent:true,exportMode:true});
+const a=document.createElement("a");a.download=String(WZ.copy.head||"frame").replace(/[^\w\- ]+/g,"").trim().replace(/\s+/g,"-").toLowerCase()+"-frame-1080.png";a.href=oc.toDataURL("image/png");a.click();toast("⬇ Transparent 1080×1080 frame downloaded","ok")}
+function wzPick(body){const a=ARCH_BY[WZ.arch]||ARCH[0];if(WZ.variant==null)WZ.variant=0;
+body.insertAdjacentHTML("beforeend",`<div class="wfinal"><div id="wBig"></div><div id="wSide"></div></div>`);
+const big=body.querySelector("#wBig"),side=body.querySelector("#wSide");const spec=wzSpec(a.id,WZ.variant);WZ._final=spec;
+const th=miniThumb(spec,560,false,"🔍 "+a.name+" · "+TONE_VARIANTS[WZ.tone][WZ.variant]+" · click to enlarge",()=>wzZoom(spec));th.classList.add("wbig");th.title="Click to enlarge";big.appendChild(th);
+side.insertAdjacentHTML("beforeend",`<div class="wnext"><b>What happens next</b><span>“Customise in editor” opens this frame in the full editor. There you can add your product photo, more text, banners, badges, stickers or your own images, and change any colour, font or position. Then export the transparent PNG for Meta.</span></div>`);
+wLab(side,"Colour treatment");side.appendChild(wSeg(TONE_VARIANTS[WZ.tone].map((n,v)=>[v,n]),WZ.variant,v=>{WZ.variant=v;wzRender()}));
+wLab(side,"Try another layout");const g2=document.createElement("div");g2.className="wthumbs wmini";side.appendChild(g2);
+const pool=LAY_POOLS[occById(WZ.occ).grp].map(id=>ARCH_BY[id]).filter(x=>x.id!==a.id&&(x.tone===WZ.tone||x.tone==="any"));const st=(WZ.seed*5)%Math.max(1,pool.length);
+pool.slice(st).concat(pool.slice(0,st)).slice(0,6).forEach(x=>{g2.appendChild(miniThumb(wzSpec(x.id,WZ.variant),150,false,x.name,()=>{WZ.arch=x.id;wzRender()}))});
 const row=document.createElement("div");row.className="wrow";
-const sh=document.createElement("button");sh.className="btn btn-s";sh.type="button";sh.textContent="🎲 Shuffle decorations & picks";sh.onclick=()=>{WZ.seed++;wzRender()};
-row.appendChild(sh);row.insertAdjacentHTML("beforeend",'<span class="hint" style="margin:0">Tap a design to open it in the editor.</span>');body.appendChild(row)}
-document.getElementById("wizNext").onclick=()=>{if(WZ.step===3&&!String(WZ.copy.head||"").trim()){toast("Add a headline first","err");return}WZ.step=Math.min(4,WZ.step+1);wzRender()};
+const sh=document.createElement("button");sh.className="btn btn-s";sh.type="button";sh.textContent="🎲 Shuffle";sh.onclick=()=>{WZ.seed++;wzRender()};
+const dl=document.createElement("button");dl.className="btn btn-s";dl.type="button";dl.textContent="⬇ Download PNG now";dl.onclick=()=>wzDownload(WZ._final);
+const ed=document.createElement("button");ed.className="linkbtn";ed.type="button";ed.textContent="Edit words";ed.onclick=()=>{WZ.step=3;wzRender()};
+row.appendChild(sh);row.appendChild(dl);row.appendChild(ed);side.appendChild(row)}
+document.getElementById("wizNext").onclick=()=>{if(WZ.step===3&&!String(WZ.copy.head||"").trim()){toast("Add a headline first","err");return}if(WZ.step===4){wzOpenEditor(WZ._final||wzSpec(WZ.arch,WZ.variant||0));return}WZ.step=Math.min(4,WZ.step+1);wzRender()};
 document.getElementById("wizBack").onclick=()=>{WZ.step=Math.max(0,WZ.step-1);wzRender()};
 document.getElementById("wizClose").onclick=closeWizard;
 document.getElementById("wizBg").onclick=e=>{if(e.target.id==="wizBg")closeWizard()};
