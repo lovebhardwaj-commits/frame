@@ -528,6 +528,12 @@ html[data-theme="light"] .wnext{background:#fcf2f0;color:#4f4f5c}
 .wzoom canvas{display:block;width:min(78vh,78vw,760px);height:auto;border-radius:10px}
 .wzoom-cap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 4px 2px;font-size:12px;font-weight:700;color:var(--tx2)}
 @media(max-width:720px){.wfinal{grid-template-columns:1fr}.wthumbs.wmini{grid-template-columns:repeat(3,1fr)}}
+/* ── Editable frame name ── */
+button.pvchip{font:inherit;cursor:pointer;transition:border-color .15s,background .15s}
+button.pvchip:hover{border-color:var(--acbd);background:var(--acb)}
+.pvchip .pvedit{display:inline-flex;margin-left:6px;opacity:.75}
+.pvchip .pvedit .ic{width:13px;height:13px;color:var(--ac2,var(--ac))}
+button.pvchip:hover .pvedit{opacity:1}
 /* v6: facets, paging, wizard */
 .facets{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:-4px 0 14px}
 .facets select{padding:7px 10px;border-radius:10px;border:1px solid var(--bd);background:var(--panel);color:var(--tx);font:inherit;font-size:12px;font-weight:600;cursor:pointer;max-width:220px}
@@ -582,7 +588,7 @@ html[data-theme="light"] .wnext{background:#fcf2f0;color:#4f4f5c}
 <div class="topbar">
 <div class="brand"><div class="logo" id="brandLogo"></div><h1>Frame Studio</h1><span class="bg"><span class="tcount">3,000+</span> TEMPLATES</span></div>
 <button class="tbtn" id="homeBtn" data-tip="Back" data-tip-pos="bottom" title="Back to templates"><i class="ich" data-i="back"></i>Back</button>
-<div class="tb-center"><div class="pvchip" id="pvLabel">Pick a template to start</div><button class="tbtn" id="rerollBtn" data-tip="Generate another surprise design" data-tip-pos="bottom" style="display:none"><i class="ich" data-i="dice"></i></button></div>
+<div class="tb-center"><button type="button" class="pvchip" id="pvLabel" title="Rename this frame">Pick a template to start</button><button class="tbtn" id="rerollBtn" data-tip="Generate another surprise design" data-tip-pos="bottom" style="display:none"><i class="ich" data-i="dice"></i></button></div>
 <div class="tb-right">
 <button class="tbtn" id="undoBtn" data-tip="Undo · Ctrl+Z" data-tip-pos="bottom" aria-label="Undo" title="Undo (Ctrl+Z)"><i class="ich" data-i="undo"></i></button>
 <button class="tbtn" id="redoBtn" data-tip="Redo · Ctrl+Y" data-tip-pos="bottom" aria-label="Redo" title="Redo (Ctrl+Y)"><i class="ich" data-i="redo"></i></button>
@@ -595,12 +601,9 @@ html[data-theme="light"] .wnext{background:#fcf2f0;color:#4f4f5c}
 <button class="helpbtn" id="helpBtn" data-tip="Help" data-tip-pos="bottom" aria-label="Help and shortcuts" title="Help & shortcuts">?</button>
 </div>
 <div class="moremenu" id="moreMenu">
-<button class="mitem" id="wizMenuBtn"><i class="ich" data-i="sparkle"></i>Build your frame (guided)</button>
 <button class="mitem" id="newFrameBtn"><i class="ich" data-i="filePlus"></i>New blank frame</button>
 <button class="mitem" id="dupDesignBtn"><i class="ich" data-i="copy"></i>Duplicate this design</button>
 <button class="mitem" id="copyPngBtn"><i class="ich" data-i="clip"></i>Copy frame PNG to clipboard</button>
-<button class="mitem" id="expJsonBtn"><i class="ich" data-i="file"></i>Export frame spec (JSON)</button>
-<label class="mitem" style="cursor:pointer"><i class="ich" data-i="file"></i>Import frame spec<input type="file" accept=".json" id="impJson" style="display:none"></label>
 </div>
 </div>
 
@@ -854,6 +857,11 @@ function markDirty(){S.dirty=true;clearTimeout(histTimer);histTimer=setTimeout((
 function histNow(){S.dirty=true;clearTimeout(histTimer);HIST.push()}
 /* ---- My Frames ---- */
 let MYFRAMES=store.get("fs_myframes")||[];
+function setPvLabel(name){const pv=document.getElementById("pvLabel");if(!pv)return;
+pv.innerHTML='<span>Editing ·</span><span class="pvname">'+String(name).replace(/</g,"&lt;")+'</span><span class="pvedit" aria-hidden="true">'+ICON.pencil+'</span>';pv.title="Rename “"+name+"”";pv.setAttribute("aria-label","Frame name: "+name+". Click to rename")}
+async function renameDesign(){const old=S.designName||"Untitled Frame";const nm=await askText("Rename frame",old,"","Rename");if(!nm||nm===old)return;
+const i=MYFRAMES.findIndex(f=>f.name===old);if(i>=0&&!MYFRAMES.some(f=>f.name===nm)){MYFRAMES[i].name=nm;store.set("fs_myframes",MYFRAMES);refreshAllViews()}
+S.designName=nm;setPvLabel(nm);try{store.set("fs_session",{name:nm,layers:serializeLayers(S.layers),ts:Date.now()})}catch(e){}toast("✎ Renamed to “"+nm+"”","ok")}
 function saveMyFrame(name,silent){
 name=name||S.designName||"My Frame";
 const spec={name,cat:"💾 My Frames",layers:serializeLayers(S.layers),ts:Date.now()};
@@ -863,7 +871,7 @@ if(MYFRAMES.length>40)MYFRAMES.pop();
 store.set("fs_myframes",MYFRAMES);
 refreshAllViews();
 if(!silent)toast("💾 Saved to My Frames"+(store.ok?"":" (this session)"),"ok");
-S.designName=name;S.dirty=false;}
+S.designName=name;S.dirty=false;setPvLabel(name);}
 function autosavePrevious(){if(S.dirty&&S.layers.length){const nm="Autosave · "+(S.designName||"previous design");const spec={name:nm,cat:"💾 My Frames",layers:serializeLayers(S.layers),ts:Date.now()};const i=MYFRAMES.findIndex(f=>f.name.startsWith("Autosave"));if(i>=0)MYFRAMES[i]=spec;else MYFRAMES.unshift(spec);store.set("fs_myframes",MYFRAMES);}}
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function lg(c,x1,y1,x2,y2,cols){const g=c.createLinearGradient(x1,y1,x2,y2);cols.forEach((s,i)=>g.addColorStop(cols.length>1?i/(cols.length-1):0,s));return g}
@@ -1388,6 +1396,7 @@ c.fillStyle=l.grad?lg(c,bx,by-fs,bx,by,[tint(l.c,.6),l.c,shade(l.c,-.2)]):(l.c||
 if(l.outline){nsh(c);c.lineWidth=Math.max(2.5,fs*.035);c.strokeStyle=l.c||"#fff";c.strokeText(t,bx,by)}else c.fillText(t,bx,by);nsh(c);});
 c.restore();l._bb=[X-6,l.y-4,w+12,totH+fs*.32];}
 function drawImgL(c,l,exportMode){
+if(l.role==="logo"&&!l.imgObj&&S.logo){l={...l,imgObj:S.logo,placeholder:false};const o=arguments[1];drawImgL(c,l,exportMode);o._bb=l._bb;return}
 if(l.placeholder&&!l.imgObj){if(exportMode){l._bb=null;return}
 c.save();c.globalAlpha=.7;c.setLineDash([8,6]);c.strokeStyle="#aaa";c.lineWidth=3;
 c.strokeRect(l.x,l.y,l.wd,l.wd*.5);c.font="600 22px 'DM Sans',sans-serif";c.fillStyle="#999";c.textAlign="center";c.textBaseline="middle";c.fillText("LOGO",l.x+l.wd/2,l.y+l.wd*.25);c.setLineDash([]);c.restore();
@@ -2331,7 +2340,7 @@ S.layers=reviveLayers(JSON.parse(JSON.stringify(spec.layers)));
 S.sel=null;S.designName=spec.name||"Untitled Frame";S.dirty=false;
 render();buildLayerList();buildProps();HIST.push(opts.noSession);
 if(!S.designName.startsWith("✨ Surprise")){const rb=document.getElementById("rerollBtn");if(rb)rb.style.display="none"}
-{const pv=document.getElementById("pvLabel");pv.innerHTML=ICON.pencil+'<span>Editing ·</span><span class="pvname">'+S.designName.replace(/</g,"&lt;")+"</span>";pv.setAttribute("data-tip",S.designName);pv.title=S.designName;}
+setPvLabel(S.designName);
 switchTab("layers");if(!opts.stayHome)showEditor();
 if(!opts.silent)toast("✓ "+S.designName+" — click any element to customize");
 }
@@ -2403,15 +2412,17 @@ document.getElementById("haExtract").onclick=()=>{showEditor();switchTab("ai")};
 document.getElementById("haBlank").onclick=()=>openWizard();
 document.getElementById("homeBtn").onclick=()=>{if(history.state&&history.state.v){history.back()}else{if(curView()==="editor")autosavePrevious();applyView(curView()==="editor"?"gallery":"home")}};
 /* ⋯ menu */
+document.getElementById("pvLabel").onclick=()=>{if(curView()==="editor")renameDesign()};
 const moreMenu=document.getElementById("moreMenu");
 moreMenu.addEventListener("click",e=>{const it=e.target.closest(".mitem");if(it&&it.tagName!=="LABEL")setTimeout(()=>moreMenu.classList.remove("show"),0)});
-document.getElementById("impJson").addEventListener("change",()=>moreMenu.classList.remove("show"));
+
 document.getElementById("moreBtn").onclick=e=>{e.stopPropagation();moreMenu.classList.toggle("show")};
 document.addEventListener("click",e=>{if(!moreMenu.contains(e.target))moreMenu.classList.remove("show")});
-document.getElementById("dupDesignBtn").onclick=()=>{
-let nm=S.designName+" copy",i=2;
-while(MYFRAMES.some(f=>f.name===nm))nm=S.designName+" copy "+(i++);
-saveMyFrame(nm);moreMenu.classList.remove("show")};
+document.getElementById("dupDesignBtn").onclick=async()=>{moreMenu.classList.remove("show");
+let sug=S.designName+" copy",i=2;while(MYFRAMES.some(f=>f.name===sug))sug=S.designName+" copy "+(i++);
+let nm=await askText("Name the copy",sug,"The copy is saved to My Frames and opens for editing.","Duplicate");if(!nm)return;
+if(MYFRAMES.some(f=>f.name===nm)){let k=2;while(MYFRAMES.some(f=>f.name===nm+" ("+k+")"))k++;nm=nm+" ("+k+")"}
+saveMyFrame(nm,true);toast("⧉ Duplicated as “"+nm+"” — you're now editing the copy","ok")};
 document.getElementById("copyPngBtn").onclick=async()=>{
 moreMenu.classList.remove("show");
 try{
@@ -2858,16 +2869,21 @@ document.getElementById("pRemove2").onclick=clearProduct;
 document.getElementById("homeProdRm").onclick=e=>{e.preventDefault();e.stopPropagation();clearProduct()};
 document.getElementById("pReset").onclick=resetProduct;
 /* ---- logo: clear ---- */
-function clearLogo(){if(!S.logo)return;_revoke(S.logo);S.logo=null;
+function logoUI(on){document.getElementById("lla").textContent=on?"✓ Your logo · change":"Add logo";document.getElementById("luz").classList.toggle("ok",on);document.getElementById("luzw").classList.toggle("has",on)}
+function persistLogo(img){try{const m=600,sc=Math.min(1,m/Math.max(img.naturalWidth||img.width,img.naturalHeight||img.height));const c=document.createElement("canvas");
+c.width=Math.max(1,Math.round((img.naturalWidth||img.width)*sc));c.height=Math.max(1,Math.round((img.naturalHeight||img.height)*sc));c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+const du=c.toDataURL("image/png");if(du.length<1400000)store.set("fs_logo",du)}catch(e){}}
+function useLogo(img,quiet){if(S.logo&&S.logo!==img)_revoke(S.logo);S.logo=img;
+S.layers.forEach(l=>{if(l.role==="logo"){l.imgObj=img;l.placeholder=false}});
+if(!S.layers.some(l=>l.role==="logo"))S.layers.push(L({type:"img",role:"logo",name:"Logo",imgObj:img,x:K-280,y:66,wd:200,opacity:1}));
+logoUI(true);render();buildLayerList();refreshAllViews();if(!quiet)toast("⭐ Logo saved — it'll appear on every frame. Change or remove it any time from “Your logo”.","ok")}
+function clearLogo(){if(!S.logo)return;_revoke(S.logo);S.logo=null;try{localStorage.removeItem("fs_logo");store.mem.fs_logo=null}catch(e){}refreshAllViews();
 S.layers.forEach(l=>{if(l.role==="logo"){l.imgObj=null;l.placeholder=true}});
-document.getElementById("lla").textContent="Add logo";document.getElementById("luz").classList.remove("ok");document.getElementById("luzw").classList.remove("has");
-render();buildLayerList();buildProps();toast("Logo removed — logo slots are back to placeholders")}
+logoUI(false);
+render();buildLayerList();buildProps();toast("Logo removed from all frames — upload a new one any time")}
 document.getElementById("lRemove").onclick=e=>{e.preventDefault();e.stopPropagation();clearLogo()};
-document.getElementById("li").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const img=new Image();img.onload=()=>{if(S.logo&&S.logo!==img)_revoke(S.logo);S.logo=img;
-let slot=S.layers.find(l=>l.role==="logo");
-if(slot){slot.imgObj=img;slot.placeholder=false}
-else{S.layers.push(L({type:"img",role:"logo",name:"Logo",imgObj:img,x:K-280,y:66,wd:200,opacity:1}))}
-document.getElementById("lla").textContent="✓ Logo · change";document.getElementById("luz").classList.add("ok");document.getElementById("luzw").classList.add("has");render();buildLayerList();toast("⭐ Logo placed in the logo slot — drag to move")};img.src=URL.createObjectURL(f)};
+document.getElementById("li").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const img=new Image();img.onload=()=>{persistLogo(img);useLogo(img)};img.src=URL.createObjectURL(f)};
+{const du=store.get("fs_logo");if(du){const img=new Image();img.onload=()=>useLogo(img,true);img.src=du}}
 document.getElementById("pZoom").addEventListener("input",function(){S.imgScale=parseFloat(this.value);document.getElementById("pZoomV").textContent=(+this.value).toFixed(2);render()});
 document.getElementById("pPanX").addEventListener("input",function(){S.imgX=parseFloat(this.value);document.getElementById("pPanXV").textContent=this.value;render()});
 document.getElementById("pPanY").addEventListener("input",function(){S.imgY=parseFloat(this.value);document.getElementById("pPanYV").textContent=this.value;render()});
@@ -2883,15 +2899,11 @@ const oc=document.createElement("canvas");oc.width=K;oc.height=K;
 renderScene(oc.getContext("2d"),S.layers,{img:S.img,imgX:S.imgX,imgY:S.imgY,imgScale:S.imgScale,exportMode:true});
 const a=document.createElement("a");a.download=(S.designName||"frame").replace(/[^\w\- ]+/g,"").trim().replace(/\s+/g,"-").toLowerCase()+"-preview-1080.png";a.href=oc.toDataURL("image/png");a.click();
 toast(S.img?"⬇ Preview exported (flattened with product)":"⬇ Preview exported — upload a product image for a real preview")};
-document.getElementById("expJsonBtn").onclick=()=>{
-const spec={name:"Custom Frame",layers:S.layers.map(l=>{const c={...l};delete c.imgObj;delete c._bb;return c})};
-const a=document.createElement("a");a.download=(S.designName||"frame").replace(/[^\w\- ]+/g,"").trim().replace(/\s+/g,"-").toLowerCase()+"-spec.json";a.href="data:application/json,"+encodeURIComponent(JSON.stringify(spec,null,1));a.click();toast("💾 Frame spec downloaded")};
-document.getElementById("impJson").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const spec=JSON.parse(ev.target.result);applyTemplate(spec);toast("📂 Frame imported")}catch(err){toast("❌ Invalid JSON file","err")}};r.readAsText(f);e.target.value=""};
 document.getElementById("newFrameBtn").onclick=()=>{
 autosavePrevious();
 S.layers=[L({type:"bg",name:"Border",cols:["#1a1a2e","#2e2e52"],inset:{t:60,r:60,b:60,l:60},radius:6}),logoSlot()];
 if(S.logo){const slot=S.layers.find(l=>l.role==="logo");slot.imgObj=S.logo;slot.placeholder=false}
-S.sel=null;S.designName="Untitled Frame";S.dirty=false;render();buildLayerList();buildProps();HIST.push();{const pv=document.getElementById("pvLabel");pv.innerHTML=ICON.pencil+'<span>Editing ·</span><span class="pvname">Untitled Frame</span>';pv.title="Untitled Frame";}document.getElementById("rerollBtn").style.display="none";
+S.sel=null;S.designName="Untitled Frame";S.dirty=false;render();buildLayerList();buildProps();HIST.push();setPvLabel("Untitled Frame");document.getElementById("rerollBtn").style.display="none";
 toast("🆕 Blank frame — add text, banners & badges from the Add tab")};
 
 /* ============ RECREATE — frame extractor + look-alike (100% client-side) ============ */
@@ -2959,7 +2971,7 @@ base.imgObj=im;
 S.layers=[base];S.sel=null;S.designName=name;S.dirty=false;
 render();buildLayerList();buildProps();HIST.push();
 saveMyFrame(name,true);
-{const pv=document.getElementById("pvLabel");pv.innerHTML=ICON.pencil+'<span>Editing ·</span><span class="pvname">'+name.replace(/</g,"&lt;")+"</span>";pv.setAttribute("data-tip",name);pv.title=name;}
+setPvLabel(name);
 switchTab("layers");showEditor();
 toast("✂️ Frame extracted — center is transparent. Add your text & badges on top!","ok")};
 im.src=du}
@@ -3256,7 +3268,7 @@ function wzApplyLogoColors(img){const cs=logoColors(img);
 if(!cs.length){toast("Couldn't find strong colours in that logo — pick them manually");return}
 if(cs.length===1){WZ.a=cs[0];WZ.p=shade(cs[0],-.6)}else{const[a,b]=cs;if(_lum(a)<=_lum(b)){WZ.p=a;WZ.a=b}else{WZ.p=b;WZ.a=a}}
 toast("🎨 Colours picked from your logo","ok");wzRender()}
-function wzSetLogo(img){if(S.logo&&S.logo!==img)_revoke(S.logo);S.logo=img;
+function wzSetLogo(img){persistLogo(img);if(S.logo&&S.logo!==img)_revoke(S.logo);S.logo=img;logoUI(true);refreshAllViews();
 S.layers.forEach(l=>{if(l.role==="logo"){l.imgObj=img;l.placeholder=false}});
 document.getElementById("lla").textContent="✓ Logo · change";document.getElementById("luz").classList.add("ok");document.getElementById("luzw").classList.add("has");render();buildLayerList()}
 function openWizard(){WZ.step=0;WZ.variant=0;WZ.p=BK.p;WZ.a=BK.s;WZ.fp=TONE_FP[WZ.tone];wzDefaults();document.getElementById("wizBg").classList.add("show");wzRender()}
@@ -3297,7 +3309,8 @@ wLab(L1,"Brand colours");
 const row=document.createElement("div");row.className="wrow";row.style.marginTop="0";
 row.innerHTML=`<label class="wcolor">Primary<input type="color" id="wzP" value="${WZ.p}"></label><label class="wcolor">Accent<input type="color" id="wzA" value="${WZ.a}"></label>`;
 const lb=document.createElement("button");lb.className="btn btn-s";lb.type="button";lb.textContent=S.logo?"🎨 Use my logo's colours":"🎨 Upload logo & use its colours";
-lb.onclick=()=>{if(S.logo)wzApplyLogoColors(S.logo);else document.getElementById("wzLogo").click()};row.appendChild(lb);L1.appendChild(row);
+lb.onclick=()=>{if(S.logo)wzApplyLogoColors(S.logo);else document.getElementById("wzLogo").click()};row.appendChild(lb);
+if(S.logo){const ch=document.createElement("button");ch.type="button";ch.className="linkbtn";ch.textContent="Change logo";ch.onclick=()=>document.getElementById("wzLogo").click();row.appendChild(ch)}L1.appendChild(row);
 row.querySelector("#wzP").oninput=e=>{WZ.p=e.target.value;wzLater(()=>wzPreview(P1))};
 row.querySelector("#wzA").oninput=e=>{WZ.a=e.target.value;wzLater(()=>wzPreview(P1))};
 wLab(L1,"Type pairing");const fr=document.createElement("div");fr.className="wrow";fr.style.marginTop="0";
@@ -3337,7 +3350,7 @@ if(unused.length){const n=document.createElement("div");n.className="wunused";n.
 const b=document.createElement("button");b.type="button";b.className="linkbtn";b.textContent="Change layout";b.onclick=()=>{WZ.step=1;wzRender()};n.appendChild(b);L1.appendChild(n)}
 wzPreview(P1)}
 function wzOpenEditor(spec){autosavePrevious();BK.p=WZ.p;BK.s=WZ.a;store.set("fs_brand",BK);document.getElementById("bkP").value=BK.p;document.getElementById("bkS").value=BK.s;
-applyTemplate(spec);closeWizard();switchTab("elements");toast("✓ Your frame is open — add your product photo, text or stickers, then export")}
+applyTemplate(spec);closeWizard();switchTab("layers");toast("✓ Your frame is open — click any element to edit, or use the tiles above to add more")}
 function wzDownload(spec){const oc=document.createElement("canvas");oc.width=oc.height=K;renderScene(oc.getContext("2d"),spec.layers,{transparent:true,exportMode:true});
 const a=document.createElement("a");a.download=String(WZ.copy.head||"frame").replace(/[^\w\- ]+/g,"").trim().replace(/\s+/g,"-").toLowerCase()+"-frame-1080.png";a.href=oc.toDataURL("image/png");a.click();toast("⬇ Transparent 1080×1080 frame downloaded","ok")}
 function wzPick(body){const a=ARCH_BY[WZ.arch]||ARCH[0];if(WZ.variant==null)WZ.variant=0;
@@ -3360,7 +3373,7 @@ document.getElementById("wizClose").onclick=closeWizard;
 document.getElementById("wizBg").onclick=e=>{if(e.target.id==="wizBg")closeWizard()};
 document.getElementById("wzLogo").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const img=new Image();img.onload=()=>{wzSetLogo(img);wzApplyLogoColors(img)};img.src=URL.createObjectURL(f)};
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&document.getElementById("wizBg").classList.contains("show"))closeWizard()});
-document.getElementById("wizMenuBtn").onclick=()=>{moreMenu.classList.remove("show");openWizard()};
+
 /* safe-zone overlay toggle */
 document.getElementById("safeBtn").onclick=function(){S.safe=!S.safe;this.classList.toggle("on",S.safe);render()};
 
