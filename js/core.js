@@ -60,3 +60,5 @@ const selLayer=()=>layers().find(l=>l.id===S.sel)||null;
 /* native = rebuildable as a Meta layer; otherwise it is exported as a PNG image layer */
 const isNative=l=>!(l.type==="sticker"||(l.fx&&(l.fx.outline||l.fx.shadow||l.fx.hl))||(l.type==="bg"&&l.grad));
 let requestRender=function(){};
+/* late modules: settings (variables), then Meta login. Added after the core scripts have run so its overrides apply. */
+document.addEventListener("DOMContentLoaded",()=>{const add=(src,next)=>{const s=document.createElement("script");s.src=src;s.onload=s.onerror=()=>{if(next)next()};document.body.append(s)};add("config.js?v=2",()=>add("js/meta.js?v=2"))});
